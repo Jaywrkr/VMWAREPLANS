@@ -925,11 +925,10 @@
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
 
-  /* ─── Wire up detail rows ─── */
-  document.querySelectorAll('tr.detail-row').forEach(tr => {
-    tr.addEventListener('click', () => {
-      openModal(tr.dataset.key, tr.dataset.vvf, tr.dataset.vcfe, tr.dataset.vcf);
-    });
+  /* ─── Wire up detail rows (delegation) ─── */
+  document.addEventListener('click', e => {
+    const tr = e.target.closest('tr.detail-row');
+    if (tr) openModal(tr.dataset.key, tr.dataset.vvf, tr.dataset.vcfe, tr.dataset.vcf);
   });
 
   /* ─── Theme toggle ─── */
