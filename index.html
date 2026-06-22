@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VMware by Broadcom – Comparación VVF / VCFE / VCF v2</title>
   <style>
-    /* ─── Reset & variables ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --vcf-color:  #0077b6;
@@ -45,39 +44,23 @@
 
     /* ─── Toolbar ─── */
     .toolbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
       padding: 10px 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
       box-shadow: var(--shadow);
     }
     .toolbar input[type="search"] {
-      flex: 1 1 200px;
-      padding: 7px 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--bg);
-      color: var(--text);
-      font-size: .9rem;
-      outline: none;
+      flex: 1 1 200px; padding: 7px 14px;
+      border: 1px solid var(--border); border-radius: 999px;
+      background: var(--bg); color: var(--text); font-size: .9rem; outline: none;
     }
     .toolbar input[type="search"]:focus { border-color: var(--vcf-color); }
     .btn {
-      padding: 7px 16px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--bg);
-      color: var(--text);
-      font-size: .85rem;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background .15s;
+      padding: 7px 16px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--bg); color: var(--text); font-size: .85rem;
+      cursor: pointer; white-space: nowrap; transition: background .15s;
     }
     .btn:hover { background: var(--border); }
     .btn.active { background: var(--vcf-color); color: #fff; border-color: var(--vcf-color); }
@@ -86,93 +69,52 @@
     /* ─── Hero ─── */
     .hero {
       background: linear-gradient(135deg, #023e8a 0%, #0077b6 50%, #00b4d8 100%);
-      color: #fff;
-      text-align: center;
-      padding: 60px 24px 48px;
+      color: #fff; text-align: center; padding: 60px 24px 48px;
     }
     .hero .badge {
-      display: inline-block;
-      background: rgba(255,255,255,.18);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 999px;
-      padding: 4px 16px;
-      font-size: .78rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+      display: inline-block; background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35); border-radius: 999px;
+      padding: 4px 16px; font-size: .78rem; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: 18px;
     }
     .hero h1 { font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; }
     .hero p  { margin-top: 12px; opacity: .85; max-width: 600px; margin-inline: auto; }
     .version-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.25);
-      border-radius: 999px;
-      padding: 2px 12px;
-      font-size: .75rem;
-      margin-top: 16px;
+      display: inline-block; background: rgba(255,255,255,.25);
+      border-radius: 999px; padding: 2px 12px; font-size: .75rem; margin-top: 16px;
     }
 
     /* ─── Sticky nav ─── */
     .sticky-nav {
-      position: sticky;
-      top: 53px;
-      z-index: 90;
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 4px;
-      padding: 6px 24px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      position: sticky; top: 53px; z-index: 90;
+      background: var(--card-bg); border-bottom: 1px solid var(--border);
+      display: flex; gap: 4px; padding: 6px 24px;
+      overflow-x: auto; scrollbar-width: none;
     }
     .sticky-nav::-webkit-scrollbar { display: none; }
     .nav-link {
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-size: .82rem;
-      color: var(--muted);
-      text-decoration: none;
-      white-space: nowrap;
+      padding: 5px 14px; border-radius: 999px; font-size: .82rem;
+      color: var(--muted); text-decoration: none; white-space: nowrap;
       transition: background .15s, color .15s;
     }
     .nav-link:hover { background: var(--bg); color: var(--text); }
 
-    /* ─── Main layout ─── */
+    /* ─── Layout ─── */
     .container { max-width: 1140px; margin: 0 auto; padding: 32px 20px; }
     section { margin-bottom: 48px; }
     .section-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;
+      color: var(--text); display: flex; align-items: center; gap: 10px;
     }
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
     /* ─── Plan cards ─── */
-    .plan-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
+    .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .plan-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      border: 1px solid var(--border);
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--border);
     }
-    .plan-card .card-header {
-      padding: 20px 24px 16px;
-      color: #fff;
-    }
+    .plan-card .card-header { padding: 20px 24px 16px; color: #fff; }
     .plan-card.vvf  .card-header { background: linear-gradient(135deg, #0096c7, #48cae4); }
     .plan-card.vcfe .card-header { background: linear-gradient(135deg, #0077b6, #00b4d8); }
     .plan-card.vcf  .card-header { background: linear-gradient(135deg, #03045e, #0077b6); }
@@ -181,71 +123,59 @@
     .plan-card .card-body { padding: 20px 24px; }
     .plan-card .card-body ul { list-style: none; }
     .plan-card .card-body ul li {
-      padding: 5px 0;
-      font-size: .88rem;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
+      padding: 5px 0; font-size: .88rem;
+      border-bottom: 1px solid var(--border); color: var(--muted);
     }
     .plan-card .card-body ul li:last-child { border: none; }
     .plan-card .card-body ul li::before { content: '✓ '; color: var(--vcf-color); font-weight: 700; }
     .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
     .tag {
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: .75rem;
-      font-weight: 600;
-      background: var(--bg);
-      color: var(--muted);
-      border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 999px; font-size: .75rem; font-weight: 600;
+      background: var(--bg); color: var(--muted); border: 1px solid var(--border);
     }
 
     /* ─── Feature table ─── */
     .table-wrap {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow-x: auto;
-      border: 1px solid var(--border);
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow-x: auto; border: 1px solid var(--border);
     }
     table { width: 100%; border-collapse: collapse; }
     th {
-      background: var(--bg);
-      color: var(--muted);
-      font-size: .78rem;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
+      background: var(--bg); color: var(--muted); font-size: .78rem;
+      text-transform: uppercase; letter-spacing: .06em; padding: 12px 16px;
+      text-align: left; border-bottom: 1px solid var(--border);
     }
     th:not(:first-child) { text-align: center; }
     td {
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--border);
-      font-size: .88rem;
-      color: var(--text);
-      vertical-align: middle;
+      padding: 10px 16px; border-bottom: 1px solid var(--border);
+      font-size: .88rem; color: var(--text); vertical-align: middle;
     }
     td:not(:first-child) { text-align: center; }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(0,119,182,.04); }
     .subcategory-row td {
-      background: var(--bg);
-      font-weight: 700;
-      font-size: .82rem;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      color: var(--muted);
-      padding: 8px 16px;
+      background: var(--bg); font-weight: 700; font-size: .82rem;
+      text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding: 8px 16px;
     }
+
+    /* ─── Clickable rows ─── */
+    tr.detail-row {
+      cursor: pointer;
+      transition: background .12s;
+    }
+    tr.detail-row:hover td { background: rgba(0,119,182,.07); }
+    tr.detail-row td:first-child { display: flex; align-items: center; gap: 8px; }
+    tr.detail-row td:first-child::after {
+      content: 'ℹ';
+      font-size: .7rem;
+      color: var(--muted);
+      opacity: .5;
+      flex-shrink: 0;
+    }
+    tr.detail-row:hover td:first-child::after { opacity: 1; color: var(--vcf-color); }
+
     .chip {
-      display: inline-block;
-      border-radius: 999px;
-      padding: 3px 12px;
-      font-size: .8rem;
-      font-weight: 600;
+      display: inline-block; border-radius: 999px;
+      padding: 3px 12px; font-size: .8rem; font-weight: 600;
     }
     .chip-yes  { background: var(--yes);     color: #fff; }
     .chip-no   { background: var(--no);      color: var(--muted); }
@@ -253,30 +183,75 @@
     .diff-hidden { display: none; }
     .hidden-row  { display: none; }
 
-    /* ─── Comparator ─── */
-    .comparator-box {
+    /* ─── Detail Modal ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.45);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
       background: var(--card-bg);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: 0 8px 40px rgba(0,0,0,.25);
+      width: 100%; max-width: 600px;
+      max-height: 85vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform .2s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    }
+    .modal-header h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .modal-close {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.3rem; color: var(--muted); flex-shrink: 0;
+      padding: 2px 6px; border-radius: 6px;
+    }
+    .modal-close:hover { background: var(--bg); color: var(--text); }
+    .modal-body { padding: 20px 24px; }
+    .modal-section { margin-bottom: 18px; }
+    .modal-section:last-child { margin-bottom: 0; }
+    .modal-label {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted); margin-bottom: 6px;
+    }
+    .modal-section p { font-size: .9rem; line-height: 1.65; color: var(--text); }
+    .modal-example {
+      background: var(--bg); border-left: 3px solid var(--vcf-color);
+      border-radius: 0 8px 8px 0; padding: 10px 14px;
+      font-size: .85rem; line-height: 1.6; color: var(--text);
+    }
+    .modal-plans { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+    .modal-plan-chip {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 999px; font-size: .82rem; font-weight: 600;
       border: 1px solid var(--border);
-      padding: 24px;
+    }
+    .modal-plan-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-yes  { background: var(--yes); }
+    .dot-no   { background: #94a3b8; }
+    .dot-note { background: #f59e0b; }
+
+    /* ─── Comparator ─── */
+    .comparator-box {
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); border: 1px solid var(--border); padding: 24px;
     }
     .comparator-selects {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-      align-items: center;
+      display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; align-items: center;
     }
     .comparator-selects select {
-      flex: 1 1 160px;
-      padding: 9px 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--bg);
-      color: var(--text);
-      font-size: .9rem;
-      cursor: pointer;
+      flex: 1 1 160px; padding: 9px 14px;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--bg); color: var(--text); font-size: .9rem; cursor: pointer;
     }
     .comparator-selects .vs { font-weight: 700; color: var(--muted); }
     .comp-table th, .comp-table td { font-size: .85rem; }
@@ -284,84 +259,49 @@
     [data-theme="dark"] .diff-row td { background: #3d2c00 !important; }
 
     /* ─── Use case cards ─── */
-    .usecase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-    }
+    .usecase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
     .usecase-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      padding: 20px;
-      box-shadow: var(--shadow);
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--border); padding: 20px; box-shadow: var(--shadow);
     }
     .usecase-card .uc-icon { font-size: 2rem; margin-bottom: 10px; }
     .usecase-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
     .usecase-card p  { font-size: .83rem; color: var(--muted); line-height: 1.5; }
     .recommend-badge {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: .75rem;
-      font-weight: 700;
-      color: #fff;
+      display: inline-block; margin-top: 10px; padding: 3px 10px;
+      border-radius: 999px; font-size: .75rem; font-weight: 700; color: #fff;
     }
     .rec-vvf  { background: var(--vvf-color); }
     .rec-vcfe { background: var(--vcfe-color); }
     .rec-vcf  { background: var(--vcf-color); }
 
     /* ─── Upgrade paths ─── */
-    .upgrade-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
+    .upgrade-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
     .upgrade-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
     }
     .upgrade-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
     .arrow-list { list-style: none; }
     .arrow-list li {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: .85rem;
-      padding: 5px 0;
-      color: var(--muted);
-      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px; font-size: .85rem;
+      padding: 5px 0; color: var(--muted); border-bottom: 1px solid var(--border);
     }
     .arrow-list li:last-child { border: none; }
     .arrow-list .arrow { color: var(--vcf-color); font-weight: 700; }
 
-    /* ─── Notes ─── */
     .note-box {
-      background: var(--note-bg);
-      color: var(--note-text);
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      font-size: .85rem;
-      margin-top: 16px;
-      line-height: 1.6;
+      background: var(--note-bg); color: var(--note-text);
+      border-radius: var(--radius); padding: 14px 18px;
+      font-size: .85rem; margin-top: 16px; line-height: 1.6;
     }
-
-    /* ─── Footer ─── */
     footer {
-      text-align: center;
-      padding: 32px 20px;
-      font-size: .8rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
+      text-align: center; padding: 32px 20px;
+      font-size: .8rem; color: var(--muted); border-top: 1px solid var(--border);
     }
 
-    /* ─── Print / PDF ─── */
     @media print {
-      .toolbar, .sticky-nav { display: none; }
+      .toolbar, .sticky-nav, .modal-overlay { display: none; }
       body { background: #fff; color: #000; }
       .plan-card .card-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .chip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -370,6 +310,30 @@
   </style>
 </head>
 <body>
+
+<!-- ─── MODAL ─── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle"></h3>
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <div class="modal-label">¿Qué es?</div>
+        <p id="modalDesc"></p>
+      </div>
+      <div class="modal-section">
+        <div class="modal-label">Ejemplo práctico</div>
+        <div class="modal-example" id="modalExample"></div>
+      </div>
+      <div class="modal-section">
+        <div class="modal-label">Disponibilidad por plan</div>
+        <div class="modal-plans" id="modalPlans"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ─── TOOLBAR ─── -->
 <div class="toolbar">
@@ -385,7 +349,7 @@
 <div class="hero">
   <div class="badge">VMware by Broadcom · VCF 9.1</div>
   <h1>Comparación de Planes<br>VVF · VCFE · VCF</h1>
-  <p>Guía completa basada en el documento oficial de Broadcom (mayo 2026). Datos verificados.</p>
+  <p>Guía completa basada en el documento oficial de Broadcom (mayo 2026). Haz clic en cualquier funcionalidad para ver más detalles.</p>
   <span class="version-badge">Versión 2</span>
 </div>
 
@@ -411,12 +375,8 @@
   <section id="planes">
     <h2 class="section-title">Los tres planes VMware</h2>
     <div class="plan-grid">
-
       <div class="plan-card vvf">
-        <div class="card-header">
-          <h2>VVF</h2>
-          <p>vSphere Foundation</p>
-        </div>
+        <div class="card-header"><h2>VVF</h2><p>vSphere Foundation</p></div>
         <div class="card-body">
           <ul>
             <li>Virtualización de cómputo con vSphere 9</li>
@@ -427,19 +387,13 @@
             <li>vSphere Distributed Switch (vDS)</li>
           </ul>
           <div class="tag-row">
-            <span class="tag">Hypervisor</span>
-            <span class="tag">vCenter</span>
-            <span class="tag">vDS</span>
-            <span class="tag">VKS básico</span>
+            <span class="tag">Hypervisor</span><span class="tag">vCenter</span>
+            <span class="tag">vDS</span><span class="tag">VKS básico</span>
           </div>
         </div>
       </div>
-
       <div class="plan-card vcfe">
-        <div class="card-header">
-          <h2>VCFE</h2>
-          <p>VCF Edge (Nube Privada Edge)</p>
-        </div>
+        <div class="card-header"><h2>VCFE</h2><p>VCF Edge (Nube Privada Edge)</p></div>
         <div class="card-body">
           <ul>
             <li>Todo lo de VVF más stack completo de VCF</li>
@@ -450,19 +404,13 @@
             <li>VCF Operations (Aria Operations)</li>
           </ul>
           <div class="tag-row">
-            <span class="tag">NSX</span>
-            <span class="tag">vSAN ESA</span>
-            <span class="tag">VKS Enterprise</span>
-            <span class="tag">≤5 hosts</span>
+            <span class="tag">NSX</span><span class="tag">vSAN ESA</span>
+            <span class="tag">VKS Enterprise</span><span class="tag">≤5 hosts</span>
           </div>
         </div>
       </div>
-
       <div class="plan-card vcf">
-        <div class="card-header">
-          <h2>VCF</h2>
-          <p>VMware Cloud Foundation</p>
-        </div>
+        <div class="card-header"><h2>VCF</h2><p>VMware Cloud Foundation</p></div>
         <div class="card-body">
           <ul>
             <li>Plataforma de nube privada completa</li>
@@ -474,14 +422,11 @@
             <li>Private AI Foundation (GPU workloads)</li>
           </ul>
           <div class="tag-row">
-            <span class="tag">Full Stack</span>
-            <span class="tag">NSX Enterprise</span>
-            <span class="tag">Private AI</span>
-            <span class="tag">Sin límite</span>
+            <span class="tag">Full Stack</span><span class="tag">NSX Enterprise</span>
+            <span class="tag">Private AI</span><span class="tag">Sin límite</span>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -503,14 +448,8 @@
         </select>
       </div>
       <div class="table-wrap">
-        <table class="comp-table" id="compTable">
-          <thead>
-            <tr>
-              <th>Funcionalidad</th>
-              <th id="compHead1">VVF</th>
-              <th id="compHead2">VCFE</th>
-            </tr>
-          </thead>
+        <table class="comp-table">
+          <thead><tr><th>Funcionalidad</th><th id="compHead1">VVF</th><th id="compHead2">VCFE</th></tr></thead>
           <tbody id="compBody"></tbody>
         </table>
       </div>
@@ -521,63 +460,14 @@
   <section id="casos">
     <h2 class="section-title">¿Cuál plan es para ti?</h2>
     <div class="usecase-grid">
-
-      <div class="usecase-card">
-        <div class="uc-icon">🏢</div>
-        <h4>Virtualización clásica on-prem</h4>
-        <p>Empresa que migra desde vSphere tradicional, sin necesidad de SDN ni nube privada completa.</p>
-        <span class="recommend-badge rec-vvf">Recomendado: VVF</span>
-      </div>
-
-      <div class="usecase-card">
-        <div class="uc-icon">🌐</div>
-        <h4>Nube privada en sede remota</h4>
-        <p>Oficina o sucursal con hasta 5 hosts que necesita stack completo de VCF en espacio reducido.</p>
-        <span class="recommend-badge rec-vcfe">Recomendado: VCFE</span>
-      </div>
-
-      <div class="usecase-card">
-        <div class="uc-icon">🤖</div>
-        <h4>Cargas de trabajo de IA / GPU</h4>
-        <p>Proyectos de IA generativa que requieren Private AI Foundation y acceso a NVIDIA AI Enterprise.</p>
-        <span class="recommend-badge rec-vcf">Recomendado: VCF</span>
-      </div>
-
-      <div class="usecase-card">
-        <div class="uc-icon">🐳</div>
-        <h4>Kubernetes en producción</h4>
-        <p>Plataformas de contenedores empresariales con Harbor Registry, ArgoCD y red NSX.</p>
-        <span class="recommend-badge rec-vcf">Recomendado: VCF</span>
-      </div>
-
-      <div class="usecase-card">
-        <div class="uc-icon">🔒</div>
-        <h4>Seguridad y microsegmentación</h4>
-        <p>Entornos que requieren NSX Distributed Firewall y políticas de microsegmentación avanzadas.</p>
-        <span class="recommend-badge rec-vcfe">Recomendado: VCFE o VCF</span>
-      </div>
-
-      <div class="usecase-card">
-        <div class="uc-icon">📊</div>
-        <h4>Multi-cloud con automatización</h4>
-        <p>Organizaciones que necesitan VCF Automation para self-service de infraestructura a escala.</p>
-        <span class="recommend-badge rec-vcf">Recomendado: VCF</span>
-      </div>
-
-      <div class="usecase-card">
-        <div class="uc-icon">💰</div>
-        <h4>Presupuesto limitado, funciones clave</h4>
-        <p>Empresa que quiere hypervisor enterprise, vCenter y Kubernetes básico al menor costo.</p>
-        <span class="recommend-badge rec-vvf">Recomendado: VVF</span>
-      </div>
-
-      <div class="usecase-card">
-        <div class="uc-icon">🔄</div>
-        <h4>Migración desde Aria / vCloud Suite</h4>
-        <p>Clientes con licencias vCloud Suite, Aria Suite o vSphere EP que buscan transicionar a SKU 9.1.</p>
-        <span class="recommend-badge rec-vcf">Recomendado: VCF</span>
-      </div>
-
+      <div class="usecase-card"><div class="uc-icon">🏢</div><h4>Virtualización clásica on-prem</h4><p>Empresa que migra desde vSphere tradicional, sin necesidad de SDN ni nube privada completa.</p><span class="recommend-badge rec-vvf">Recomendado: VVF</span></div>
+      <div class="usecase-card"><div class="uc-icon">🌐</div><h4>Nube privada en sede remota</h4><p>Oficina o sucursal con hasta 5 hosts que necesita stack completo de VCF en espacio reducido.</p><span class="recommend-badge rec-vcfe">Recomendado: VCFE</span></div>
+      <div class="usecase-card"><div class="uc-icon">🤖</div><h4>Cargas de trabajo de IA / GPU</h4><p>Proyectos de IA generativa que requieren Private AI Foundation y acceso a NVIDIA AI Enterprise.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
+      <div class="usecase-card"><div class="uc-icon">🐳</div><h4>Kubernetes en producción</h4><p>Plataformas de contenedores empresariales con Harbor Registry, ArgoCD y red NSX.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
+      <div class="usecase-card"><div class="uc-icon">🔒</div><h4>Seguridad y microsegmentación</h4><p>Entornos que requieren NSX Distributed Firewall y políticas de microsegmentación avanzadas.</p><span class="recommend-badge rec-vcfe">Recomendado: VCFE o VCF</span></div>
+      <div class="usecase-card"><div class="uc-icon">📊</div><h4>Multi-cloud con automatización</h4><p>Organizaciones que necesitan VCF Automation para self-service de infraestructura a escala.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
+      <div class="usecase-card"><div class="uc-icon">💰</div><h4>Presupuesto limitado, funciones clave</h4><p>Empresa que quiere hypervisor enterprise, vCenter y Kubernetes básico al menor costo.</p><span class="recommend-badge rec-vvf">Recomendado: VVF</span></div>
+      <div class="usecase-card"><div class="uc-icon">🔄</div><h4>Migración desde Aria / vCloud Suite</h4><p>Clientes con licencias vCloud Suite, Aria Suite o vSphere EP que buscan transicionar a SKU 9.1.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
     </div>
   </section>
 
@@ -586,115 +476,27 @@
     <h2 class="section-title">Cómputo – vSphere &amp; Operaciones</h2>
     <div id="mainTable" class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Funcionalidad</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Plataforma de cómputo</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere 9 (ESXi + vCenter)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vCenter Server</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere vMotion, HA, DRS</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Fault Tolerance</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Distributed Switch (vDS)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Lifecycle Manager (vLCM)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr class="subcategory-row"><td colspan="4">Seguridad de cómputo</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Trust Authority</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Native Key Provider</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>NSX Distributed Firewall</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>NSX Gateway Firewall</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr class="subcategory-row"><td colspan="4">VKS – Kubernetes</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Kubernetes Service (VKS)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="note" data-vcfe="yes" data-vcf="yes">
-            <td>Tanzu Kubernetes Grid (TKG)</td>
-            <td><span class="chip chip-note">Básico</span></td>
-            <td><span class="chip chip-yes">Enterprise</span></td>
-            <td><span class="chip chip-yes">Enterprise</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>ArgoCD Operator</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>Harbor Registry (integrado)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="vsphere" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere 9 (ESXi + vCenter)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="vmotion" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere vMotion, HA, DRS</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="ft" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Fault Tolerance</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="vds" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Distributed Switch (vDS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="vlcm" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Lifecycle Manager (vLCM)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="subcategory-row"><td colspan="4">Seguridad</td></tr>
+          <tr class="detail-row" data-key="trust" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Trust Authority</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="nkp" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Native Key Provider</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="dfw" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX Distributed Firewall</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="gfw" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX Gateway Firewall</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="subcategory-row"><td colspan="4">Kubernetes (VKS)</td></tr>
+          <tr class="detail-row" data-key="vks" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Kubernetes Service (VKS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="tkg" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>Tanzu Kubernetes Grid (TKG)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Enterprise</span></td><td><span class="chip chip-yes">Enterprise</span></td></tr>
+          <tr class="detail-row" data-key="argocd" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>ArgoCD Operator</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="harbor" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Harbor Registry (integrado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Continuidad de negocio</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>VMware Site Recovery Manager (SRM)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Replication</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="srm" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VMware Site Recovery Manager (SRM)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="replication" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Replication</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -705,53 +507,16 @@
     <h2 class="section-title">Almacenamiento</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Funcionalidad</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">vSAN</td></tr>
-          <tr data-vvf="note" data-vcfe="yes" data-vcf="yes">
-            <td>vSAN OSA (Original Storage Architecture)</td>
-            <td><span class="chip chip-note">Opcional</span></td>
-            <td><span class="chip chip-yes">Incluido</span></td>
-            <td><span class="chip chip-yes">Incluido</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>vSAN ESA (Express Storage Architecture)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="note" data-vcf="yes">
-            <td>vSAN Max (almacenamiento desagregado)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-note">Add-on</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>vSAN Stretched Clusters</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="vsanosa" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>vSAN OSA (Original Storage Architecture)</td><td><span class="chip chip-note">Opcional</span></td><td><span class="chip chip-yes">Incluido</span></td><td><span class="chip chip-yes">Incluido</span></td></tr>
+          <tr class="detail-row" data-key="vsanesa" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>vSAN ESA (Express Storage Architecture)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="vsanmax" data-vvf="no" data-vcfe="note" data-vcf="yes"><td>vSAN Max (almacenamiento desagregado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Add-on</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="stretched" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>vSAN Stretched Clusters</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Almacenamiento externo</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>NFS / iSCSI / FC (VMFS Datastores)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vVols (VMware Virtual Volumes)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="nfs" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>NFS / iSCSI / FC (VMFS Datastores)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="vvols" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vVols (VMware Virtual Volumes)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -762,115 +527,36 @@
     <h2 class="section-title">Redes</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Funcionalidad</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
-          <tr class="subcategory-row"><td colspan="4">NSX Networking</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>vSphere Distributed Switch (vDS)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>NSX (SDN – redes definidas por software)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>NSX – Enrutamiento distribuido (T0/T1)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>NSX – VPN (L2/L3)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>NSX – Microsegmentación</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>NSX Advanced Load Balancer (Avi)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="subcategory-row"><td colspan="4">Networking</td></tr>
+          <tr class="detail-row" data-key="vds" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Distributed Switch (vDS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="nsx" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX (SDN – redes definidas por software)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="nsxrouting" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – Enrutamiento distribuido (T0/T1)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="nsxvpn" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – VPN (L2/L3)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="microseg" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – Microsegmentación</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="avi" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>NSX Advanced Load Balancer (Avi)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- ─── VKS / CLOUD SERVICES ─── -->
+  <!-- ─── VKS / CLOUD ─── -->
   <section id="vks">
     <h2 class="section-title">VKS y servicios cloud</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Funcionalidad</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Kubernetes (VKS)</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>VKS – Supervisor Cluster</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="note" data-vcfe="yes" data-vcf="yes">
-            <td>VKS – Guest Clusters (TKG)</td>
-            <td><span class="chip chip-note">Básico</span></td>
-            <td><span class="chip chip-yes">Enterprise</span></td>
-            <td><span class="chip chip-yes">Enterprise</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>VKS – Network Policies con NSX</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>VKS – Storage con vSAN ESA</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>VKS – Harbor Registry integrado</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="supervisor" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VKS – Supervisor Cluster</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="tkg" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>VKS – Guest Clusters (TKG)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Enterprise</span></td><td><span class="chip chip-yes">Enterprise</span></td></tr>
+          <tr class="detail-row" data-key="vksnet" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VKS – Network Policies con NSX</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="vksstorage" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VKS – Storage con vSAN ESA</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="harbor" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VKS – Harbor Registry integrado</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Servicios cloud</td></tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>VMware Cloud Director (VCD)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>VMware HCX (migración workloads)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="vcd" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VMware Cloud Director (VCD)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="hcx" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VMware HCX (migración workloads)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -881,46 +567,14 @@
     <h2 class="section-title">VCF Automation</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Funcionalidad</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Automatización e IaC</td></tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>VCF Automation (Aria Automation)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-note">≤5 hosts</span></td>
-            <td><span class="chip chip-yes">Ilimitado</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>Self-service catalog (service broker)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>Terraform &amp; Ansible integration</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>Multi-cloud automation (AWS, Azure, GCP)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>Aria Suite Lifecycle Manager</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="vcfauto" data-vvf="no" data-vcfe="note" data-vcf="yes"><td>VCF Automation (Aria Automation)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">≤5 hosts</span></td><td><span class="chip chip-yes">Ilimitado</span></td></tr>
+          <tr class="detail-row" data-key="selfservice" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>Self-service catalog (service broker)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="terraform" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>Terraform &amp; Ansible integration</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="multicloud" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Multi-cloud automation (AWS, Azure, GCP)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="slcm" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>Aria Suite Lifecycle Manager</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -931,46 +585,14 @@
     <h2 class="section-title">VCF Operations &amp; Observabilidad</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Funcionalidad</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Monitoreo y gestión</td></tr>
-          <tr data-vvf="note" data-vcfe="yes" data-vcf="yes">
-            <td>VCF Operations (Aria Operations)</td>
-            <td><span class="chip chip-note">Básico</span></td>
-            <td><span class="chip chip-yes">Completo</span></td>
-            <td><span class="chip chip-yes">Completo</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="yes" data-vcf="yes">
-            <td>VCF Operations for Networks</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>VCF Log Intelligence (Aria Log Insight)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>VCF Operations for Apps (APM)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="yes" data-vcfe="yes" data-vcf="yes">
-            <td>SDDC Manager (gestión de dominio)</td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="ops" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>VCF Operations (Aria Operations)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Completo</span></td><td><span class="chip chip-yes">Completo</span></td></tr>
+          <tr class="detail-row" data-key="opsnet" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VCF Operations for Networks</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="logintel" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VCF Log Intelligence (Aria Log Insight)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="apm" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VCF Operations for Apps (APM)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="sddcmgr" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>SDDC Manager (gestión de dominio)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -981,45 +603,16 @@
     <h2 class="section-title">Private AI Foundation</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Funcionalidad</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>Private AI Foundation (GPU workloads)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>NVIDIA AI Enterprise (integración)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Add-on</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>Gestión de GPU vGPU / MIG</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
-          <tr data-vvf="no" data-vcfe="no" data-vcf="yes">
-            <td>AI/ML Kubernetes operators</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-yes">Sí</span></td>
-          </tr>
+          <tr class="detail-row" data-key="privateai" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Private AI Foundation (GPU workloads)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="nvidia" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>NVIDIA AI Enterprise (integración)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Add-on</span></td></tr>
+          <tr class="detail-row" data-key="vgpu" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Gestión de GPU vGPU / MIG</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" data-key="aiops" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>AI/ML Kubernetes operators</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note-box">
-      ⚠️ Private AI Foundation es exclusivo de VCF y requiere hardware con GPU compatible (NVIDIA). NVIDIA AI Enterprise se licencia por separado como add-on sobre VCF.
-    </div>
+    <div class="note-box">⚠️ Private AI Foundation es exclusivo de VCF y requiere hardware con GPU compatible (NVIDIA). NVIDIA AI Enterprise se licencia por separado como add-on sobre VCF.</div>
   </section>
 
   <!-- ─── ADD-ONS ─── -->
@@ -1027,45 +620,13 @@
     <h2 class="section-title">Add-ons disponibles</h2>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Add-on</th>
-            <th>VVF</th>
-            <th>VCFE</th>
-            <th>VCF</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Add-on <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
-          <tr data-vvf="note" data-vcfe="note" data-vcf="note">
-            <td>vSAN Max (almacenamiento desagregado)</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-          </tr>
-          <tr data-vvf="note" data-vcfe="note" data-vcf="note">
-            <td>NSX Advanced Threat Prevention</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-          </tr>
-          <tr data-vvf="note" data-vcfe="note" data-vcf="note">
-            <td>NVIDIA AI Enterprise</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-          </tr>
-          <tr data-vvf="note" data-vcfe="note" data-vcf="note">
-            <td>VMware HCX Enterprise</td>
-            <td><span class="chip chip-no">No</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-          </tr>
-          <tr data-vvf="note" data-vcfe="note" data-vcf="note">
-            <td>Carbon Black Cloud (EDR/XDR)</td>
-            <td><span class="chip chip-note">Disponible</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-            <td><span class="chip chip-note">Disponible</span></td>
-          </tr>
+          <tr class="detail-row" data-key="vsanmax" data-vvf="no" data-vcfe="note" data-vcf="note"><td>vSAN Max (almacenamiento desagregado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" data-key="nsxatp" data-vvf="no" data-vcfe="note" data-vcf="note"><td>NSX Advanced Threat Prevention</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" data-key="nvidia" data-vvf="no" data-vcfe="no" data-vcf="note"><td>NVIDIA AI Enterprise</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" data-key="hcx" data-vvf="no" data-vcfe="note" data-vcf="note"><td>VMware HCX Enterprise</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" data-key="cbc" data-vvf="note" data-vcfe="note" data-vcf="note"><td>Carbon Black Cloud (EDR/XDR)</td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1075,63 +636,17 @@
   <section id="upgrade">
     <h2 class="section-title">Rutas de migración / upgrade</h2>
     <div class="upgrade-grid">
-
-      <div class="upgrade-card">
-        <h4>Desde vSphere Foundation (VSF) / vSphere EP</h4>
-        <ul class="arrow-list">
-          <li><span class="arrow">→</span> VVF (migración directa)</li>
-          <li><span class="arrow">→</span> VCFE (si necesita NSX/vSAN)</li>
-          <li><span class="arrow">→</span> VCF (stack completo)</li>
-        </ul>
-      </div>
-
-      <div class="upgrade-card">
-        <h4>Desde vCloud Suite</h4>
-        <ul class="arrow-list">
-          <li><span class="arrow">→</span> VCF (equivalente funcional)</li>
-          <li><span class="arrow">→</span> VVF + add-ons (reducción de scope)</li>
-        </ul>
-      </div>
-
-      <div class="upgrade-card">
-        <h4>Desde Aria Suite (standalone)</h4>
-        <ul class="arrow-list">
-          <li><span class="arrow">→</span> VCF (Aria queda incluido)</li>
-          <li><span class="arrow">→</span> VCFE (Operations incluido)</li>
-        </ul>
-      </div>
-
-      <div class="upgrade-card">
-        <h4>Desde VCF 4.x / 5.x</h4>
-        <ul class="arrow-list">
-          <li><span class="arrow">→</span> VCF 9.1 (upgrade in-place)</li>
-          <li><span class="arrow">→</span> Requiere VCF 5.2+ como base</li>
-        </ul>
-      </div>
-
-      <div class="upgrade-card">
-        <h4>Desde NSX-T standalone</h4>
-        <ul class="arrow-list">
-          <li><span class="arrow">→</span> VCFE (NSX incluido)</li>
-          <li><span class="arrow">→</span> VCF (NSX Enterprise incluido)</li>
-        </ul>
-      </div>
-
-      <div class="upgrade-card">
-        <h4>Desde vSAN standalone</h4>
-        <ul class="arrow-list">
-          <li><span class="arrow">→</span> VCFE (vSAN ESA incluido)</li>
-          <li><span class="arrow">→</span> VCF (vSAN ESA + Max disponible)</li>
-        </ul>
-      </div>
-
+      <div class="upgrade-card"><h4>Desde vSphere Foundation / vSphere EP</h4><ul class="arrow-list"><li><span class="arrow">→</span> VVF (migración directa)</li><li><span class="arrow">→</span> VCFE (si necesita NSX/vSAN)</li><li><span class="arrow">→</span> VCF (stack completo)</li></ul></div>
+      <div class="upgrade-card"><h4>Desde vCloud Suite</h4><ul class="arrow-list"><li><span class="arrow">→</span> VCF (equivalente funcional)</li><li><span class="arrow">→</span> VVF + add-ons (reducción de scope)</li></ul></div>
+      <div class="upgrade-card"><h4>Desde Aria Suite (standalone)</h4><ul class="arrow-list"><li><span class="arrow">→</span> VCF (Aria queda incluido)</li><li><span class="arrow">→</span> VCFE (Operations incluido)</li></ul></div>
+      <div class="upgrade-card"><h4>Desde VCF 4.x / 5.x</h4><ul class="arrow-list"><li><span class="arrow">→</span> VCF 9.1 (upgrade in-place)</li><li><span class="arrow">→</span> Requiere VCF 5.2+ como base</li></ul></div>
+      <div class="upgrade-card"><h4>Desde NSX-T standalone</h4><ul class="arrow-list"><li><span class="arrow">→</span> VCFE (NSX incluido)</li><li><span class="arrow">→</span> VCF (NSX Enterprise incluido)</li></ul></div>
+      <div class="upgrade-card"><h4>Desde vSAN standalone</h4><ul class="arrow-list"><li><span class="arrow">→</span> VCFE (vSAN ESA incluido)</li><li><span class="arrow">→</span> VCF (vSAN ESA + Max disponible)</li></ul></div>
     </div>
-    <div class="note-box">
-      📋 Broadcom recomienda revisar la herramienta de compatibilidad oficial antes de cualquier upgrade. Las rutas de migración dependen de la versión actual y del hardware certificado HCL.
-    </div>
+    <div class="note-box">📋 Broadcom recomienda revisar la herramienta de compatibilidad oficial antes de cualquier upgrade. Las rutas de migración dependen de la versión actual y del hardware certificado HCL.</div>
   </section>
 
-</div><!-- /container -->
+</div>
 
 <footer>
   <p>Datos basados en <strong>VCF 9.1 Feature Comparison and Upgrade Paths</strong> – Broadcom, mayo 2026.</p>
@@ -1139,7 +654,285 @@
 </footer>
 
 <script>
-  // ─── Theme toggle ───
+  /* ─── Diccionario de detalles ─── */
+  const details = {
+    vsphere: {
+      title: 'vSphere 9 (ESXi + vCenter)',
+      desc: 'vSphere es la plataforma de virtualización de VMware. ESXi es el hipervisor que se instala directamente en el servidor físico y permite crear múltiples máquinas virtuales. vCenter es el servidor de gestión centralizado que permite administrar todos los hosts ESXi desde una sola consola.',
+      example: 'Una empresa tiene 20 servidores físicos. Instala ESXi en cada uno y los gestiona todos desde vCenter. Puede ver el estado, crear VMs, mover cargas de trabajo y aplicar parches desde una sola pantalla.'
+    },
+    vmotion: {
+      title: 'vSphere vMotion, HA, DRS',
+      desc: 'vMotion permite migrar máquinas virtuales en vivo entre hosts sin interrupción del servicio. HA (High Availability) reinicia automáticamente las VMs en otro host si el servidor falla. DRS (Distributed Resource Scheduler) balancea la carga de trabajo automáticamente entre hosts.',
+      example: 'A las 3 AM un servidor físico falla. HA detecta el fallo en segundos y reinicia todas las VMs del servidor caído en otros hosts disponibles. Los usuarios casi no notan la interrupción.'
+    },
+    ft: {
+      title: 'vSphere Fault Tolerance',
+      desc: 'Fault Tolerance (FT) mantiene una copia en espejo de una VM corriendo en otro host en tiempo real. Si el host principal falla, la copia toma el control instantáneamente sin ninguna interrupción, sin perder ni un solo paquete de red ni transacción.',
+      example: 'Un sistema de pagos crítico corre con FT activo. Cuando el host primario sufre un fallo de hardware, el host espejo asume el control en microsegundos. Los clientes no ven ningún error ni timeout en sus transacciones.'
+    },
+    vds: {
+      title: 'vSphere Distributed Switch (vDS)',
+      desc: 'El vDS es un switch virtual que abarca múltiples hosts ESXi, gestionado de forma centralizada desde vCenter. Permite configurar políticas de red (VLANs, QoS, seguridad) una sola vez y aplicarlas a todos los hosts del clúster de forma coherente.',
+      example: 'En lugar de configurar 50 switches virtuales idénticos en 50 hosts, el administrador configura el vDS una vez en vCenter. La política de red se sincroniza automáticamente a todos los hosts: QoS para tráfico de base de datos, VLAN de producción y VLAN de respaldo, todo en un solo lugar.'
+    },
+    vlcm: {
+      title: 'vSphere Lifecycle Manager (vLCM)',
+      desc: 'vLCM gestiona el ciclo de vida del firmware y software de los hosts ESXi mediante imágenes deseadas (desired state). Define el estado exacto que debe tener cada host y aplica parches, actualizaciones y configuraciones de forma automatizada y consistente.',
+      example: 'El equipo de infraestructura define que todos los hosts deben tener ESXi 9.0.1 con el driver de red 5.2.3 y el firmware del BIOS 2.1. vLCM compara automáticamente cada host con la imagen deseada, identifica los que están desactualizados y los parchea en la ventana de mantenimiento programada.'
+    },
+    trust: {
+      title: 'vSphere Trust Authority',
+      desc: 'vSphere Trust Authority (vTA) permite verificar la integridad del hardware y el hipervisor antes de ejecutar cargas de trabajo sensibles. Usa servidores de confianza designados (Trust Authority Hosts) que validan que los hosts de cómputo no han sido comprometidos.',
+      example: 'Un banco requiere que sus VMs de procesamiento de pagos solo corran en hardware verificado y no comprometido. vTA valida el firmware y el arranque seguro de cada host. Si un host no pasa la verificación, las VMs con esa política no se inician en él.'
+    },
+    nkp: {
+      title: 'vSphere Native Key Provider',
+      desc: 'Permite cifrar VMs y vSAN sin necesitar un servidor KMS (Key Management Server) externo de terceros. El propio vCenter actúa como proveedor de claves, simplificando el cumplimiento normativo y eliminando la dependencia de servicios externos.',
+      example: 'Una empresa quiere cifrar todas sus VMs por cumplimiento GDPR pero no quiere instalar y mantener un servidor KMS separado. Con Native Key Provider, habilita cifrado directamente desde vCenter sin infraestructura adicional. Las claves se almacenan de forma segura en el propio vCenter.'
+    },
+    dfw: {
+      title: 'NSX Distributed Firewall',
+      desc: 'El Distributed Firewall (DFW) de NSX aplica reglas de firewall directamente en el kernel del hipervisor, cerca de cada VM, en lugar de en un firewall perimetral. Esto permite controlar el tráfico este-oeste (entre VMs) con políticas basadas en grupos y etiquetas, no en IPs.',
+      example: 'Una empresa tiene VMs de base de datos y VMs de aplicación en el mismo segmento de red. Con DFW, aunque una VM de aplicación sea comprometida, el atacante no puede conectarse directamente a la VM de base de datos porque el DFW bloquea el tráfico este-oeste no autorizado a nivel de kernel, antes de que salga al switch virtual.'
+    },
+    gfw: {
+      title: 'NSX Gateway Firewall',
+      desc: 'El Gateway Firewall actúa como firewall en el borde de los segmentos NSX (gateways T0 y T1), controlando el tráfico norte-sur (entre la red física y las VMs virtuales). Incluye funciones como NAT, inspección L7, IDS/IPS y detección de amenazas.',
+      example: 'El tráfico de internet que llega a las VMs pasa primero por el Gateway Firewall NSX antes de entrar al ambiente virtualizado. El firewall inspecciona el contenido L7, bloquea ataques conocidos y registra todos los intentos de conexión para cumplimiento normativo.'
+    },
+    vks: {
+      title: 'vSphere Kubernetes Service (VKS)',
+      desc: 'VKS integra Kubernetes directamente en vSphere, permitiendo correr contenedores junto a VMs en la misma infraestructura. El Supervisor Cluster actúa como plano de control Kubernetes nativo, usando la infraestructura de vSphere para scheduling, storage y networking.',
+      example: 'El equipo de desarrollo quiere desplegar microservicios en contenedores sin tener que gestionar infraestructura de Kubernetes por separado. Con VKS, los desarrolladores hacen kubectl apply en el mismo clúster vSphere donde corren las VMs. El almacenamiento se provee de vSAN automáticamente y la red de vDS/NSX.'
+    },
+    tkg: {
+      title: 'Tanzu Kubernetes Grid (TKG)',
+      desc: 'TKG permite crear clústeres Kubernetes gestionados (Guest Clusters) dentro del Supervisor de vSphere. En VVF el soporte es básico (sin NSX para networking avanzado ni vSAN ESA). En VCFE y VCF es Enterprise con soporte completo de NSX, Harbor y políticas de red avanzadas.',
+      example: 'El equipo de DevOps necesita 5 clústeres Kubernetes aislados para diferentes equipos de desarrollo. Con TKG Enterprise crean un clúster por equipo en minutos usando una plantilla. Cada clúster tiene su propia red NSX aislada, política de seguridad y cuota de recursos.'
+    },
+    argocd: {
+      title: 'ArgoCD Operator',
+      desc: 'ArgoCD es una herramienta de GitOps que sincroniza automáticamente el estado de Kubernetes con el código almacenado en Git. El operador de ArgoCD en VCF/VCFE permite desplegar y gestionar ArgoCD como servicio de plataforma, sin instalación manual.',
+      example: 'El equipo de DevOps tiene los manifiestos de Kubernetes en GitHub. Con ArgoCD Operator, cada vez que un desarrollador hace merge a main, ArgoCD detecta el cambio y aplica automáticamente la actualización al clúster Kubernetes en VCF. Si algo falla, ArgoCD puede revertir automáticamente al estado anterior.'
+    },
+    harbor: {
+      title: 'Harbor Registry (integrado)',
+      desc: 'Harbor es un registro privado de imágenes de contenedores con funciones enterprise: escaneo de vulnerabilidades, políticas de retención, control de acceso por proyecto y replicación. En VCF está integrado como servicio de plataforma y se gestiona a través del Supervisor.',
+      example: 'El equipo de seguridad requiere que todas las imágenes de contenedores sean escaneadas antes de desplegarse en producción. Con Harbor integrado en VCF, el pipeline de CI/CD sube las imágenes a Harbor, que las escanea automáticamente con Trivy. Las imágenes con vulnerabilidades críticas no pueden desplegarse hasta ser parcheadas.'
+    },
+    srm: {
+      title: 'VMware Site Recovery Manager (SRM)',
+      desc: 'SRM automatiza y orquesta la recuperación ante desastres entre dos sitios (datacenter primario y secundario). Define planes de recuperación con RTO y RPO específicos, gestiona la replicación y permite realizar pruebas de DR sin impactar producción.',
+      example: 'Una empresa tiene su datacenter principal en Madrid y un sitio de DR en Barcelona. Con SRM, si Madrid sufre un desastre, el equipo ejecuta el plan de recuperación con un clic. SRM activa las VMs replicadas en Barcelona en el orden correcto (primero la base de datos, luego la aplicación, luego el frontend) y actualiza el DNS automáticamente.'
+    },
+    replication: {
+      title: 'vSphere Replication',
+      desc: 'vSphere Replication replica VMs de forma asíncrona entre hosts o sitios, con un RPO mínimo de 5 minutos. Es más ligero que la replicación basada en storage y funciona a nivel de hipervisor, siendo compatible con cualquier tipo de almacenamiento.',
+      example: 'Una empresa no tiene presupuesto para almacenamiento replicado dedicado entre sitios. Con vSphere Replication, las VMs críticas se replican cada 15 minutos al sitio de DR usando el propio hipervisor, sin necesitar que el storage sea compatible con replicación. Solo necesita conectividad de red entre los sitios.'
+    },
+    vsanosa: {
+      title: 'vSAN OSA (Original Storage Architecture)',
+      desc: 'vSAN OSA es la arquitectura original de almacenamiento hiperconvergido de VMware. Combina discos locales de múltiples hosts en un datastore distribuido. Usa una capa de caché (SSD) + capa de capacidad (HDD o SSD). Es compatible con hardware existente de generaciones anteriores.',
+      example: 'Una empresa tiene servidores Dell PowerEdge R740 con discos NVMe y SSD ya instalados. Con vSAN OSA pueden crear un datastore distribuido de 100 TB usando los discos locales de 10 servidores, sin comprar almacenamiento externo. Broadcom certifica el hardware en su HCL para garantizar compatibilidad.'
+    },
+    vsanesa: {
+      title: 'vSAN ESA (Express Storage Architecture)',
+      desc: 'vSAN ESA es la nueva arquitectura de almacenamiento optimizada para hardware NVMe All-Flash moderno. Elimina la separación caché/capacidad, ofrece compresión de datos mejorada, deduplicación más eficiente y snapshots de mayor rendimiento con menor overhead que OSA.',
+      example: 'Un banco requiere máximo rendimiento de almacenamiento para su base de datos Oracle. Con vSAN ESA en servidores con NVMe Gen 4, obtiene latencia sub-milisegundo y throughput mayor que con OSA. La compresión nativa reduce el espacio consumido en un 40% sin impacto en rendimiento.'
+    },
+    vsanmax: {
+      title: 'vSAN Max (almacenamiento desagregado)',
+      desc: 'vSAN Max separa el cómputo del almacenamiento, creando un pool de almacenamiento dedicado que puede ser consumido por múltiples clústeres de cómputo. Permite escalar almacenamiento y cómputo de forma independiente, ideal para workloads con alta demanda de storage.',
+      example: 'Una empresa tiene un clúster de cómputo para VMs de negocio y un clúster separado para bases de datos. Con vSAN Max, despliegan un tercer clúster dedicado solo a almacenamiento de alta capacidad. Ambos clústeres de cómputo consumen del mismo pool de storage sin necesitar discos locales adicionales.'
+    },
+    stretched: {
+      title: 'vSAN Stretched Clusters',
+      desc: 'Un Stretched Cluster extiende un clúster vSAN entre dos sitios geográficos separados (con un witness en un tercer sitio), proporcionando disponibilidad continua ante fallo de sitio completo. Las VMs pueden correr en cualquier sitio y el storage se replica síncronamente.',
+      example: 'Un retailer tiene dos datacenters en la misma ciudad separados 10 km. Con vSAN Stretched Cluster, el clúster abarca ambos DCs. Si el DC1 pierde energía completamente, las VMs se ven afectadas el tiempo mínimo necesario para reiniciar en DC2, que ya tiene los datos porque la replicación es síncrona.'
+    },
+    nfs: {
+      title: 'NFS / iSCSI / FC (VMFS Datastores)',
+      desc: 'vSphere soporta almacenamiento externo tradicional mediante protocolos estándar: NFS (almacenamiento de red sobre Ethernet), iSCSI (bloque sobre Ethernet), Fibre Channel (bloque dedicado de alta velocidad) y FCoE. Todos se presentan como datastores VMFS para almacenar VMs.',
+      example: 'Una empresa ya tiene una SAN NetApp con 500 TB. En lugar de comprar almacenamiento nuevo, conectan sus hosts ESXi a la SAN por Fibre Channel y presentan los LUNs como datastores VMFS en vCenter. Las VMs existentes siguen usando su almacenamiento sin cambios.'
+    },
+    vvols: {
+      title: 'vVols (VMware Virtual Volumes)',
+      desc: 'vVols cambia el paradigma de gestión de storage: en lugar de presentar LUNs o volúmenes al host, el array de almacenamiento recibe las políticas de storage de vSphere y gestiona cada VM individualmente. Permite aplicar calidad de servicio, snapshots y replicación por VM, no por datastore.',
+      example: 'Un hospital necesita que las VMs del sistema de historiales médicos tengan replicación síncrona y snapshots cada hora, mientras que las VMs de impresión solo necesiten backup diario. Con vVols y la SAN Pure Storage, el administrador asigna políticas diferentes por VM desde vCenter sin crear datastores separados.'
+    },
+    nsx: {
+      title: 'NSX (SDN – Redes definidas por software)',
+      desc: 'NSX virtualiza completamente la red: crea switches, routers, firewalls y balanceadores de carga por software, independientes del hardware de red físico. Permite crear redes aisladas (overlays) con enrutamiento, seguridad y balanceo de carga sin tocar el hardware de red.',
+      example: 'Un proveedor de servicios cloud necesita crear redes completamente aisladas para 100 clientes diferentes, todos compartiendo el mismo hardware físico. Con NSX crea 100 redes overlay (VxLAN) aisladas, cada una con su propio router virtual, firewall y rango de IPs, sin necesitar VLANs físicas adicionales.'
+    },
+    nsxrouting: {
+      title: 'NSX – Enrutamiento distribuido (T0/T1)',
+      desc: 'NSX implementa enrutamiento distribuido en el hipervisor: el router T0 conecta la red virtual con la red física (BGP/OSPF con el underlay), y el router T1 conecta segmentos internos. El enrutamiento ocurre en el kernel del host, no en un dispositivo centralizado.',
+      example: 'Una empresa tiene 50 VMs de aplicación distribuidas en 10 hosts. Con enrutamiento distribuido NSX, cuando la VM-App-01 en Host-1 se comunica con VM-DB-01 en Host-5, el paquete se enruta directamente en el kernel de Host-1 sin pasar por un router físico central, reduciendo la latencia.'
+    },
+    nsxvpn: {
+      title: 'NSX – VPN (L2/L3)',
+      desc: 'NSX incluye capacidades de VPN integradas: L2 VPN extiende segmentos L2 entre sitios (útil para migración de VMs sin cambiar IPs), y L3 VPN (IPSec) conecta sitios o usuarios remotos a la infraestructura NSX de forma segura.',
+      example: 'Una empresa quiere migrar sus VMs de su datacenter on-premise a otro datacenter sin cambiar las IPs de las VMs. Con L2 VPN de NSX, extienden el segmento de red del DC1 al DC2. Las VMs migradas mantienen su IP original y los aplicativos que las llaman por IP siguen funcionando sin cambio de configuración.'
+    },
+    microseg: {
+      title: 'NSX – Microsegmentación',
+      desc: 'La microsegmentación divide la red en zonas muy pequeñas (hasta nivel de VM individual) y aplica políticas de seguridad entre ellas. Implementada con el Distributed Firewall de NSX, permite que aunque un atacante comprometa una VM, no pueda moverse lateralmente a otras.',
+      example: 'Un ransomware infecta una VM de RR.HH. Sin microsegmentación, podría propagarse a las 200 VMs de la misma red. Con microsegmentación NSX, la política de seguridad solo permite que las VMs de RR.HH. se conecten a sus servidores de archivos específicos por los puertos necesarios. El ransomware queda contenido en esa VM.'
+    },
+    avi: {
+      title: 'NSX Advanced Load Balancer (Avi)',
+      desc: 'Avi Networks (ahora NSX ALB) es un balanceador de carga de aplicaciones software-defined de alto rendimiento. Ofrece balanceo L4/L7, terminación SSL, WAF (Web Application Firewall), análisis de performance de aplicaciones y autoescalado, todo gestionado como software.',
+      example: 'Una tienda online tiene picos de tráfico en Black Friday. Con NSX ALB configuran un virtual service que distribuye el tráfico entre 10 VMs de frontend. ALB detecta que 3 VMs tienen alta CPU y desvía el tráfico automáticamente a las 7 restantes. El WAF integrado bloquea intentos de inyección SQL sin configuración adicional.'
+    },
+    supervisor: {
+      title: 'VKS – Supervisor Cluster',
+      desc: 'El Supervisor es el plano de control de Kubernetes integrado en vSphere. Se activa sobre un clúster vSphere y habilita un API endpoint de Kubernetes nativo. A partir de él se pueden crear namespaces, desplegar VMs via VM Service y crear Guest Clusters (TKG). Es la base de toda la funcionalidad Kubernetes en vSphere.',
+      example: 'El equipo de plataforma activa el Supervisor en un clúster vSphere con 10 hosts. Inmediatamente tienen disponible un endpoint kubectl. Crean namespaces para los equipos de desarrollo y los desarrolladores pueden desplegar pods, VMs y clústeres TKG usando la misma herramienta Kubernetes estándar.'
+    },
+    vksnet: {
+      title: 'VKS – Network Policies con NSX',
+      desc: 'Cuando VKS usa NSX como CNI (Container Network Interface), los pods de Kubernetes pueden usar Network Policies de NSX para controlar el tráfico entre pods con mayor granularidad y rendimiento. NSX provee aislamiento de red entre namespaces y políticas de seguridad a nivel de pod.',
+      example: 'Los pods del namespace "frontend" deben poder conectarse a los pods del namespace "backend" en el puerto 8080, pero no al revés. Con Network Policies de NSX, el administrador define esta regla que NSX aplica en el kernel del hipervisor, no en un proxy de red, logrando máximo rendimiento con seguridad microsegmentada.'
+    },
+    vksstorage: {
+      title: 'VKS – Storage con vSAN ESA',
+      desc: 'Cuando los Guest Clusters de TKG usan vSAN ESA como backend de storage, los Persistent Volumes de Kubernetes son aprovisionados directamente en el datastore vSAN de alto rendimiento. El aprovisionamiento es dinámico vía CSI driver, con políticas de storage de vSphere aplicables por PVC.',
+      example: 'Un desarrollador despliega una base de datos PostgreSQL en un Guest Cluster TKG. Solicita un PVC de 100 GB con política "alta disponibilidad". El CSI driver crea automáticamente un volumen en vSAN ESA con nivel de redundancia FTT=1 y lo monta en el pod. Si el pod se mueve a otro nodo, el volumen lo sigue automáticamente.'
+    },
+    vcd: {
+      title: 'VMware Cloud Director (VCD)',
+      desc: 'VCD es una plataforma de gestión de nube privada y pública orientada a proveedores de servicios cloud (Service Providers). Permite ofrecer IaaS a múltiples tenants con autoservicio, cuotas, catálogos de servicios, redes aisladas y facturación, todo desde un portal de tenant.',
+      example: 'Un proveedor de hosting ofrece "VMware Cloud Privado" a sus 50 clientes empresariales. Con VCD cada cliente tiene su propio portal donde puede crear VMs, redes y storage dentro de sus cuotas asignadas, sin ver los recursos de otros clientes. El proveedor gestiona todo el hardware subyacente de forma centralizada.'
+    },
+    hcx: {
+      title: 'VMware HCX (migración workloads)',
+      desc: 'HCX facilita la migración de VMs entre entornos vSphere (on-premises a on-premises, o a cloud) de forma simplificada, con mínimo o cero downtime. Soporta migración masiva, extensión de red L2 para mantener IPs, y optimización de WAN para migración por red lenta.',
+      example: 'Una empresa quiere migrar 500 VMs de su datacenter antiguo a su nueva infraestructura VCF sin afectar producción. Con HCX, extienden la red L2 entre los dos datacenters, migran las VMs en vivo con vMotion a través de la WAN y las VMs mantienen sus IPs originales. Los usuarios no notan nada durante la migración.'
+    },
+    vcfauto: {
+      title: 'VCF Automation (Aria Automation)',
+      desc: 'VCF Automation es la plataforma de automatización e IaC de VMware. Permite que los equipos consuman infraestructura (VMs, contenedores, redes, storage) de forma self-service mediante blueprints y catálogos. Soporta Terraform, Ansible y tiene integraciones con ServiceNow y otras herramientas ITSM.',
+      example: 'Un desarrollador necesita un ambiente completo de 3 VMs (frontend + backend + base de datos) con sus redes y storage. En lugar de hacer un ticket al equipo de infraestructura y esperar 2 semanas, accede al portal de VCF Automation, selecciona el blueprint "Ambiente Desarrollo" y en 20 minutos tiene su ambiente aprovisionado automáticamente.'
+    },
+    selfservice: {
+      title: 'Self-service catalog (service broker)',
+      desc: 'El catálogo de autoservicio es el portal donde los usuarios finales consumen recursos de infraestructura publicados por el equipo de plataforma. Los administradores publican blueprints como "items de catálogo" con aprobaciones, cuotas y costos. Los usuarios los solicitan sin intervención manual del equipo IT.',
+      example: 'El equipo de IT publica en el catálogo: "VM Windows Server", "Clúster Kubernetes", "Base de datos MySQL", cada uno con su costo por hora. Los desarrolladores acceden al portal, eligen lo que necesitan, sus solicitudes pasan por aprobación automática del líder técnico y el recurso se aprovisiona solo.'
+    },
+    terraform: {
+      title: 'Terraform &amp; Ansible integration',
+      desc: 'VCF Automation se integra con Terraform (para gestión de infraestructura como código) y Ansible (para configuración y automatización de sistemas). Los blueprints pueden usar scripts de Terraform o playbooks de Ansible como parte del flujo de aprovisionamiento.',
+      example: 'El equipo de DevOps mantiene toda su infraestructura como código en Git usando Terraform. Con la integración de VCF Automation, cuando se aprueba un plan de Terraform en el pipeline CI/CD, VCF Automation ejecuta el terraform apply contra la API de vSphere/NSX y provee el recurso automáticamente, con gobernanza y trazabilidad incluidas.'
+    },
+    multicloud: {
+      title: 'Multi-cloud automation (AWS, Azure, GCP)',
+      desc: 'VCF Automation puede gestionar recursos no solo en vSphere sino también en nubes públicas (AWS, Azure, GCP) desde la misma plataforma. Permite crear blueprints "cloud-agnostic" que se despliegan en on-premises o en cloud según las políticas de la empresa.',
+      example: 'Una empresa tiene política de cloud burst: cuando el datacenter on-premises está al 80% de capacidad, los workloads adicionales deben ir a AWS. Con VCF Automation configuran un blueprint que primero intenta aprovisionar en vSphere on-premises, y si no hay capacidad, automáticamente aprovisiona en AWS EC2, todo visible desde el mismo portal.'
+    },
+    slcm: {
+      title: 'Aria Suite Lifecycle Manager',
+      desc: 'Aria Suite Lifecycle Manager automatiza la instalación, actualización y configuración de los productos del portfolio Aria/VCF (Operations, Automation, Log Intelligence). Gestiona el ciclo de vida completo de estos productos con menor esfuerzo operacional.',
+      example: 'El equipo de operaciones necesita actualizar Aria Operations de 8.14 a 8.16 en producción. Con Aria Suite Lifecycle Manager, el proceso está completamente automatizado: hace backup de la configuración, descarga el paquete desde depot.vmware.com, aplica la actualización con health checks automáticos y valida que todo funciona correctamente.'
+    },
+    ops: {
+      title: 'VCF Operations (Aria Operations)',
+      desc: 'VCF Operations es la plataforma de monitoreo y gestión de operaciones de VMware. Recopila métricas de toda la infraestructura (VMs, hosts, storage, red, aplicaciones), analiza el rendimiento, predice problemas de capacidad y da recomendaciones de rightsizing para optimizar costos.',
+      example: 'El equipo de operaciones recibe una alerta de que la VM "SAP-Produccion" está consumiendo 64 GB de RAM pero el análisis muestra que el pico histórico real es 28 GB. VCF Operations recomienda reducir la RAM asignada a 36 GB, ahorrando 28 GB de RAM que puede asignarse a otras VMs. Esto reduce la necesidad de comprar más servidores.'
+    },
+    opsnet: {
+      title: 'VCF Operations for Networks',
+      desc: 'Extiende las capacidades de VCF Operations específicamente para redes virtuales y físicas. Recopila flujos de tráfico (IPFIX, NetFlow), mapea dependencias entre aplicaciones, visualiza la topología de red completa y detecta anomalías de tráfico que podrían indicar problemas o amenazas de seguridad.',
+      example: 'El equipo de seguridad recibe una alerta de que una VM está enviando tráfico inusual a IPs externas a las 2 AM. Con VCF Operations for Networks, acceden al mapa de flujos de esa VM y ven que está escaneando puertos en rangos de IP de internet. Identifican el proceso responsable y lo bloquean antes de que cause daño mayor.'
+    },
+    logintel: {
+      title: 'VCF Log Intelligence (Aria Log Insight)',
+      desc: 'VCF Log Intelligence centraliza y analiza logs de toda la infraestructura VMware (ESXi, vCenter, NSX, VMs) y aplicaciones. Permite búsqueda en tiempo real sobre petabytes de logs, creación de dashboards y alertas basadas en patrones de log, facilitando el troubleshooting y el cumplimiento normativo.',
+      example: 'Un usuario reporta que no puede autenticarse en la aplicación ERP desde las 10:15 AM. El administrador busca en Log Intelligence "authentication failed" filtrado por la IP del usuario en el rango horario. En segundos encuentra 50 errores de autenticación en el servidor LDAP causados por un certificado expirado, que fue el evento raíz del problema.'
+    },
+    apm: {
+      title: 'VCF Operations for Apps (APM)',
+      desc: 'Proporciona Application Performance Monitoring (APM) para las aplicaciones que corren en la infraestructura VCF. Rastrea transacciones de usuarios a través de múltiples servicios, mide latencias, identifica cuellos de botella y correlaciona problemas de aplicación con la infraestructura subyacente.',
+      example: 'Los usuarios reportan que la página de checkout de la tienda online tarda 8 segundos en cargar. Con VCF Operations for Apps, el equipo ve el mapa de dependencias: frontend → API → microservicio de inventario → base de datos. El APM muestra que el 95% del tiempo se va en la query de inventario que hace full table scan. Se añade el índice faltante y la página carga en 0.8 segundos.'
+    },
+    sddcmgr: {
+      title: 'SDDC Manager (gestión de dominio)',
+      desc: 'SDDC Manager es el orquestador de ciclo de vida de VCF. Gestiona el aprovisionamiento automatizado del stack completo (vSphere, vSAN, NSX), aplicación de actualizaciones en el orden correcto, expansión de clústeres y dominios de carga de trabajo, y health checks de toda la plataforma.',
+      example: 'El equipo de infraestructura necesita añadir un nuevo dominio de carga de trabajo para el equipo de IA con 8 hosts nuevos, vSAN y NSX. Con SDDC Manager, describen el dominio deseado (hosts, VLANs, rangos de IP) y SDDC Manager instala ESXi, configura vSAN, despliega NSX y lo registra en vCenter automáticamente en pocas horas, sin intervención manual paso a paso.'
+    },
+    privateai: {
+      title: 'Private AI Foundation (GPU workloads)',
+      desc: 'Private AI Foundation es la plataforma de VMware para ejecutar cargas de trabajo de Inteligencia Artificial y Machine Learning on-premises, usando GPUs físicas compartidas virtualizadas. Incluye servicios de RAG (Retrieval Augmented Generation), almacenes vectoriales y runtime de modelos LLM.',
+      example: 'Una empresa farmacéutica quiere usar LLMs para analizar documentos de investigación confidenciales pero no puede enviarlos a ChatGPT por razones de privacidad. Con Private AI Foundation en VCF, despliegan un modelo LLaMA 3 en sus propios servidores con GPUs NVIDIA H100. Los científicos hacen preguntas al modelo sobre sus datos internos sin que salgan del datacenter.'
+    },
+    nvidia: {
+      title: 'NVIDIA AI Enterprise (integración/add-on)',
+      desc: 'NVIDIA AI Enterprise es el stack de software de IA de NVIDIA (CUDA, cuDNN, TensorFlow, PyTorch optimizados, RAPIDS, Triton Inference Server) empaquetado y certificado para correr sobre VMware vSphere con vGPU. Se licencia por separado como add-on sobre VCF.',
+      example: 'El equipo de data science tiene modelos de PyTorch que necesitan correr en producción con alta disponibilidad. Con NVIDIA AI Enterprise sobre VCF, sus modelos corren en VMs con vGPU usando las versiones optimizadas y certificadas de PyTorch y TensorRT. Broadcom y NVIDIA garantizan soporte conjunto ante problemas.'
+    },
+    vgpu: {
+      title: 'Gestión de GPU vGPU / MIG',
+      desc: 'vGPU (Virtual GPU) permite compartir una GPU física entre múltiples VMs, cada una con su fracción de GPU. MIG (Multi-Instance GPU, solo NVIDIA A100/H100) divide físicamente la GPU en instancias aisladas. VCF gestiona la asignación de perfiles vGPU a VMs como un recurso más del hipervisor.',
+      example: 'Un equipo de 20 data scientists necesitan acceso a GPUs para entrenamiento de modelos, pero comprar 20 GPUs es inviable. Con vGPU en VCF, configuran 4 servidores con GPUs NVIDIA A100 y crean 20 VMs, cada una con un perfil vGPU de 20GB. Cada científico tiene acceso garantizado a su fracción de GPU desde su VM, con aislamiento completo entre ellos.'
+    },
+    aiops: {
+      title: 'AI/ML Kubernetes operators',
+      desc: 'VCF incluye operadores Kubernetes especializados para cargas de trabajo de IA/ML: gestión de trabajos de entrenamiento distribuido, orquestación de inferencia, escalado automático basado en colas de inferencia, y aprovisionamiento de recursos GPU para pods de Kubernetes.',
+      example: 'El equipo de MLOps quiere entrenar un modelo de lenguaje con 8 GPUs distribuidas en 4 nodos. Con los AI/ML operators de VCF, definen un "PyTorchJob" en Kubernetes y el operator aprovisiona automáticamente 4 pods, uno por nodo, los conecta con NCCL para comunicación colectiva GPU-a-GPU, y libera los recursos cuando el entrenamiento termina.'
+    },
+    nsxatp: {
+      title: 'NSX Advanced Threat Prevention',
+      desc: 'NSX Advanced Threat Prevention (ATP) añade capacidades de IDS/IPS (Intrusion Detection/Prevention System) y análisis de malware basado en sandboxing al Gateway Firewall y Distributed Firewall de NSX. Detecta amenazas conocidas y desconocidas (zero-day) en el tráfico de red este-oeste y norte-sur.',
+      example: 'Un atacante logra comprometer una VM y empieza a escanear la red interna buscando otras VMs vulnerables. NSX ATP detecta el patrón de escaneo de puertos (una firma de IDS conocida), bloquea automáticamente el tráfico desde esa VM y envía una alerta al equipo de seguridad con el detalle del ataque para investigación forense.'
+    },
+    cbc: {
+      title: 'Carbon Black Cloud (EDR/XDR)',
+      desc: 'Carbon Black Cloud es la plataforma de Endpoint Detection and Response (EDR) de VMware/Broadcom. Instala un agente ligero en VMs y sistemas físicos que monitorea comportamiento de procesos, detecta amenazas avanzadas (ransomware, malware fileless) y permite respuesta a incidentes remotamente.',
+      example: 'Un empleado abre un adjunto malicioso de phishing. Carbon Black detecta en tiempo real que el proceso de Outlook ejecuta PowerShell de forma inusual, que PowerShell descarga un binario de internet y que ese binario intenta cifrar archivos. CBC bloquea la actividad, termina los procesos maliciosos y alerta al equipo de seguridad con el árbol completo de eventos para forense.'
+    }
+  };
+
+  /* ─── Modal logic ─── */
+  function openModal(key, vvf, vcfe, vcf) {
+    const d = details[key];
+    if (!d) return;
+    document.getElementById('modalTitle').textContent = d.title;
+    document.getElementById('modalDesc').textContent = d.desc;
+    document.getElementById('modalExample').textContent = d.example;
+
+    const planMap = [
+      { label: 'VVF', val: vvf,  color: '#48cae4' },
+      { label: 'VCFE', val: vcfe, color: '#00b4d8' },
+      { label: 'VCF',  val: vcf,  color: '#0077b6' },
+    ];
+    document.getElementById('modalPlans').innerHTML = planMap.map(p => {
+      const dotClass = p.val === 'yes' ? 'dot-yes' : p.val === 'no' ? 'dot-no' : 'dot-note';
+      const label = p.val === 'yes' ? 'Incluido' : p.val === 'no' ? 'No incluido' : 'Parcial / Add-on';
+      return `<div class="modal-plan-chip"><span class="dot ${dotClass}"></span><strong>${p.label}</strong> — ${label}</div>`;
+    }).join('');
+
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+  }
+  function closeModalBtn() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+  /* ─── Wire up detail rows ─── */
+  document.querySelectorAll('tr.detail-row').forEach(tr => {
+    tr.addEventListener('click', () => {
+      openModal(tr.dataset.key, tr.dataset.vvf, tr.dataset.vcfe, tr.dataset.vcf);
+    });
+  });
+
+  /* ─── Theme toggle ─── */
   function toggleTheme() {
     const html = document.documentElement;
     const isDark = html.getAttribute('data-theme') === 'dark';
@@ -1147,7 +940,7 @@
     document.getElementById('themeBtn').textContent = isDark ? '🌙 Modo oscuro' : '☀️ Modo claro';
   }
 
-  // ─── Search ───
+  /* ─── Search ─── */
   function filterSearch() {
     const q = document.getElementById('searchInput').value.toLowerCase().trim();
     document.querySelectorAll('section table tbody tr:not(.subcategory-row)').forEach(tr => {
@@ -1155,7 +948,7 @@
     });
   }
 
-  // ─── Diff filter ───
+  /* ─── Diff filter ─── */
   let diffActive = false;
   function toggleDiff() {
     diffActive = !diffActive;
@@ -1166,50 +959,49 @@
     });
   }
 
-  // ─── Comparator ───
+  /* ─── Comparator ─── */
   const features = [
-    ['vSphere 9 (ESXi + vCenter)',          'yes','yes','yes'],
-    ['vCenter Server',                       'yes','yes','yes'],
-    ['vSphere vMotion / HA / DRS',           'yes','yes','yes'],
-    ['vSphere Lifecycle Manager (vLCM)',     'yes','yes','yes'],
-    ['vSphere Distributed Switch (vDS)',     'yes','yes','yes'],
-    ['vSphere Trust Authority',              'yes','yes','yes'],
-    ['vSphere Native Key Provider',          'yes','yes','yes'],
-    ['Site Recovery Manager (SRM)',          'yes','yes','yes'],
-    ['Aria Suite Lifecycle Manager',         'yes','yes','yes'],
-    ['SDDC Manager',                         'yes','yes','yes'],
-    ['VKS – Supervisor Cluster',             'yes','yes','yes'],
-    ['VKS – Guest Clusters (TKG)',           'note','yes','yes'],
-    ['ArgoCD Operator',                      'no','yes','yes'],
-    ['Harbor Registry integrado',            'no','no','yes'],
-    ['vSAN OSA',                             'note','yes','yes'],
-    ['vSAN ESA',                             'no','yes','yes'],
-    ['vSAN Max',                             'no','note','yes'],
-    ['NFS / iSCSI / FC Datastores',          'yes','yes','yes'],
-    ['NSX (SDN)',                             'no','yes','yes'],
-    ['NSX Distributed Firewall',             'no','yes','yes'],
-    ['NSX Gateway Firewall',                 'no','yes','yes'],
-    ['NSX Advanced Load Balancer (Avi)',     'no','no','yes'],
-    ['VMware HCX',                           'no','yes','yes'],
-    ['VCF Automation (Aria Automation)',     'no','note','yes'],
-    ['Terraform & Ansible integration',      'no','yes','yes'],
-    ['Multi-cloud automation',               'no','no','yes'],
-    ['VCF Operations',                       'note','yes','yes'],
-    ['VCF Operations for Networks',          'no','yes','yes'],
-    ['VCF Log Intelligence',                 'no','no','yes'],
-    ['VCF Operations for Apps (APM)',        'no','no','yes'],
-    ['Private AI Foundation',                'no','no','yes'],
-    ['GPU vGPU / MIG management',            'no','no','yes'],
-    ['NVIDIA AI Enterprise (add-on)',        'no','no','yes'],
-    ['Carbon Black Cloud (add-on)',          'note','note','note'],
+    ['vSphere 9 (ESXi + vCenter)',        'yes','yes','yes'],
+    ['vSphere vMotion / HA / DRS',         'yes','yes','yes'],
+    ['vSphere Lifecycle Manager (vLCM)',   'yes','yes','yes'],
+    ['vSphere Distributed Switch (vDS)',   'yes','yes','yes'],
+    ['vSphere Trust Authority',            'yes','yes','yes'],
+    ['vSphere Native Key Provider',        'yes','yes','yes'],
+    ['Site Recovery Manager (SRM)',        'yes','yes','yes'],
+    ['Aria Suite Lifecycle Manager',       'yes','yes','yes'],
+    ['SDDC Manager',                       'yes','yes','yes'],
+    ['VKS – Supervisor Cluster',           'yes','yes','yes'],
+    ['VKS – Guest Clusters (TKG)',         'note','yes','yes'],
+    ['ArgoCD Operator',                    'no','yes','yes'],
+    ['Harbor Registry integrado',          'no','no','yes'],
+    ['vSAN OSA',                           'note','yes','yes'],
+    ['vSAN ESA',                           'no','yes','yes'],
+    ['vSAN Max',                           'no','note','yes'],
+    ['NFS / iSCSI / FC Datastores',        'yes','yes','yes'],
+    ['NSX (SDN)',                           'no','yes','yes'],
+    ['NSX Distributed Firewall',           'no','yes','yes'],
+    ['NSX Gateway Firewall',               'no','yes','yes'],
+    ['NSX Advanced Load Balancer (Avi)',   'no','no','yes'],
+    ['VMware HCX',                         'no','yes','yes'],
+    ['VCF Automation (Aria Automation)',   'no','note','yes'],
+    ['Terraform & Ansible integration',    'no','yes','yes'],
+    ['Multi-cloud automation',             'no','no','yes'],
+    ['VCF Operations',                     'note','yes','yes'],
+    ['VCF Operations for Networks',        'no','yes','yes'],
+    ['VCF Log Intelligence',               'no','no','yes'],
+    ['VCF Operations for Apps (APM)',      'no','no','yes'],
+    ['Private AI Foundation',              'no','no','yes'],
+    ['GPU vGPU / MIG management',          'no','no','yes'],
+    ['NVIDIA AI Enterprise (add-on)',      'no','no','yes'],
+    ['Carbon Black Cloud (add-on)',        'note','note','note'],
   ];
 
   const planIndex = { vvf: 1, vcfe: 2, vcf: 3 };
   const planLabel = { vvf: 'VVF', vcfe: 'VCFE', vcf: 'VCF' };
 
   function chipHTML(val) {
-    if (val === 'yes')  return '<span class="chip chip-yes">Sí</span>';
-    if (val === 'no')   return '<span class="chip chip-no">No</span>';
+    if (val === 'yes') return '<span class="chip chip-yes">Sí</span>';
+    if (val === 'no')  return '<span class="chip chip-no">No</span>';
     return '<span class="chip chip-note">Parcial</span>';
   }
 
@@ -1218,17 +1010,10 @@
     const p2 = document.getElementById('plan2').value;
     document.getElementById('compHead1').textContent = planLabel[p1];
     document.getElementById('compHead2').textContent = planLabel[p2];
-    const i1 = planIndex[p1];
-    const i2 = planIndex[p2];
-    const tbody = document.getElementById('compBody');
-    tbody.innerHTML = features.map(f => {
+    const i1 = planIndex[p1], i2 = planIndex[p2];
+    document.getElementById('compBody').innerHTML = features.map(f => {
       const v1 = f[i1], v2 = f[i2];
-      const diff = v1 !== v2;
-      return `<tr class="${diff ? 'diff-row' : ''}">
-        <td>${f[0]}</td>
-        <td>${chipHTML(v1)}</td>
-        <td>${chipHTML(v2)}</td>
-      </tr>`;
+      return `<tr class="${v1 !== v2 ? 'diff-row' : ''}"><td>${f[0]}</td><td>${chipHTML(v1)}</td><td>${chipHTML(v2)}</td></tr>`;
     }).join('');
   }
 
