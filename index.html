@@ -183,62 +183,99 @@
     .diff-hidden { display: none; }
     .hidden-row  { display: none; }
 
-    /* ─── Detail Modal ─── */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 999;
-      background: rgba(0,0,0,.45);
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px;
+    /* ─── Side Panel ─── */
+    .panel-backdrop {
+      position: fixed; inset: 0; z-index: 998;
+      background: rgba(0,0,0,.35);
       opacity: 0; pointer-events: none;
-      transition: opacity .2s;
+      transition: opacity .25s;
     }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal {
+    .panel-backdrop.open { opacity: 1; pointer-events: all; }
+    .side-panel {
+      position: fixed; top: 0; right: 0; z-index: 999;
+      width: 420px; max-width: 96vw; height: 100vh;
       background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: 0 8px 40px rgba(0,0,0,.25);
-      width: 100%; max-width: 600px;
-      max-height: 85vh;
-      overflow-y: auto;
-      transform: translateY(20px);
-      transition: transform .2s;
+      box-shadow: -4px 0 32px rgba(0,0,0,.18);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+      overflow: hidden;
     }
-    .modal-overlay.open .modal { transform: translateY(0); }
-    .modal-header {
-      padding: 20px 24px 16px;
+    .side-panel.open { transform: translateX(0); }
+    .panel-header {
+      padding: 20px 20px 16px;
       border-bottom: 1px solid var(--border);
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+      display: flex; align-items: flex-start; gap: 12px;
+      flex-shrink: 0;
     }
-    .modal-header h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
-    .modal-close {
+    .panel-header-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg,#0077b6,#00b4d8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0; color: #fff;
+    }
+    .panel-header-text { flex: 1; min-width: 0; }
+    .panel-header-text h3 {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      line-height: 1.3; margin-bottom: 4px;
+    }
+    .panel-category {
+      font-size: .72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted);
+    }
+    .panel-close {
       background: none; border: none; cursor: pointer;
-      font-size: 1.3rem; color: var(--muted); flex-shrink: 0;
-      padding: 2px 6px; border-radius: 6px;
+      font-size: 1.2rem; color: var(--muted); flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .modal-close:hover { background: var(--bg); color: var(--text); }
-    .modal-body { padding: 20px 24px; }
-    .modal-section { margin-bottom: 18px; }
-    .modal-section:last-child { margin-bottom: 0; }
-    .modal-label {
-      font-size: .72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .08em; color: var(--muted); margin-bottom: 6px;
+    .panel-close:hover { background: var(--bg); color: var(--text); }
+    .panel-body {
+      flex: 1; overflow-y: auto; padding: 20px;
+      display: flex; flex-direction: column; gap: 18px;
     }
-    .modal-section p { font-size: .9rem; line-height: 1.65; color: var(--text); }
-    .modal-example {
-      background: var(--bg); border-left: 3px solid var(--vcf-color);
-      border-radius: 0 8px 8px 0; padding: 10px 14px;
-      font-size: .85rem; line-height: 1.6; color: var(--text);
+    .panel-plans {
+      display: flex; gap: 8px; flex-wrap: wrap;
     }
-    .modal-plans { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-    .modal-plan-chip {
+    .panel-plan-chip {
       display: flex; align-items: center; gap: 6px;
-      padding: 5px 12px; border-radius: 999px; font-size: .82rem; font-weight: 600;
-      border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 999px; font-size: .8rem; font-weight: 600;
+      border: 2px solid transparent;
     }
-    .modal-plan-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
-    .dot-yes  { background: var(--yes); }
-    .dot-no   { background: #94a3b8; }
-    .dot-note { background: #f59e0b; }
+    .panel-plan-chip.ppc-yes  { background: rgba(34,197,94,.12); border-color: #22c55e; color: #15803d; }
+    .panel-plan-chip.ppc-no   { background: var(--bg); border-color: var(--border); color: var(--muted); }
+    .panel-plan-chip.ppc-note { background: rgba(245,158,11,.12); border-color: #f59e0b; color: #b45309; }
+    [data-theme="dark"] .panel-plan-chip.ppc-yes  { color: #4ade80; }
+    [data-theme="dark"] .panel-plan-chip.ppc-note { color: #fcd34d; }
+    .panel-section-title {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--muted); margin-bottom: 7px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .panel-section-title::after { content:''; flex:1; height:1px; background: var(--border); }
+    .panel-desc { font-size: .88rem; line-height: 1.7; color: var(--text); }
+    .panel-benefits { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .panel-benefits li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: .85rem; line-height: 1.55; color: var(--text);
+    }
+    .panel-benefits li::before {
+      content: '✓'; color: var(--yes); font-weight: 700;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .panel-example {
+      background: var(--bg); border-left: 3px solid var(--vcf-color);
+      border-radius: 0 8px 8px 0; padding: 12px 14px;
+      font-size: .84rem; line-height: 1.65; color: var(--text);
+    }
+    .panel-example::before {
+      display: block; content: 'Caso real →';
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--vcf-color); margin-bottom: 6px;
+    }
+    @media (max-width: 480px) {
+      .side-panel { width: 100vw; }
+    }
 
     /* ─── Comparator ─── */
     .comparator-box {
@@ -301,7 +338,7 @@
     }
 
     @media print {
-      .toolbar, .sticky-nav, .modal-overlay { display: none; }
+      .toolbar, .sticky-nav, .side-panel, .panel-backdrop { display: none; }
       body { background: #fff; color: #000; }
       .plan-card .card-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .chip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -311,29 +348,36 @@
 </head>
 <body>
 
-<!-- ─── MODAL ─── -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <h3 id="modalTitle"></h3>
-      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+<!-- ─── SIDE PANEL ─── -->
+<div class="panel-backdrop" id="panelBackdrop" onclick="closePanel()"></div>
+<aside class="side-panel" id="sidePanel">
+  <div class="panel-header">
+    <div class="panel-header-icon" id="panelIcon">⚙</div>
+    <div class="panel-header-text">
+      <h3 id="panelTitle"></h3>
+      <div class="panel-category" id="panelCategory"></div>
     </div>
-    <div class="modal-body">
-      <div class="modal-section">
-        <div class="modal-label">¿Qué es?</div>
-        <p id="modalDesc"></p>
-      </div>
-      <div class="modal-section">
-        <div class="modal-label">Ejemplo práctico</div>
-        <div class="modal-example" id="modalExample"></div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-label">Disponibilidad por plan</div>
-        <div class="modal-plans" id="modalPlans"></div>
-      </div>
+    <button class="panel-close" onclick="closePanel()" title="Cerrar">✕</button>
+  </div>
+  <div class="panel-body">
+    <div>
+      <div class="panel-section-title">Disponibilidad por plan</div>
+      <div class="panel-plans" id="panelPlans"></div>
+    </div>
+    <div>
+      <div class="panel-section-title">¿Qué es?</div>
+      <p class="panel-desc" id="panelDesc"></p>
+    </div>
+    <div>
+      <div class="panel-section-title">¿Qué hace / beneficios</div>
+      <ul class="panel-benefits" id="panelBenefits"></ul>
+    </div>
+    <div>
+      <div class="panel-section-title">Ejemplo práctico</div>
+      <div class="panel-example" id="panelExample"></div>
     </div>
   </div>
-</div>
+</aside>
 
 <!-- ─── TOOLBAR ─── -->
 <div class="toolbar">
@@ -350,7 +394,7 @@
   <div class="badge">VMware by Broadcom · VCF 9.1</div>
   <h1>Comparación de Planes<br>VVF · VCFE · VCF</h1>
   <p>Guía completa basada en el documento oficial de Broadcom (mayo 2026). Haz clic en cualquier funcionalidad para ver más detalles.</p>
-  <span class="version-badge">Versión 2</span>
+  <span class="version-badge">Versión 3</span>
 </div>
 
 <!-- ─── STICKY NAV ─── -->
@@ -660,270 +704,636 @@
       title: 'vSphere 9 (ESXi + vCenter)',
       desc: 'vSphere es la plataforma de virtualización de VMware. ESXi es el hipervisor que se instala directamente en el servidor físico y permite crear múltiples máquinas virtuales. vCenter es el servidor de gestión centralizado que permite administrar todos los hosts ESXi desde una sola consola.',
       example: 'Una empresa tiene 20 servidores físicos. Instala ESXi en cada uno y los gestiona todos desde vCenter. Puede ver el estado, crear VMs, mover cargas de trabajo y aplicar parches desde una sola pantalla.'
+      benefits: [
+        'Consolida múltiples servidores físicos en VMs, reduciendo costos de hardware hasta un 70%',
+        'Gestión centralizada de toda la infraestructura desde una sola consola (vCenter)',
+        'Base para funcionalidades avanzadas: vSAN, NSX, VKS, vMotion, HA y DRS',
+        'Compatibilidad con miles de aplicaciones empresariales certificadas para vSphere',
+        'Soporte para workloads críticos con alta disponibilidad y SLAs garantizados'
+      ],
     },
     vmotion: {
       title: 'vSphere vMotion, HA, DRS',
       desc: 'vMotion permite migrar máquinas virtuales en vivo entre hosts sin interrupción del servicio. HA (High Availability) reinicia automáticamente las VMs en otro host si el servidor falla. DRS (Distributed Resource Scheduler) balancea la carga de trabajo automáticamente entre hosts.',
       example: 'A las 3 AM un servidor físico falla. HA detecta el fallo en segundos y reinicia todas las VMs del servidor caído en otros hosts disponibles. Los usuarios casi no notan la interrupción.'
+      benefits: [
+        'Migración en vivo de VMs sin downtime: cero interrupción para los usuarios',
+        'HA reinicia VMs automáticamente ante fallo de hardware en 30-60 segundos',
+        'DRS optimiza el uso de recursos automáticamente, evitando "hot spots" en los hosts',
+        'Permite mantenimiento de servidores físicos sin ventanas de mantenimiento para las aplicaciones',
+        'Reduce el tiempo de respuesta ante incidentes de infraestructura crítica'
+      ],
     },
     ft: {
       title: 'vSphere Fault Tolerance',
       desc: 'Fault Tolerance (FT) mantiene una copia en espejo de una VM corriendo en otro host en tiempo real. Si el host principal falla, la copia toma el control instantáneamente sin ninguna interrupción, sin perder ni un solo paquete de red ni transacción.',
       example: 'Un sistema de pagos crítico corre con FT activo. Cuando el host primario sufre un fallo de hardware, el host espejo asume el control en microsegundos. Los clientes no ven ningún error ni timeout en sus transacciones.'
+      benefits: [
+        'Cero downtime y cero pérdida de datos ante fallo de hardware: RPO=0, RTO=0',
+        'Ideal para aplicaciones críticas de negocio que no pueden tolerar ninguna interrupción',
+        'Transparente para la aplicación: no requiere cambios ni agentes en la VM',
+        'La copia espejo corre en tiempo real en otro host físico diferente',
+        'Más robusto que HA: FT no reinicia la VM, simplemente continúa sin interrupción'
+      ],
     },
     vds: {
       title: 'vSphere Distributed Switch (vDS)',
       desc: 'El vDS es un switch virtual que abarca múltiples hosts ESXi, gestionado de forma centralizada desde vCenter. Permite configurar políticas de red (VLANs, QoS, seguridad) una sola vez y aplicarlas a todos los hosts del clúster de forma coherente.',
       example: 'En lugar de configurar 50 switches virtuales idénticos en 50 hosts, el administrador configura el vDS una vez en vCenter. La política de red se sincroniza automáticamente a todos los hosts: QoS para tráfico de base de datos, VLAN de producción y VLAN de respaldo, todo en un solo lugar.'
+      benefits: [
+        'Configuración de red centralizada: una política para todos los hosts del clúster',
+        'Elimina inconsistencias de configuración de red entre hosts',
+        'Soporta QoS, VLANs, PVLAN, port mirroring y seguridad de puertos avanzada',
+        'Facilita auditoría y cumplimiento normativo de la configuración de red',
+        'Necesario para funcionalidades avanzadas como vMotion y NSX'
+      ],
     },
     vlcm: {
       title: 'vSphere Lifecycle Manager (vLCM)',
       desc: 'vLCM gestiona el ciclo de vida del firmware y software de los hosts ESXi mediante imágenes deseadas (desired state). Define el estado exacto que debe tener cada host y aplica parches, actualizaciones y configuraciones de forma automatizada y consistente.',
       example: 'El equipo de infraestructura define que todos los hosts deben tener ESXi 9.0.1 con el driver de red 5.2.3 y el firmware del BIOS 2.1. vLCM compara automáticamente cada host con la imagen deseada, identifica los que están desactualizados y los parchea en la ventana de mantenimiento programada.'
+      benefits: [
+        'Parches y actualizaciones automatizados de ESXi, firmware y drivers',
+        'Desired State: si un host se desvía, vLCM lo detecta y puede corregirlo automáticamente',
+        'Reduce drásticamente el tiempo de mantenimiento de actualizaciones masivas',
+        'Minimiza errores humanos en el proceso de patching de infraestructura crítica',
+        'Integrado con SDDC Manager en VCF para actualizaciones del stack completo'
+      ],
     },
     trust: {
       title: 'vSphere Trust Authority',
       desc: 'vSphere Trust Authority (vTA) permite verificar la integridad del hardware y el hipervisor antes de ejecutar cargas de trabajo sensibles. Usa servidores de confianza designados (Trust Authority Hosts) que validan que los hosts de cómputo no han sido comprometidos.',
       example: 'Un banco requiere que sus VMs de procesamiento de pagos solo corran en hardware verificado y no comprometido. vTA valida el firmware y el arranque seguro de cada host. Si un host no pasa la verificación, las VMs con esa política no se inician en él.'
+      benefits: [
+        'Verifica la integridad del firmware y el arranque seguro antes de ejecutar VMs sensibles',
+        'Cumple requisitos de seguridad de sectores regulados (banca, salud, gobierno)',
+        'Protege contra ataques de firmware y bootkits que comprometen el hipervisor',
+        'Garantiza que las VMs solo corren en hardware verificado y de confianza',
+        'Requerido para entornos de alta seguridad con certificaciones como FedRAMP, Common Criteria'
+      ],
     },
     nkp: {
       title: 'vSphere Native Key Provider',
       desc: 'Permite cifrar VMs y vSAN sin necesitar un servidor KMS (Key Management Server) externo de terceros. El propio vCenter actúa como proveedor de claves, simplificando el cumplimiento normativo y eliminando la dependencia de servicios externos.',
       example: 'Una empresa quiere cifrar todas sus VMs por cumplimiento GDPR pero no quiere instalar y mantener un servidor KMS separado. Con Native Key Provider, habilita cifrado directamente desde vCenter sin infraestructura adicional. Las claves se almacenan de forma segura en el propio vCenter.'
+      benefits: [
+        'Cifrado de VMs y vSAN sin servidor KMS externo de terceros',
+        'Simplifica el cumplimiento normativo (GDPR, HIPAA, PCI-DSS) con cifrado nativo',
+        'Elimina la dependencia de infraestructura externa para gestión de claves',
+        'Las claves se almacenan de forma segura en vCenter, con backup exportable',
+        'Disponible en VVF, VCFE y VCF sin licencias adicionales de KMS'
+      ],
     },
     dfw: {
       title: 'NSX Distributed Firewall',
       desc: 'El Distributed Firewall (DFW) de NSX aplica reglas de firewall directamente en el kernel del hipervisor, cerca de cada VM, en lugar de en un firewall perimetral. Esto permite controlar el tráfico este-oeste (entre VMs) con políticas basadas en grupos y etiquetas, no en IPs.',
       example: 'Una empresa tiene VMs de base de datos y VMs de aplicación en el mismo segmento de red. Con DFW, aunque una VM de aplicación sea comprometida, el atacante no puede conectarse directamente a la VM de base de datos porque el DFW bloquea el tráfico este-oeste no autorizado a nivel de kernel, antes de que salga al switch virtual.'
+      benefits: [
+        'Firewall en el kernel del hipervisor: máximo rendimiento sin overhead de red',
+        'Microsegmentación este-oeste: controla tráfico entre VMs en la misma red',
+        'Políticas basadas en grupos y etiquetas, no en IPs: más flexible y escalable',
+        'Contiene el movimiento lateral de atacantes dentro del datacenter',
+        'No requiere cambios en la topología de red física existente'
+      ],
     },
     gfw: {
       title: 'NSX Gateway Firewall',
       desc: 'El Gateway Firewall actúa como firewall en el borde de los segmentos NSX (gateways T0 y T1), controlando el tráfico norte-sur (entre la red física y las VMs virtuales). Incluye funciones como NAT, inspección L7, IDS/IPS y detección de amenazas.',
       example: 'El tráfico de internet que llega a las VMs pasa primero por el Gateway Firewall NSX antes de entrar al ambiente virtualizado. El firewall inspecciona el contenido L7, bloquea ataques conocidos y registra todos los intentos de conexión para cumplimiento normativo.'
+      benefits: [
+        'Controla el tráfico norte-sur (internet/red física ↔ VMs) con inspección L7',
+        'Incluye NAT, IDS/IPS, detección de malware y filtrado de URLs',
+        'Sustituye firewalls físicos perimetrales con una solución software más flexible',
+        'Integrado con NSX ATP para detección de amenazas avanzadas y zero-day',
+        'Logs y visibilidad completa del tráfico para auditoría y cumplimiento'
+      ],
     },
     vks: {
       title: 'vSphere Kubernetes Service (VKS)',
       desc: 'VKS integra Kubernetes directamente en vSphere, permitiendo correr contenedores junto a VMs en la misma infraestructura. El Supervisor Cluster actúa como plano de control Kubernetes nativo, usando la infraestructura de vSphere para scheduling, storage y networking.',
       example: 'El equipo de desarrollo quiere desplegar microservicios en contenedores sin tener que gestionar infraestructura de Kubernetes por separado. Con VKS, los desarrolladores hacen kubectl apply en el mismo clúster vSphere donde corren las VMs. El almacenamiento se provee de vSAN automáticamente y la red de vDS/NSX.'
+      benefits: [
+        'Kubernetes nativo integrado en vSphere: sin infraestructura adicional que gestionar',
+        'Los equipos de desarrollo usan kubectl estándar sobre la misma infraestructura corporativa',
+        'Storage y networking aprovisionados automáticamente desde vSAN y NSX',
+        'Aísla equipos y proyectos en namespaces con cuotas y políticas de seguridad',
+        'Base para TKG Guest Clusters: despliega clústeres Kubernetes dedicados por equipo'
+      ],
     },
     tkg: {
       title: 'Tanzu Kubernetes Grid (TKG)',
       desc: 'TKG permite crear clústeres Kubernetes gestionados (Guest Clusters) dentro del Supervisor de vSphere. En VVF el soporte es básico (sin NSX para networking avanzado ni vSAN ESA). En VCFE y VCF es Enterprise con soporte completo de NSX, Harbor y políticas de red avanzadas.',
       example: 'El equipo de DevOps necesita 5 clústeres Kubernetes aislados para diferentes equipos de desarrollo. Con TKG Enterprise crean un clúster por equipo en minutos usando una plantilla. Cada clúster tiene su propia red NSX aislada, política de seguridad y cuota de recursos.'
+      benefits: [
+        'Clústeres Kubernetes gestionados: el equipo de plataforma los crea, los devs los usan',
+        'Aislamiento completo entre clústeres: red, storage y políticas de seguridad separadas',
+        'Ciclo de vida gestionado: actualizaciones de Kubernetes con un clic',
+        'En VCF Enterprise: red NSX nativa, Harbor integrado y seguridad microsegmentada',
+        'Compatible con herramientas estándar: kubectl, Helm, ArgoCD, Prometheus'
+      ],
     },
     argocd: {
       title: 'ArgoCD Operator',
       desc: 'ArgoCD es una herramienta de GitOps que sincroniza automáticamente el estado de Kubernetes con el código almacenado en Git. El operador de ArgoCD en VCF/VCFE permite desplegar y gestionar ArgoCD como servicio de plataforma, sin instalación manual.',
       example: 'El equipo de DevOps tiene los manifiestos de Kubernetes en GitHub. Con ArgoCD Operator, cada vez que un desarrollador hace merge a main, ArgoCD detecta el cambio y aplica automáticamente la actualización al clúster Kubernetes en VCF. Si algo falla, ArgoCD puede revertir automáticamente al estado anterior.'
+      benefits: [
+        'GitOps: el repositorio Git es la fuente de verdad, no un servidor manual',
+        'Despliega cambios automáticamente cuando se hace merge a la rama principal',
+        'Detecta drift: si alguien cambia el clúster manualmente, ArgoCD lo detecta y corrige',
+        'Rollback automático o manual a cualquier estado anterior del repositorio',
+        'Reduce errores humanos en despliegues de producción con auditoría completa en Git'
+      ],
     },
     harbor: {
       title: 'Harbor Registry (integrado)',
       desc: 'Harbor es un registro privado de imágenes de contenedores con funciones enterprise: escaneo de vulnerabilidades, políticas de retención, control de acceso por proyecto y replicación. En VCF está integrado como servicio de plataforma y se gestiona a través del Supervisor.',
       example: 'El equipo de seguridad requiere que todas las imágenes de contenedores sean escaneadas antes de desplegarse en producción. Con Harbor integrado en VCF, el pipeline de CI/CD sube las imágenes a Harbor, que las escanea automáticamente con Trivy. Las imágenes con vulnerabilidades críticas no pueden desplegarse hasta ser parcheadas.'
+      benefits: [
+        'Registro privado: las imágenes no salen del datacenter, garantizando privacidad',
+        'Escaneo de vulnerabilidades automático antes de que las imágenes lleguen a producción',
+        'Control de acceso granular por proyecto y equipo',
+        'Políticas de retención para limpiar imágenes antiguas y ahorrar storage',
+        'Replicación entre registros Harbor para alta disponibilidad y distribución geográfica'
+      ],
     },
     srm: {
       title: 'VMware Site Recovery Manager (SRM)',
       desc: 'SRM automatiza y orquesta la recuperación ante desastres entre dos sitios (datacenter primario y secundario). Define planes de recuperación con RTO y RPO específicos, gestiona la replicación y permite realizar pruebas de DR sin impactar producción.',
       example: 'Una empresa tiene su datacenter principal en Madrid y un sitio de DR en Barcelona. Con SRM, si Madrid sufre un desastre, el equipo ejecuta el plan de recuperación con un clic. SRM activa las VMs replicadas en Barcelona en el orden correcto (primero la base de datos, luego la aplicación, luego el frontend) y actualiza el DNS automáticamente.'
+      benefits: [
+        'Automatiza la recuperación ante desastres: un clic para activar el plan de DR',
+        'Pruebas de DR no disruptivas: valida el plan sin impactar producción',
+        'Orquesta el orden de encendido de VMs (bases de datos antes que aplicaciones)',
+        'RTO y RPO definidos y documentados, cumpliendo requisitos de auditoría',
+        'Integrado con vSphere Replication y arrays de almacenamiento para protección completa'
+      ],
     },
     replication: {
       title: 'vSphere Replication',
       desc: 'vSphere Replication replica VMs de forma asíncrona entre hosts o sitios, con un RPO mínimo de 5 minutos. Es más ligero que la replicación basada en storage y funciona a nivel de hipervisor, siendo compatible con cualquier tipo de almacenamiento.',
       example: 'Una empresa no tiene presupuesto para almacenamiento replicado dedicado entre sitios. Con vSphere Replication, las VMs críticas se replican cada 15 minutos al sitio de DR usando el propio hipervisor, sin necesitar que el storage sea compatible con replicación. Solo necesita conectividad de red entre los sitios.'
+      benefits: [
+        'Replicación asíncrona de VMs a nivel de hipervisor, sin dependencia del storage',
+        'RPO mínimo de 5 minutos: pérdida máxima de datos muy baja',
+        'Funciona con cualquier tipo de storage (local, SAN, NFS) en ambos extremos',
+        'Más económico que la replicación de storage dedicada',
+        'Integrado con SRM para automatizar la recuperación ante desastres'
+      ],
     },
     vsanosa: {
       title: 'vSAN OSA (Original Storage Architecture)',
       desc: 'vSAN OSA es la arquitectura original de almacenamiento hiperconvergido de VMware. Combina discos locales de múltiples hosts en un datastore distribuido. Usa una capa de caché (SSD) + capa de capacidad (HDD o SSD). Es compatible con hardware existente de generaciones anteriores.',
       example: 'Una empresa tiene servidores Dell PowerEdge R740 con discos NVMe y SSD ya instalados. Con vSAN OSA pueden crear un datastore distribuido de 100 TB usando los discos locales de 10 servidores, sin comprar almacenamiento externo. Broadcom certifica el hardware en su HCL para garantizar compatibilidad.'
+      benefits: [
+        'Almacenamiento hiperconvergido: usa los discos locales de los servidores ESXi',
+        'Elimina la necesidad de SANs o NAS externas para la mayoría de workloads',
+        'Alta disponibilidad integrada: los datos se replican entre hosts automáticamente',
+        'Compatible con hardware de generaciones anteriores (certificado en HCL de Broadcom)',
+        'Gestión integrada en vCenter: un solo panel para cómputo y almacenamiento'
+      ],
     },
     vsanesa: {
       title: 'vSAN ESA (Express Storage Architecture)',
       desc: 'vSAN ESA es la nueva arquitectura de almacenamiento optimizada para hardware NVMe All-Flash moderno. Elimina la separación caché/capacidad, ofrece compresión de datos mejorada, deduplicación más eficiente y snapshots de mayor rendimiento con menor overhead que OSA.',
       example: 'Un banco requiere máximo rendimiento de almacenamiento para su base de datos Oracle. Con vSAN ESA en servidores con NVMe Gen 4, obtiene latencia sub-milisegundo y throughput mayor que con OSA. La compresión nativa reduce el espacio consumido en un 40% sin impacto en rendimiento.'
+      benefits: [
+        'Diseñado para hardware NVMe All-Flash moderno: máximo rendimiento y eficiencia',
+        'Elimina la capa de caché: arquitectura más simple y con mejor rendimiento constante',
+        'Compresión nativa mejorada: reduce el espacio consumido sin impacto en latencia',
+        'Snapshots de mayor rendimiento para protección de datos sin degradar producción',
+        'Requerido para workloads intensivos en I/O: bases de datos, VDI de alta densidad'
+      ],
     },
     vsanmax: {
       title: 'vSAN Max (almacenamiento desagregado)',
       desc: 'vSAN Max separa el cómputo del almacenamiento, creando un pool de almacenamiento dedicado que puede ser consumido por múltiples clústeres de cómputo. Permite escalar almacenamiento y cómputo de forma independiente, ideal para workloads con alta demanda de storage.',
       example: 'Una empresa tiene un clúster de cómputo para VMs de negocio y un clúster separado para bases de datos. Con vSAN Max, despliegan un tercer clúster dedicado solo a almacenamiento de alta capacidad. Ambos clústeres de cómputo consumen del mismo pool de storage sin necesitar discos locales adicionales.'
+      benefits: [
+        'Desagrega cómputo y almacenamiento: escala cada dimensión de forma independiente',
+        'Un pool de storage compartido para múltiples clústeres de cómputo',
+        'Ideal para entornos con alta demanda de capacidad de storage vs. cómputo',
+        'Reduce el costo total: no es necesario añadir discos a los hosts de cómputo',
+        'Disponible solo en VCF: requiere la arquitectura completa del stack'
+      ],
     },
     stretched: {
       title: 'vSAN Stretched Clusters',
       desc: 'Un Stretched Cluster extiende un clúster vSAN entre dos sitios geográficos separados (con un witness en un tercer sitio), proporcionando disponibilidad continua ante fallo de sitio completo. Las VMs pueden correr en cualquier sitio y el storage se replica síncronamente.',
       example: 'Un retailer tiene dos datacenters en la misma ciudad separados 10 km. Con vSAN Stretched Cluster, el clúster abarca ambos DCs. Si el DC1 pierde energía completamente, las VMs se ven afectadas el tiempo mínimo necesario para reiniciar en DC2, que ya tiene los datos porque la replicación es síncrona.'
+      benefits: [
+        'Disponibilidad continua ante fallo de sitio completo sin intervención manual',
+        'Las VMs pueden correr en cualquiera de los dos sitios activos simultáneamente',
+        'Replicación síncrona: cero pérdida de datos (RPO=0) entre los sitios',
+        'No requiere soluciones de DR adicionales para la infraestructura cubierta',
+        'Protege contra desastres localizados: corte de energía, incendio, inundación en un DC'
+      ],
     },
     nfs: {
       title: 'NFS / iSCSI / FC (VMFS Datastores)',
       desc: 'vSphere soporta almacenamiento externo tradicional mediante protocolos estándar: NFS (almacenamiento de red sobre Ethernet), iSCSI (bloque sobre Ethernet), Fibre Channel (bloque dedicado de alta velocidad) y FCoE. Todos se presentan como datastores VMFS para almacenar VMs.',
       example: 'Una empresa ya tiene una SAN NetApp con 500 TB. En lugar de comprar almacenamiento nuevo, conectan sus hosts ESXi a la SAN por Fibre Channel y presentan los LUNs como datastores VMFS en vCenter. Las VMs existentes siguen usando su almacenamiento sin cambios.'
+      benefits: [
+        'Reutiliza inversiones existentes en storage SAN/NAS sin migración de datos',
+        'Soporta los protocolos estándar de la industria: NFS, iSCSI, FC, FCoE',
+        'Compatible con arrays de todos los fabricantes principales (NetApp, Pure, Dell, HP)',
+        'VMFS permite que múltiples hosts accedan al mismo datastore simultáneamente',
+        'Ideal para workloads que requieren el rendimiento y fiabilidad de storage empresarial dedicado'
+      ],
     },
     vvols: {
       title: 'vVols (VMware Virtual Volumes)',
       desc: 'vVols cambia el paradigma de gestión de storage: en lugar de presentar LUNs o volúmenes al host, el array de almacenamiento recibe las políticas de storage de vSphere y gestiona cada VM individualmente. Permite aplicar calidad de servicio, snapshots y replicación por VM, no por datastore.',
       example: 'Un hospital necesita que las VMs del sistema de historiales médicos tengan replicación síncrona y snapshots cada hora, mientras que las VMs de impresión solo necesiten backup diario. Con vVols y la SAN Pure Storage, el administrador asigna políticas diferentes por VM desde vCenter sin crear datastores separados.'
+      benefits: [
+        'Políticas de storage por VM, no por datastore: granularidad máxima',
+        'El array gestiona snapshots, replicación y QoS de forma nativa por VM',
+        'Reduce la proliferación de datastores: un datastore puede tener VMs con políticas diferentes',
+        'Delegación de operaciones de storage al array: menor carga en el hipervisor',
+        'Soporte por los arrays enterprise más avanzados: Pure Storage, NetApp, Dell EMC'
+      ],
     },
     nsx: {
       title: 'NSX (SDN – Redes definidas por software)',
       desc: 'NSX virtualiza completamente la red: crea switches, routers, firewalls y balanceadores de carga por software, independientes del hardware de red físico. Permite crear redes aisladas (overlays) con enrutamiento, seguridad y balanceo de carga sin tocar el hardware de red.',
       example: 'Un proveedor de servicios cloud necesita crear redes completamente aisladas para 100 clientes diferentes, todos compartiendo el mismo hardware físico. Con NSX crea 100 redes overlay (VxLAN) aisladas, cada una con su propio router virtual, firewall y rango de IPs, sin necesitar VLANs físicas adicionales.'
+      benefits: [
+        'Red completamente en software: sin dependencia de hardware de red específico',
+        'Crea redes overlay aisladas para multi-tenancy sin VLANs físicas adicionales',
+        'Microservicios y contenedores con su propia red aislada sin cambios en la red física',
+        'Portabilidad: las redes virtuales se mueven con las VMs entre datacenters',
+        'Base para microsegmentación, automatización de red y funciones de seguridad avanzadas'
+      ],
     },
     nsxrouting: {
       title: 'NSX – Enrutamiento distribuido (T0/T1)',
       desc: 'NSX implementa enrutamiento distribuido en el hipervisor: el router T0 conecta la red virtual con la red física (BGP/OSPF con el underlay), y el router T1 conecta segmentos internos. El enrutamiento ocurre en el kernel del host, no en un dispositivo centralizado.',
       example: 'Una empresa tiene 50 VMs de aplicación distribuidas en 10 hosts. Con enrutamiento distribuido NSX, cuando la VM-App-01 en Host-1 se comunica con VM-DB-01 en Host-5, el paquete se enruta directamente en el kernel de Host-1 sin pasar por un router físico central, reduciendo la latencia.'
+      benefits: [
+        'Enrutamiento distribuido en el kernel: sin router centralizado que sea cuello de botella',
+        'Latencia mínima para tráfico este-oeste entre VMs en el mismo clúster',
+        'Conectividad BGP/OSPF con la red física para integración en entornos empresariales',
+        'T0 y T1 simplifican el modelo de red con separación clara de funciones',
+        'Escala horizontalmente: añadir hosts añade capacidad de enrutamiento automáticamente'
+      ],
     },
     nsxvpn: {
       title: 'NSX – VPN (L2/L3)',
       desc: 'NSX incluye capacidades de VPN integradas: L2 VPN extiende segmentos L2 entre sitios (útil para migración de VMs sin cambiar IPs), y L3 VPN (IPSec) conecta sitios o usuarios remotos a la infraestructura NSX de forma segura.',
       example: 'Una empresa quiere migrar sus VMs de su datacenter on-premise a otro datacenter sin cambiar las IPs de las VMs. Con L2 VPN de NSX, extienden el segmento de red del DC1 al DC2. Las VMs migradas mantienen su IP original y los aplicativos que las llaman por IP siguen funcionando sin cambio de configuración.'
+      benefits: [
+        'L2 VPN: extiende redes de capa 2 entre datacenters, manteniendo las IPs de las VMs',
+        'L3 VPN (IPSec): conecta sitios remotos y usuarios a la infraestructura NSX de forma segura',
+        'Elimina la necesidad de dispositivos VPN físicos dedicados en algunos escenarios',
+        'Ideal para migraciones de datacenter a datacenter sin cambio de IPs (con L2 VPN)',
+        'Gestionado desde la misma consola NSX: simplifica operaciones de red y seguridad'
+      ],
     },
     microseg: {
       title: 'NSX – Microsegmentación',
       desc: 'La microsegmentación divide la red en zonas muy pequeñas (hasta nivel de VM individual) y aplica políticas de seguridad entre ellas. Implementada con el Distributed Firewall de NSX, permite que aunque un atacante comprometa una VM, no pueda moverse lateralmente a otras.',
       example: 'Un ransomware infecta una VM de RR.HH. Sin microsegmentación, podría propagarse a las 200 VMs de la misma red. Con microsegmentación NSX, la política de seguridad solo permite que las VMs de RR.HH. se conecten a sus servidores de archivos específicos por los puertos necesarios. El ransomware queda contenido en esa VM.'
+      benefits: [
+        'Contiene amenazas internas y movimiento lateral: un compromiso no se propaga',
+        'Políticas basadas en identidad (etiquetas, grupos) en lugar de IPs estáticas',
+        'Cumple el modelo Zero Trust dentro del datacenter',
+        'No requiere reconfiguración de la red física ni nuevas VLANs',
+        'Visibilidad completa del tráfico este-oeste entre VMs para auditoría y troubleshooting'
+      ],
     },
     avi: {
       title: 'NSX Advanced Load Balancer (Avi)',
       desc: 'Avi Networks (ahora NSX ALB) es un balanceador de carga de aplicaciones software-defined de alto rendimiento. Ofrece balanceo L4/L7, terminación SSL, WAF (Web Application Firewall), análisis de performance de aplicaciones y autoescalado, todo gestionado como software.',
       example: 'Una tienda online tiene picos de tráfico en Black Friday. Con NSX ALB configuran un virtual service que distribuye el tráfico entre 10 VMs de frontend. ALB detecta que 3 VMs tienen alta CPU y desvía el tráfico automáticamente a las 7 restantes. El WAF integrado bloquea intentos de inyección SQL sin configuración adicional.'
+      benefits: [
+        'Balanceo de carga L4/L7 completamente en software: sin appliances físicos',
+        'Autoescalado de Service Engines según la demanda de tráfico en tiempo real',
+        'WAF (Web Application Firewall) integrado: protege aplicaciones web sin dispositivo adicional',
+        'Analytics de aplicación en tiempo real: latencia, throughput, errores por virtual service',
+        'Terminación SSL centralizada con gestión automatizada de certificados'
+      ],
     },
     supervisor: {
       title: 'VKS – Supervisor Cluster',
       desc: 'El Supervisor es el plano de control de Kubernetes integrado en vSphere. Se activa sobre un clúster vSphere y habilita un API endpoint de Kubernetes nativo. A partir de él se pueden crear namespaces, desplegar VMs via VM Service y crear Guest Clusters (TKG). Es la base de toda la funcionalidad Kubernetes en vSphere.',
       example: 'El equipo de plataforma activa el Supervisor en un clúster vSphere con 10 hosts. Inmediatamente tienen disponible un endpoint kubectl. Crean namespaces para los equipos de desarrollo y los desarrolladores pueden desplegar pods, VMs y clústeres TKG usando la misma herramienta Kubernetes estándar.'
+      benefits: [
+        'Un solo clúster vSphere gestiona VMs y contenedores Kubernetes simultáneamente',
+        'API Kubernetes nativa: los desarrolladores usan kubectl estándar sin aprender nuevas herramientas',
+        'Namespaces con cuotas de CPU, RAM y storage por equipo o proyecto',
+        'VM Service: despliega VMs como objetos Kubernetes desde manifiestos yaml',
+        'Base obligatoria para TKG Guest Clusters, Harbor y funcionalidades Kubernetes de VCF'
+      ],
     },
     vksnet: {
       title: 'VKS – Network Policies con NSX',
       desc: 'Cuando VKS usa NSX como CNI (Container Network Interface), los pods de Kubernetes pueden usar Network Policies de NSX para controlar el tráfico entre pods con mayor granularidad y rendimiento. NSX provee aislamiento de red entre namespaces y políticas de seguridad a nivel de pod.',
       example: 'Los pods del namespace "frontend" deben poder conectarse a los pods del namespace "backend" en el puerto 8080, pero no al revés. Con Network Policies de NSX, el administrador define esta regla que NSX aplica en el kernel del hipervisor, no en un proxy de red, logrando máximo rendimiento con seguridad microsegmentada.'
+      benefits: [
+        'NSX como CNI de Kubernetes: seguridad y rendimiento a nivel de kernel para pods',
+        'Network Policies aplicadas en el hipervisor: no en un proxy de red, máximo rendimiento',
+        'Aislamiento de red entre namespaces: cada equipo tiene su red Kubernetes aislada',
+        'Misma herramienta NSX para gestionar red de VMs y contenedores: operaciones simplificadas',
+        'Soporte para Ingress con NSX ALB integrado para servicios de tipo LoadBalancer'
+      ],
     },
     vksstorage: {
       title: 'VKS – Storage con vSAN ESA',
       desc: 'Cuando los Guest Clusters de TKG usan vSAN ESA como backend de storage, los Persistent Volumes de Kubernetes son aprovisionados directamente en el datastore vSAN de alto rendimiento. El aprovisionamiento es dinámico vía CSI driver, con políticas de storage de vSphere aplicables por PVC.',
       example: 'Un desarrollador despliega una base de datos PostgreSQL en un Guest Cluster TKG. Solicita un PVC de 100 GB con política "alta disponibilidad". El CSI driver crea automáticamente un volumen en vSAN ESA con nivel de redundancia FTT=1 y lo monta en el pod. Si el pod se mueve a otro nodo, el volumen lo sigue automáticamente.'
+      benefits: [
+        'Persistent Volumes de Kubernetes aprovisionados dinámicamente en vSAN ESA de alto rendimiento',
+        'CSI driver nativo: aprovisionamiento, expansión y snapshots de PVs sin operación manual',
+        'Políticas de storage de vSphere aplicables a PVCs: diferente calidad de servicio por workload',
+        'Los datos persisten independientemente del ciclo de vida del pod o del nodo Kubernetes',
+        'Soporte para ReadWriteMany (RWX) para workloads distribuidos que comparten almacenamiento'
+      ],
     },
     vcd: {
       title: 'VMware Cloud Director (VCD)',
       desc: 'VCD es una plataforma de gestión de nube privada y pública orientada a proveedores de servicios cloud (Service Providers). Permite ofrecer IaaS a múltiples tenants con autoservicio, cuotas, catálogos de servicios, redes aisladas y facturación, todo desde un portal de tenant.',
       example: 'Un proveedor de hosting ofrece "VMware Cloud Privado" a sus 50 clientes empresariales. Con VCD cada cliente tiene su propio portal donde puede crear VMs, redes y storage dentro de sus cuotas asignadas, sin ver los recursos de otros clientes. El proveedor gestiona todo el hardware subyacente de forma centralizada.'
+      benefits: [
+        'Plataforma multi-tenant: aislamiento completo entre clientes sobre hardware compartido',
+        'Portal de autoservicio para tenants: crean VMs, redes y storage de forma autónoma',
+        'Catálogos de servicios, cuotas por organización y control de costos por tenant',
+        'Ideal para proveedores de cloud privado o MSPs que ofrecen IaaS a múltiples clientes',
+        'APIs estándar compatibles con herramientas de automatización como Terraform'
+      ],
     },
     hcx: {
       title: 'VMware HCX (migración workloads)',
       desc: 'HCX facilita la migración de VMs entre entornos vSphere (on-premises a on-premises, o a cloud) de forma simplificada, con mínimo o cero downtime. Soporta migración masiva, extensión de red L2 para mantener IPs, y optimización de WAN para migración por red lenta.',
       example: 'Una empresa quiere migrar 500 VMs de su datacenter antiguo a su nueva infraestructura VCF sin afectar producción. Con HCX, extienden la red L2 entre los dos datacenters, migran las VMs en vivo con vMotion a través de la WAN y las VMs mantienen sus IPs originales. Los usuarios no notan nada durante la migración.'
+      benefits: [
+        'Migración de VMs con mínimo o cero downtime usando vMotion sobre WAN',
+        'Extensión de red L2 entre sites: las VMs mantienen su IP durante y después de la migración',
+        'Migración masiva: programa la migración de cientos de VMs en una sola operación',
+        'Optimización de WAN: compresión y deduplicación del tráfico de replicación',
+        'Migración bi-direccional: on-premises a cloud o entre datacenters sin restricción de dirección'
+      ],
     },
     vcfauto: {
       title: 'VCF Automation (Aria Automation)',
       desc: 'VCF Automation es la plataforma de automatización e IaC de VMware. Permite que los equipos consuman infraestructura (VMs, contenedores, redes, storage) de forma self-service mediante blueprints y catálogos. Soporta Terraform, Ansible y tiene integraciones con ServiceNow y otras herramientas ITSM.',
       example: 'Un desarrollador necesita un ambiente completo de 3 VMs (frontend + backend + base de datos) con sus redes y storage. En lugar de hacer un ticket al equipo de infraestructura y esperar 2 semanas, accede al portal de VCF Automation, selecciona el blueprint "Ambiente Desarrollo" y en 20 minutos tiene su ambiente aprovisionado automáticamente.'
+      benefits: [
+        'Infraestructura como código: toda la infraestructura definida, versionada y repetible',
+        'Self-service con gobernanza: los usuarios consumen recursos sin depender del equipo IT',
+        'Blueprints reutilizables: define un ambiente una vez y despliégalo cientos de veces',
+        'Reduce el tiempo de aprovisionamiento de semanas a minutos',
+        'Integración con ITSM (ServiceNow) para flujos de aprobación y gestión de cambios'
+      ],
     },
     selfservice: {
       title: 'Self-service catalog (service broker)',
       desc: 'El catálogo de autoservicio es el portal donde los usuarios finales consumen recursos de infraestructura publicados por el equipo de plataforma. Los administradores publican blueprints como "items de catálogo" con aprobaciones, cuotas y costos. Los usuarios los solicitan sin intervención manual del equipo IT.',
       example: 'El equipo de IT publica en el catálogo: "VM Windows Server", "Clúster Kubernetes", "Base de datos MySQL", cada uno con su costo por hora. Los desarrolladores acceden al portal, eligen lo que necesitan, sus solicitudes pasan por aprobación automática del líder técnico y el recurso se aprovisiona solo.'
+      benefits: [
+        'Los usuarios finales consumen infraestructura sin tickets al equipo IT',
+        'Catálogo con precios: los equipos ven el costo de lo que consumen antes de solicitarlo',
+        'Aprobaciones automatizadas o manuales según el tipo de recurso y el solicitante',
+        'Reduce el tiempo de espera para ambientes de desarrollo de días/semanas a minutos',
+        'Auditoría completa: quién solicitó qué, cuándo y con qué aprobación'
+      ],
     },
     terraform: {
       title: 'Terraform &amp; Ansible integration',
       desc: 'VCF Automation se integra con Terraform (para gestión de infraestructura como código) y Ansible (para configuración y automatización de sistemas). Los blueprints pueden usar scripts de Terraform o playbooks de Ansible como parte del flujo de aprovisionamiento.',
       example: 'El equipo de DevOps mantiene toda su infraestructura como código en Git usando Terraform. Con la integración de VCF Automation, cuando se aprueba un plan de Terraform en el pipeline CI/CD, VCF Automation ejecuta el terraform apply contra la API de vSphere/NSX y provee el recurso automáticamente, con gobernanza y trazabilidad incluidas.'
+      benefits: [
+        'Infraestructura como código con Terraform: versionada, revisable y reproducible en Git',
+        'Ansible para configuración de sistemas: automatiza todo el ciclo desde VM hasta aplicación',
+        'Integración con pipelines CI/CD: infraestructura desplegada automáticamente con el código',
+        'Gobernanza incluida: toda acción de Terraform pasa por los controles de VCF Automation',
+        'Proveedor Terraform de VMware disponible públicamente en el Terraform Registry'
+      ],
     },
     multicloud: {
       title: 'Multi-cloud automation (AWS, Azure, GCP)',
       desc: 'VCF Automation puede gestionar recursos no solo en vSphere sino también en nubes públicas (AWS, Azure, GCP) desde la misma plataforma. Permite crear blueprints "cloud-agnostic" que se despliegan en on-premises o en cloud según las políticas de la empresa.',
       example: 'Una empresa tiene política de cloud burst: cuando el datacenter on-premises está al 80% de capacidad, los workloads adicionales deben ir a AWS. Con VCF Automation configuran un blueprint que primero intenta aprovisionar en vSphere on-premises, y si no hay capacidad, automáticamente aprovisiona en AWS EC2, todo visible desde el mismo portal.'
+      benefits: [
+        'Un solo portal para gestionar infraestructura on-premises, AWS, Azure y GCP',
+        'Blueprints cloud-agnostic: el mismo blueprint se despliega en el cloud más económico o disponible',
+        'Cloud burst automático: desborda a nube pública cuando el datacenter alcanza su límite',
+        'Visibilidad de costos unificada: compara el costo de on-premises vs. cloud desde una sola consola',
+        'Gobernanza y políticas consistentes independientemente del cloud destino'
+      ],
     },
     slcm: {
       title: 'Aria Suite Lifecycle Manager',
       desc: 'Aria Suite Lifecycle Manager automatiza la instalación, actualización y configuración de los productos del portfolio Aria/VCF (Operations, Automation, Log Intelligence). Gestiona el ciclo de vida completo de estos productos con menor esfuerzo operacional.',
       example: 'El equipo de operaciones necesita actualizar Aria Operations de 8.14 a 8.16 en producción. Con Aria Suite Lifecycle Manager, el proceso está completamente automatizado: hace backup de la configuración, descarga el paquete desde depot.vmware.com, aplica la actualización con health checks automáticos y valida que todo funciona correctamente.'
+      benefits: [
+        'Instalación automatizada de productos Aria: elimina la configuración manual compleja',
+        'Actualizaciones del stack gestionadas: backup automático antes de actualizar',
+        'Health checks antes y después de cada operación para garantizar la estabilidad',
+        'Reduce el tiempo de operaciones de actualización de días a horas',
+        'Gestión centralizada de certificados, contraseñas y configuración de los productos Aria'
+      ],
     },
     ops: {
       title: 'VCF Operations (Aria Operations)',
       desc: 'VCF Operations es la plataforma de monitoreo y gestión de operaciones de VMware. Recopila métricas de toda la infraestructura (VMs, hosts, storage, red, aplicaciones), analiza el rendimiento, predice problemas de capacidad y da recomendaciones de rightsizing para optimizar costos.',
       example: 'El equipo de operaciones recibe una alerta de que la VM "SAP-Produccion" está consumiendo 64 GB de RAM pero el análisis muestra que el pico histórico real es 28 GB. VCF Operations recomienda reducir la RAM asignada a 36 GB, ahorrando 28 GB de RAM que puede asignarse a otras VMs. Esto reduce la necesidad de comprar más servidores.'
+      benefits: [
+        'Monitoreo proactivo: detecta problemas antes de que afecten a los usuarios',
+        'Rightsizing de VMs: identifica recursos sobredimensionados y sugiere reducciones para ahorrar costos',
+        'Planificación de capacidad: predice cuándo se agotarán los recursos con meses de anticipación',
+        'Correlación automática entre síntomas de aplicación e infraestructura subyacente',
+        'Dashboards ejecutivos con métricas de eficiencia, costos y salud de la plataforma'
+      ],
     },
     opsnet: {
       title: 'VCF Operations for Networks',
       desc: 'Extiende las capacidades de VCF Operations específicamente para redes virtuales y físicas. Recopila flujos de tráfico (IPFIX, NetFlow), mapea dependencias entre aplicaciones, visualiza la topología de red completa y detecta anomalías de tráfico que podrían indicar problemas o amenazas de seguridad.',
       example: 'El equipo de seguridad recibe una alerta de que una VM está enviando tráfico inusual a IPs externas a las 2 AM. Con VCF Operations for Networks, acceden al mapa de flujos de esa VM y ven que está escaneando puertos en rangos de IP de internet. Identifican el proceso responsable y lo bloquean antes de que cause daño mayor.'
+      benefits: [
+        'Visibilidad completa del tráfico de red: quién habla con quién y en qué volumen',
+        'Mapas de dependencias de aplicaciones: entiende qué servicios dependen de qué infraestructura',
+        'Detección de anomalías de tráfico: identifica comportamientos sospechosos automáticamente',
+        'Troubleshooting de red acelerado: encuentra la causa raíz de problemas de conectividad en minutos',
+        'Cumplimiento: demuestra el aislamiento de tráfico entre tenants o aplicaciones'
+      ],
     },
     logintel: {
       title: 'VCF Log Intelligence (Aria Log Insight)',
       desc: 'VCF Log Intelligence centraliza y analiza logs de toda la infraestructura VMware (ESXi, vCenter, NSX, VMs) y aplicaciones. Permite búsqueda en tiempo real sobre petabytes de logs, creación de dashboards y alertas basadas en patrones de log, facilitando el troubleshooting y el cumplimiento normativo.',
       example: 'Un usuario reporta que no puede autenticarse en la aplicación ERP desde las 10:15 AM. El administrador busca en Log Intelligence "authentication failed" filtrado por la IP del usuario en el rango horario. En segundos encuentra 50 errores de autenticación en el servidor LDAP causados por un certificado expirado, que fue el evento raíz del problema.'
+      benefits: [
+        'Búsqueda en tiempo real sobre millones de logs sin necesitar indexación previa costosa',
+        'Correlación automática de logs de múltiples fuentes para encontrar la causa raíz',
+        'Alertas basadas en patrones de log: notifica antes de que el problema impacte a usuarios',
+        'Retención de logs para cumplimiento normativo (PCI-DSS, HIPAA, SOX) con auditoría',
+        'Dashboards de operaciones en tiempo real para NOC y equipos de seguridad'
+      ],
     },
     apm: {
       title: 'VCF Operations for Apps (APM)',
       desc: 'Proporciona Application Performance Monitoring (APM) para las aplicaciones que corren en la infraestructura VCF. Rastrea transacciones de usuarios a través de múltiples servicios, mide latencias, identifica cuellos de botella y correlaciona problemas de aplicación con la infraestructura subyacente.',
       example: 'Los usuarios reportan que la página de checkout de la tienda online tarda 8 segundos en cargar. Con VCF Operations for Apps, el equipo ve el mapa de dependencias: frontend → API → microservicio de inventario → base de datos. El APM muestra que el 95% del tiempo se va en la query de inventario que hace full table scan. Se añade el índice faltante y la página carga en 0.8 segundos.'
+      benefits: [
+        'Rastrea la experiencia real del usuario a través de toda la cadena de servicios',
+        'Identifica cuellos de botella específicos: qué microservicio, query o llamada API es lenta',
+        'Correlaciona problemas de aplicación con métricas de infraestructura (CPU, RAM, disco, red)',
+        'SLA monitoring: mide si las aplicaciones cumplen sus objetivos de tiempo de respuesta',
+        'Reduce el MTTR (Mean Time To Resolve) de horas a minutos con diagnóstico visual'
+      ],
     },
     sddcmgr: {
       title: 'SDDC Manager (gestión de dominio)',
       desc: 'SDDC Manager es el orquestador de ciclo de vida de VCF. Gestiona el aprovisionamiento automatizado del stack completo (vSphere, vSAN, NSX), aplicación de actualizaciones en el orden correcto, expansión de clústeres y dominios de carga de trabajo, y health checks de toda la plataforma.',
       example: 'El equipo de infraestructura necesita añadir un nuevo dominio de carga de trabajo para el equipo de IA con 8 hosts nuevos, vSAN y NSX. Con SDDC Manager, describen el dominio deseado (hosts, VLANs, rangos de IP) y SDDC Manager instala ESXi, configura vSAN, despliega NSX y lo registra en vCenter automáticamente en pocas horas, sin intervención manual paso a paso.'
+      benefits: [
+        'Despliega el stack completo VCF (vSphere+vSAN+NSX) de forma automatizada en horas',
+        'Gestiona actualizaciones del stack en el orden correcto: sin errores de dependencias',
+        'Expansión de clústeres y dominios de carga de trabajo con validación automática',
+        'Health check continuo de toda la plataforma VCF con visibilidad en un solo panel',
+        'Punto central de gobierno para toda la infraestructura VCF de la organización'
+      ],
     },
     privateai: {
       title: 'Private AI Foundation (GPU workloads)',
       desc: 'Private AI Foundation es la plataforma de VMware para ejecutar cargas de trabajo de Inteligencia Artificial y Machine Learning on-premises, usando GPUs físicas compartidas virtualizadas. Incluye servicios de RAG (Retrieval Augmented Generation), almacenes vectoriales y runtime de modelos LLM.',
       example: 'Una empresa farmacéutica quiere usar LLMs para analizar documentos de investigación confidenciales pero no puede enviarlos a ChatGPT por razones de privacidad. Con Private AI Foundation en VCF, despliegan un modelo LLaMA 3 en sus propios servidores con GPUs NVIDIA H100. Los científicos hacen preguntas al modelo sobre sus datos internos sin que salgan del datacenter.'
+      benefits: [
+        'IA en el datacenter propio: los datos confidenciales nunca salen de la organización',
+        'Cumplimiento normativo para sectores regulados que no pueden usar IA pública (salud, finanzas)',
+        'Latencia local: modelos de inferencia sin round-trip a internet, respuesta más rápida',
+        'Control total del modelo: elige, afina y actualiza los LLMs según tus necesidades específicas',
+        'Integra con datos internos (RAG) para IA contextualizada con el conocimiento de la empresa'
+      ],
     },
     nvidia: {
       title: 'NVIDIA AI Enterprise (integración/add-on)',
       desc: 'NVIDIA AI Enterprise es el stack de software de IA de NVIDIA (CUDA, cuDNN, TensorFlow, PyTorch optimizados, RAPIDS, Triton Inference Server) empaquetado y certificado para correr sobre VMware vSphere con vGPU. Se licencia por separado como add-on sobre VCF.',
       example: 'El equipo de data science tiene modelos de PyTorch que necesitan correr en producción con alta disponibilidad. Con NVIDIA AI Enterprise sobre VCF, sus modelos corren en VMs con vGPU usando las versiones optimizadas y certificadas de PyTorch y TensorRT. Broadcom y NVIDIA garantizan soporte conjunto ante problemas.'
+      benefits: [
+        'Stack de IA/ML de NVIDIA (CUDA, TensorFlow, PyTorch) certificado para vSphere/vGPU',
+        'Soporte conjunto Broadcom+NVIDIA: un solo punto de contacto para problemas de IA en producción',
+        'Versiones optimizadas de frameworks ML que aprovechan al máximo las GPUs NVIDIA',
+        'Triton Inference Server para despliegue de modelos en producción con alta disponibilidad',
+        'Garantía de compatibilidad entre versiones del driver vGPU y el stack de IA/ML'
+      ],
     },
     vgpu: {
       title: 'Gestión de GPU vGPU / MIG',
       desc: 'vGPU (Virtual GPU) permite compartir una GPU física entre múltiples VMs, cada una con su fracción de GPU. MIG (Multi-Instance GPU, solo NVIDIA A100/H100) divide físicamente la GPU en instancias aisladas. VCF gestiona la asignación de perfiles vGPU a VMs como un recurso más del hipervisor.',
       example: 'Un equipo de 20 data scientists necesitan acceso a GPUs para entrenamiento de modelos, pero comprar 20 GPUs es inviable. Con vGPU en VCF, configuran 4 servidores con GPUs NVIDIA A100 y crean 20 VMs, cada una con un perfil vGPU de 20GB. Cada científico tiene acceso garantizado a su fracción de GPU desde su VM, con aislamiento completo entre ellos.'
+      benefits: [
+        'Comparte GPUs físicas costosas entre múltiples VMs: máxima utilización del hardware',
+        'Aislamiento de rendimiento: cada VM tiene garantizada su fracción de GPU sin interferencias',
+        'MIG (NVIDIA A100/H100): particiones físicas aisladas para máxima seguridad y previsibilidad',
+        'Gestión de GPUs integrada en vCenter: se asignan como cualquier recurso más (CPU, RAM)',
+        'Soporta workloads de IA/ML, renderizado, VDI con GPU y simulación científica'
+      ],
     },
     aiops: {
       title: 'AI/ML Kubernetes operators',
       desc: 'VCF incluye operadores Kubernetes especializados para cargas de trabajo de IA/ML: gestión de trabajos de entrenamiento distribuido, orquestación de inferencia, escalado automático basado en colas de inferencia, y aprovisionamiento de recursos GPU para pods de Kubernetes.',
       example: 'El equipo de MLOps quiere entrenar un modelo de lenguaje con 8 GPUs distribuidas en 4 nodos. Con los AI/ML operators de VCF, definen un "PyTorchJob" en Kubernetes y el operator aprovisiona automáticamente 4 pods, uno por nodo, los conecta con NCCL para comunicación colectiva GPU-a-GPU, y libera los recursos cuando el entrenamiento termina.'
+      benefits: [
+        'Operadores Kubernetes especializados para entrenamientos distribuidos multi-GPU multi-nodo',
+        'Escalado automático basado en colas de inferencia: más réplicas cuando hay más solicitudes',
+        'Aprovisionamiento automático de recursos GPU para pods: sin configuración manual por job',
+        'Integración con PyTorch Distributed y TensorFlow Distributed para entrenamiento paralelo',
+        'Gestiona el ciclo de vida completo de trabajos ML: entrenamiento, evaluación y servicio'
+      ],
     },
     nsxatp: {
       title: 'NSX Advanced Threat Prevention',
       desc: 'NSX Advanced Threat Prevention (ATP) añade capacidades de IDS/IPS (Intrusion Detection/Prevention System) y análisis de malware basado en sandboxing al Gateway Firewall y Distributed Firewall de NSX. Detecta amenazas conocidas y desconocidas (zero-day) en el tráfico de red este-oeste y norte-sur.',
       example: 'Un atacante logra comprometer una VM y empieza a escanear la red interna buscando otras VMs vulnerables. NSX ATP detecta el patrón de escaneo de puertos (una firma de IDS conocida), bloquea automáticamente el tráfico desde esa VM y envía una alerta al equipo de seguridad con el detalle del ataque para investigación forense.'
+      benefits: [
+        'IDS/IPS integrado en NSX: inspección de amenazas conocidas en tráfico este-oeste y norte-sur',
+        'Sandboxing de ficheros sospechosos para detección de zero-day sin firma previa',
+        'Respuesta automática: bloquea el tráfico de VMs comprometidas al detectar un ataque',
+        'Correlación de eventos de múltiples VMs para detectar ataques distribuidos',
+        'No requiere agentes en las VMs: la protección está a nivel de red en el hipervisor'
+      ],
     },
     cbc: {
       title: 'Carbon Black Cloud (EDR/XDR)',
       desc: 'Carbon Black Cloud es la plataforma de Endpoint Detection and Response (EDR) de VMware/Broadcom. Instala un agente ligero en VMs y sistemas físicos que monitorea comportamiento de procesos, detecta amenazas avanzadas (ransomware, malware fileless) y permite respuesta a incidentes remotamente.',
-      example: 'Un empleado abre un adjunto malicioso de phishing. Carbon Black detecta en tiempo real que el proceso de Outlook ejecuta PowerShell de forma inusual, que PowerShell descarga un binario de internet y que ese binario intenta cifrar archivos. CBC bloquea la actividad, termina los procesos maliciosos y alerta al equipo de seguridad con el árbol completo de eventos para forense.'
+      example: 'Un empleado abre un adjunto malicioso de phishing. Carbon Black detecta en tiempo real que el proceso de Outlook ejecuta PowerShell de forma inusual, que PowerShell descarga un binario de internet y que ese binario intenta cifrar archivos. CBC bloquea la actividad, termina los procesos maliciosos y alerta al equipo de seguridad con el árbol completo de eventos para forense.',
+      benefits: [
+        'EDR: monitorea el comportamiento de procesos dentro de las VMs en tiempo real',
+        'Detecta malware fileless y ransomware que evade los antivirus tradicionales basados en firmas',
+        'Respuesta remota a incidentes: aísla la VM, termina procesos y recoge evidencia forense',
+        'Árbol de eventos completo: reconstruye la cadena de ataque paso a paso para forense',
+        'Integración con SIEM: envía alertas a Splunk, QRadar u otras plataformas SOC'
+      ]
     }
   };
 
-  /* ─── Modal logic ─── */
+  /* ─── Side Panel logic ─── */
+  const icons = {
+    vsphere:'🖥', vmotion:'🔄', ft:'🛡', vds:'🔌', vlcm:'🔧', trust:'🔐', nkp:'🗝',
+    dfw:'🧱', gfw:'🚧', vks:'☸', tkg:'☸', argocd:'🔁', harbor:'📦', srm:'♻',
+    replication:'📋', vsanosa:'💾', vsanesa:'⚡', vsanmax:'🗄', stretched:'🌐', nfs:'🔗',
+    vvols:'📂', nsx:'🕸', nsxrouting:'🛣', nsxvpn:'🔒', microseg:'🔬', avi:'⚖',
+    supervisor:'🎛', vksnet:'🕸', vksstorage:'💾', vcd:'☁', hcx:'🚚',
+    vcfauto:'⚙', selfservice:'🛒', terraform:'📐', multicloud:'☁', slcm:'🔄',
+    ops:'📊', opsnet:'📡', logintel:'📝', apm:'📈', sddcmgr:'🏗',
+    privateai:'🤖', nvidia:'🎮', vgpu:'⚡', aiops:'🧠', nsxatp:'🛡', cbc:'🔍'
+  };
+  const categories = {
+    vsphere:'Cómputo · vSphere', vmotion:'Cómputo · vSphere', ft:'Cómputo · vSphere',
+    vds:'Cómputo · Red', vlcm:'Cómputo · Ciclo de vida', trust:'Seguridad', nkp:'Seguridad',
+    dfw:'Seguridad · NSX', gfw:'Seguridad · NSX', vks:'Kubernetes', tkg:'Kubernetes',
+    argocd:'Kubernetes · GitOps', harbor:'Kubernetes · Registry', srm:'Continuidad de negocio',
+    replication:'Continuidad de negocio', vsanosa:'Almacenamiento · vSAN',
+    vsanesa:'Almacenamiento · vSAN', vsanmax:'Almacenamiento · vSAN',
+    stretched:'Almacenamiento · vSAN', nfs:'Almacenamiento externo', vvols:'Almacenamiento externo',
+    nsx:'Red · NSX', nsxrouting:'Red · NSX', nsxvpn:'Red · NSX', microseg:'Seguridad · NSX',
+    avi:'Red · Load Balancer', supervisor:'Kubernetes · VKS', vksnet:'Kubernetes · Red',
+    vksstorage:'Kubernetes · Storage', vcd:'Servicios cloud', hcx:'Migración',
+    vcfauto:'Automatización', selfservice:'Automatización', terraform:'Automatización · IaC',
+    multicloud:'Automatización · Multi-cloud', slcm:'Ciclo de vida',
+    ops:'Operaciones', opsnet:'Operaciones · Redes', logintel:'Operaciones · Logs',
+    apm:'Operaciones · APM', sddcmgr:'Infraestructura · SDDC',
+    privateai:'IA Privada', nvidia:'IA Privada · NVIDIA', vgpu:'IA Privada · GPU',
+    aiops:'IA Privada · Kubernetes', nsxatp:'Seguridad · Add-on', cbc:'Seguridad · EDR'
+  };
+
   function openModal(key, vvf, vcfe, vcf) {
     const d = details[key];
     if (!d) return;
-    document.getElementById('modalTitle').textContent = d.title;
-    document.getElementById('modalDesc').textContent = d.desc;
-    document.getElementById('modalExample').textContent = d.example;
+    document.getElementById('panelTitle').textContent = d.title;
+    document.getElementById('panelCategory').textContent = categories[key] || '';
+    document.getElementById('panelIcon').textContent = icons[key] || '⚙';
+    document.getElementById('panelDesc').textContent = d.desc;
+    document.getElementById('panelExample').textContent = d.example;
 
+    // Plan chips
     const planMap = [
-      { label: 'VVF', val: vvf,  color: '#48cae4' },
-      { label: 'VCFE', val: vcfe, color: '#00b4d8' },
-      { label: 'VCF',  val: vcf,  color: '#0077b6' },
+      { label: 'VVF',  val: vvf  },
+      { label: 'VCFE', val: vcfe },
+      { label: 'VCF',  val: vcf  },
     ];
-    document.getElementById('modalPlans').innerHTML = planMap.map(p => {
-      const dotClass = p.val === 'yes' ? 'dot-yes' : p.val === 'no' ? 'dot-no' : 'dot-note';
-      const label = p.val === 'yes' ? 'Incluido' : p.val === 'no' ? 'No incluido' : 'Parcial / Add-on';
-      return `<div class="modal-plan-chip"><span class="dot ${dotClass}"></span><strong>${p.label}</strong> — ${label}</div>`;
+    document.getElementById('panelPlans').innerHTML = planMap.map(p => {
+      const cls = p.val === 'yes' ? 'ppc-yes' : p.val === 'no' ? 'ppc-no' : 'ppc-note';
+      const label = p.val === 'yes' ? 'Incluido' : p.val === 'no' ? 'No incluido' : 'Parcial/Add-on';
+      return `<div class="panel-plan-chip ${cls}"><strong>${p.label}</strong> — ${label}</div>`;
     }).join('');
 
-    document.getElementById('modalOverlay').classList.add('open');
+    // Benefits
+    const benefits = d.benefits || [];
+    document.getElementById('panelBenefits').innerHTML = benefits.map(b =>
+      `<li>${b}</li>`
+    ).join('');
+
+    document.getElementById('sidePanel').classList.add('open');
+    document.getElementById('panelBackdrop').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal(e) {
-    if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
-  }
-  function closeModalBtn() {
-    document.getElementById('modalOverlay').classList.remove('open');
+  function closePanel() {
+    document.getElementById('sidePanel').classList.remove('open');
+    document.getElementById('panelBackdrop').classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
   /* ─── Wire up detail rows (delegation) ─── */
   document.addEventListener('click', e => {
