@@ -337,6 +337,152 @@
       font-size: .8rem; color: var(--muted); border-top: 1px solid var(--border);
     }
 
+
+    /* ─── Layer Diagram ─── */
+    .layer-diagram-wrap {
+      margin-bottom: 32px;
+    }
+    .layer-diagram {
+      position: relative;
+      padding: 12px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #03045e 0%, #0077b6 100%);
+      box-shadow: 0 4px 24px rgba(0,0,0,.18);
+    }
+    .layer-diagram .ld-label {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: rgba(255,255,255,.7);
+      margin-bottom: 6px; padding-left: 4px;
+    }
+    .layer-diagram .ld-label span { color: #fff; }
+    .layer-vcf-bg {
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      border: 1.5px solid rgba(255,255,255,.22);
+      padding: 12px;
+    }
+    .layer-vcf-tags {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+    }
+    .ld-tag {
+      padding: 4px 11px; border-radius: 999px; font-size: .75rem; font-weight: 600;
+      background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+    .layer-vcfe-bg {
+      border-radius: 10px;
+      background: rgba(0,180,216,.15);
+      border: 1.5px solid rgba(0,180,216,.4);
+      padding: 10px;
+      margin-top: 0;
+    }
+    .layer-vcfe-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .ld-tag-vcfe {
+      padding: 4px 11px; border-radius: 999px; font-size: .75rem; font-weight: 600;
+      background: rgba(0,180,216,.25); color: #fff;
+      border: 1px solid rgba(0,180,216,.5);
+    }
+    .layer-vvf-bg {
+      border-radius: 8px;
+      background: rgba(72,202,228,.15);
+      border: 1.5px solid rgba(72,202,228,.5);
+      padding: 10px;
+    }
+    .layer-vvf-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ld-tag-vvf {
+      padding: 4px 11px; border-radius: 999px; font-size: .75rem; font-weight: 600;
+      background: rgba(72,202,228,.25); color: #fff;
+      border: 1px solid rgba(72,202,228,.6);
+    }
+    .ld-arrow {
+      text-align: center; color: rgba(255,255,255,.5);
+      font-size: .75rem; padding: 4px 0; letter-spacing: .05em;
+    }
+
+    /* ─── Wizard ─── */
+    .wizard-section {
+      background: linear-gradient(135deg, #023e8a 0%, #0077b6 60%, #00b4d8 100%);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+      color: #fff;
+      margin-bottom: 48px;
+    }
+    .wizard-title {
+      font-size: 1.25rem; font-weight: 700; margin-bottom: 6px;
+    }
+    .wizard-subtitle {
+      font-size: .88rem; opacity: .82; margin-bottom: 24px;
+    }
+    .wizard-progress {
+      display: flex; gap: 6px; margin-bottom: 24px;
+    }
+    .wizard-progress-dot {
+      height: 4px; border-radius: 999px;
+      background: rgba(255,255,255,.25);
+      flex: 1; transition: background .3s;
+    }
+    .wizard-progress-dot.done { background: rgba(255,255,255,.9); }
+    .wizard-question {
+      font-size: 1rem; font-weight: 600; margin-bottom: 16px; line-height: 1.4;
+    }
+    .wizard-options {
+      display: grid; gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .wizard-option {
+      background: rgba(255,255,255,.13);
+      border: 1.5px solid rgba(255,255,255,.25);
+      border-radius: 12px; padding: 14px 18px;
+      cursor: pointer; transition: background .18s, border-color .18s, transform .1s;
+      text-align: left; color: #fff; display: flex; align-items: flex-start; gap: 12px;
+    }
+    .wizard-option:hover {
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.6);
+      transform: translateY(-1px);
+    }
+    .wizard-option-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 1px; }
+    .wizard-option-text strong { display: block; font-size: .92rem; margin-bottom: 2px; }
+    .wizard-option-text span { font-size: .8rem; opacity: .78; line-height: 1.35; }
+    .wizard-result {
+      display: none;
+      background: rgba(255,255,255,.12);
+      border: 1.5px solid rgba(255,255,255,.3);
+      border-radius: 14px; padding: 20px 22px;
+    }
+    .wizard-result.show { display: block; }
+    .wizard-result-header {
+      font-size: .8rem; text-transform: uppercase; letter-spacing: .1em;
+      opacity: .7; margin-bottom: 8px;
+    }
+    .wizard-result-plan {
+      font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;
+    }
+    .wizard-result-why {
+      font-size: .88rem; opacity: .88; line-height: 1.5; margin-bottom: 16px;
+    }
+    .wizard-result-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .wizard-btn-primary {
+      background: #fff; color: #0077b6; border: none; border-radius: 999px;
+      padding: 9px 22px; font-size: .88rem; font-weight: 700; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .wizard-btn-primary:hover { opacity: .9; }
+    .wizard-btn-secondary {
+      background: transparent; color: rgba(255,255,255,.85);
+      border: 1.5px solid rgba(255,255,255,.4); border-radius: 999px;
+      padding: 9px 22px; font-size: .88rem; cursor: pointer; transition: border-color .15s;
+    }
+    .wizard-btn-secondary:hover { border-color: rgba(255,255,255,.9); }
+    .wizard-back {
+      background: none; border: none; color: rgba(255,255,255,.65);
+      font-size: .82rem; cursor: pointer; padding: 0;
+      margin-bottom: 16px; display: none;
+    }
+    .wizard-back:hover { color: #fff; }
+    .wizard-back.visible { display: inline-block; }
+
     @media print {
       .toolbar, .sticky-nav, .side-panel, .panel-backdrop { display: none; }
       body { background: #fff; color: #000; }
@@ -399,6 +545,7 @@
 
 <!-- ─── STICKY NAV ─── -->
 <nav class="sticky-nav">
+  <a class="nav-link" href="#wizard">¿Cuál plan?</a>
   <a class="nav-link" href="#planes">Planes</a>
   <a class="nav-link" href="#comparador">Comparador</a>
   <a class="nav-link" href="#casos">Casos de uso</a>
@@ -415,9 +562,78 @@
 
 <div class="container">
 
-  <!-- ─── PLANES ─── -->
+
+  <!-- ─── WIZARD ─── -->
+  <section id="wizard">
+    <h2 class="section-title">¿Cuál plan es para ti?</h2>
+    <div class="wizard-section">
+      <div class="wizard-progress" id="wizardProgress">
+        <div class="wizard-progress-dot" id="wd0"></div>
+        <div class="wizard-progress-dot" id="wd1"></div>
+        <div class="wizard-progress-dot" id="wd2"></div>
+        <div class="wizard-progress-dot" id="wd3"></div>
+      </div>
+      <button class="wizard-back" id="wizardBack" onclick="wizardBack()">← Volver</button>
+      <div id="wizardStepArea"></div>
+      <div class="wizard-result" id="wizardResult">
+        <div class="wizard-result-header">Recomendación basada en tus respuestas</div>
+        <div class="wizard-result-plan" id="wizardResultPlan"></div>
+        <div class="wizard-result-why" id="wizardResultWhy"></div>
+        <div class="wizard-result-actions">
+          <button class="wizard-btn-primary" id="wizardResultBtn" onclick="wizardScrollToPlan()">Ver detalles del plan →</button>
+          <button class="wizard-btn-secondary" onclick="wizardReset()">Empezar de nuevo</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DIAGRAMA DE CAPAS ─── -->
   <section id="planes">
     <h2 class="section-title">Los tres planes VMware</h2>
+    <div class="layer-diagram-wrap">
+      <div class="layer-diagram">
+        <div class="ld-label">Cómo se relacionan los planes: <span>cada plan incluye todo lo anterior + nuevas capacidades</span></div>
+        <div class="layer-vcf-bg">
+          <div class="ld-label" style="color:rgba(255,255,255,.5)">Exclusivo <span style="color:#90e0ef">VCF</span> — Cloud Foundation completo · sin límite de hosts</div>
+          <div class="layer-vcf-tags">
+            <span class="ld-tag">🤖 Private AI Foundation</span>
+            <span class="ld-tag">⚖ NSX ALB (Avi)</span>
+            <span class="ld-tag">📦 Harbor Registry</span>
+            <span class="ld-tag">📝 Log Intelligence</span>
+            <span class="ld-tag">📈 APM</span>
+            <span class="ld-tag">🗄 vSAN Max</span>
+            <span class="ld-tag">☁ Multi-cloud Automation</span>
+            <span class="ld-tag">🏗 SDDC Manager</span>
+          </div>
+          <div class="layer-vcfe-bg">
+            <div class="ld-label" style="color:rgba(255,255,255,.5)">Incluido en <span style="color:#00b4d8">VCFE</span> — Stack SDN completo · hasta 5 hosts</div>
+            <div class="layer-vcfe-tags">
+              <span class="ld-tag-vcfe">🕸 NSX (SDN completo)</span>
+              <span class="ld-tag-vcfe">⚡ vSAN ESA</span>
+              <span class="ld-tag-vcfe">🧱 NSX Firewall Distribuido</span>
+              <span class="ld-tag-vcfe">🚧 NSX Gateway Firewall</span>
+              <span class="ld-tag-vcfe">☸ TKG Enterprise</span>
+              <span class="ld-tag-vcfe">🔁 ArgoCD Operator</span>
+              <span class="ld-tag-vcfe">📊 VCF Operations</span>
+              <span class="ld-tag-vcfe">🚚 HCX</span>
+            </div>
+            <div class="layer-vvf-bg">
+              <div class="ld-label" style="color:rgba(255,255,255,.5)">Base en <span style="color:#48cae4">VVF</span> — Virtualización enterprise</div>
+              <div class="layer-vvf-tags">
+                <span class="ld-tag-vvf">🖥 vSphere 9 (ESXi + vCenter)</span>
+                <span class="ld-tag-vvf">🔄 vMotion / HA / DRS</span>
+                <span class="ld-tag-vvf">🔌 vDS</span>
+                <span class="ld-tag-vvf">🔧 vLCM</span>
+                <span class="ld-tag-vvf">☸ VKS básico</span>
+                <span class="ld-tag-vvf">💾 vSAN OSA</span>
+                <span class="ld-tag-vvf">🔐 Trust Authority</span>
+                <span class="ld-tag-vvf">♻ SRM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="plan-grid">
       <div class="plan-card vvf">
         <div class="card-header"><h2>VVF</h2><p>vSphere Foundation</p></div>
@@ -1340,6 +1556,134 @@
     const tr = e.target.closest('tr.detail-row');
     if (tr) openModal(tr.dataset.key, tr.dataset.vvf, tr.dataset.vcfe, tr.dataset.vcf);
   });
+
+
+  /* ─── Wizard ─── */
+  const wizardQuestions = [
+    {
+      q: '¿Cuántos hosts físicos planeas virtualizar?',
+      options: [
+        { icon: '🏠', label: 'Hasta 5 hosts', desc: 'Sucursal, sitio edge o laboratorio pequeño', val: 'small' },
+        { icon: '🏢', label: '6 a 50 hosts', desc: 'Datacenter corporativo o empresa mediana', val: 'medium' },
+        { icon: '🏗', label: 'Más de 50 hosts', desc: 'Gran empresa, proveedor de servicios o nube privada a escala', val: 'large' },
+      ]
+    },
+    {
+      q: '¿Necesitas redes definidas por software (SDN)?',
+      options: [
+        { icon: '❌', label: 'No por ahora', desc: 'La red física y VLANs son suficientes para mis necesidades', val: 'no_sdn' },
+        { icon: '✅', label: 'Sí, necesito NSX', desc: 'Microsegmentación, firewall distribuido, overlay de red (VxLAN) o automatización de red', val: 'yes_sdn' },
+      ]
+    },
+    {
+      q: '¿Planeas correr Kubernetes / contenedores en producción?',
+      options: [
+        { icon: '❌', label: 'No o muy poco', desc: 'No hay planes de contenedores o es algo marginal', val: 'no_k8s' },
+        { icon: '🟡', label: 'Sí, uso básico', desc: 'Algunos pods o clusters sencillos, sin registry ni GitOps', val: 'basic_k8s' },
+        { icon: '✅', label: 'Sí, enterprise', desc: 'Múltiples clusters, Harbor Registry, ArgoCD, CI/CD completo', val: 'enterprise_k8s' },
+      ]
+    },
+    {
+      q: '¿Tienes cargas de trabajo de IA o necesitas GPUs compartidas?',
+      options: [
+        { icon: '❌', label: 'No', desc: 'No hay planes de IA/ML ni workloads GPU', val: 'no_ai' },
+        { icon: '✅', label: 'Sí', desc: 'LLMs on-premises, vGPU, NVIDIA AI Enterprise, Private AI Foundation', val: 'yes_ai' },
+      ]
+    }
+  ];
+
+  let wizardAnswers = [];
+  let wizardStep = 0;
+
+  function wizardRender() {
+    const area = document.getElementById('wizardStepArea');
+    const result = document.getElementById('wizardResult');
+    const back = document.getElementById('wizardBack');
+    result.classList.remove('show');
+    area.style.display = '';
+
+    // progress dots
+    for (let i = 0; i < 4; i++) {
+      document.getElementById('wd' + i).classList.toggle('done', i < wizardStep);
+    }
+    back.classList.toggle('visible', wizardStep > 0);
+
+    if (wizardStep >= wizardQuestions.length) {
+      area.style.display = 'none';
+      wizardShowResult();
+      return;
+    }
+    const q = wizardQuestions[wizardStep];
+    area.innerHTML = '<div class="wizard-question">' + (wizardStep + 1) + ' / ' + wizardQuestions.length + ' — ' + q.q + '</div>'
+      + '<div class="wizard-options">' + q.options.map((o, i) =>
+        '<button class="wizard-option" onclick="wizardAnswer(this.dataset.val)" data-val="' + o.val + '">'
+        + '<div class="wizard-option-icon">' + o.icon + '</div>'
+        + '<div class="wizard-option-text"><strong>' + o.label + '</strong><span>' + o.desc + '</span></div>'
+        + '</button>'
+      ).join('') + '</div>';
+  }
+
+  function wizardAnswer(elOrVal) {
+    const val = typeof elOrVal === 'string' ? elOrVal : elOrVal.dataset.val;
+    wizardAnswers[wizardStep] = val;
+    wizardStep++;
+    wizardRender();
+  }
+
+  function wizardBack() {
+    if (wizardStep > 0) { wizardStep--; wizardRender(); }
+  }
+
+  function wizardReset() {
+    wizardAnswers = [];
+    wizardStep = 0;
+    wizardRender();
+  }
+
+  function wizardShowResult() {
+    const [scale, sdn, k8s, ai] = wizardAnswers;
+    let plan, why;
+
+    if (ai === 'yes_ai') {
+      plan = 'VCF — VMware Cloud Foundation';
+      why = 'Private AI Foundation, vGPU y NVIDIA AI Enterprise solo están disponibles en VCF. Es el único plan con el stack completo de IA on-premises.';
+    } else if (k8s === 'enterprise_k8s') {
+      plan = 'VCF — VMware Cloud Foundation';
+      why = 'Harbor Registry (registro privado de imágenes) y las capacidades enterprise de Kubernetes están disponibles únicamente en VCF. Ideal para plataformas de contenedores de producción a escala.';
+    } else if (scale === 'large') {
+      plan = 'VCF — VMware Cloud Foundation';
+      why = 'Con más de 50 hosts necesitas la escala y las herramientas de operación de VCF completo: SDDC Manager, VCF Operations avanzado, automatización sin límites y el stack completo sin restricciones.';
+    } else if (sdn === 'yes_sdn' && scale === 'small') {
+      plan = 'VCFE — VCF Edge';
+      why = 'VCFE incluye el stack completo de NSX con microsegmentación y redes definidas por software, optimizado para hasta 5 hosts en entornos edge o sucursales. Es la opción perfecta para máximas capacidades SDN en escala pequeña.';
+    } else if (sdn === 'yes_sdn' && scale === 'medium') {
+      plan = 'VCF — VMware Cloud Foundation';
+      why = 'VCFE tiene límite de 5 hosts. Para una infraestructura de 6 a 50 hosts con NSX necesitas VCF, que incluye el SDN completo sin restricción de hosts y además agrega capacidades de observabilidad, Harbor y automatización avanzada.';
+    } else if (sdn === 'no_sdn' && (k8s === 'no_k8s' || k8s === 'basic_k8s')) {
+      plan = 'VVF — vSphere Foundation';
+      why = 'Si no necesitas SDN ni Kubernetes avanzado, VVF cubre perfectamente tus necesidades: hypervisor enterprise, vCenter, vMotion, HA, DRS, VKS básico y vSAN OSA al menor costo de los tres planes.';
+    } else {
+      plan = 'VCF — VMware Cloud Foundation';
+      why = 'Dadas tus necesidades combinadas de escala, SDN y Kubernetes, VCF ofrece el stack completo sin restricciones. Es la plataforma de nube privada más completa del portfolio de Broadcom.';
+    }
+
+    document.getElementById('wizardResultPlan').textContent = plan;
+    document.getElementById('wizardResultWhy').textContent = why;
+    document.getElementById('wizardResult').classList.add('show');
+
+    // update button target
+    const planKey = plan.startsWith('VVF') ? 'vvf' : plan.startsWith('VCFE') ? 'vcfe' : 'vcf';
+    document.getElementById('wizardResultBtn')._planKey = planKey;
+
+    // progress all done
+    for (let i = 0; i < 4; i++) document.getElementById('wd' + i).classList.add('done');
+  }
+
+  function wizardScrollToPlan() {
+    document.getElementById('planes').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  wizardRender();
 
   /* ─── Theme toggle ─── */
   function toggleTheme() {
