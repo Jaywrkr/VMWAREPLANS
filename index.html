@@ -483,6 +483,181 @@
     .wizard-back:hover { color: #fff; }
     .wizard-back.visible { display: inline-block; }
 
+
+    /* ─── Role filter bar ─── */
+    .role-filter-bar {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .role-filter-label { font-size: .82rem; color: var(--muted); white-space: nowrap; }
+    .role-btn {
+      padding: 7px 16px; border-radius: 999px; border: 1.5px solid var(--border);
+      background: var(--card-bg); color: var(--text); font-size: .82rem; font-weight: 600;
+      cursor: pointer; transition: all .18s; display: flex; align-items: center; gap: 6px;
+    }
+    .role-btn:hover { border-color: var(--vcf-color); color: var(--vcf-color); }
+    .role-btn.active { background: var(--vcf-color); color: #fff; border-color: var(--vcf-color); }
+    .role-btn.active-infra { background: #0096c7; border-color: #0096c7; color: #fff; }
+    .role-btn.active-devops { background: #7209b7; border-color: #7209b7; color: #fff; }
+    .role-btn.active-arq { background: #0077b6; border-color: #0077b6; color: #fff; }
+    .role-btn.active-ciso { background: #d62828; border-color: #d62828; color: #fff; }
+    tr.detail-row.role-hidden { display: none; }
+    tr.detail-row.role-dimmed td { opacity: .28; }
+
+    /* ─── ROI Calculator ─── */
+    .roi-section {
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: var(--shadow); border: 1px solid var(--border);
+      padding: 28px 28px 24px; margin-bottom: 48px;
+    }
+    .roi-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .roi-grid { grid-template-columns: 1fr; } }
+    .roi-inputs { display: flex; flex-direction: column; gap: 18px; }
+    .roi-input-group label {
+      display: block; font-size: .82rem; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px;
+    }
+    .roi-input-group input[type=range] {
+      width: 100%; accent-color: var(--vcf-color);
+    }
+    .roi-input-val {
+      display: inline-block; font-size: 1.1rem; font-weight: 700;
+      color: var(--vcf-color); min-width: 50px;
+    }
+    .roi-results {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .roi-card {
+      background: var(--bg); border-radius: 10px; padding: 16px;
+      border: 1px solid var(--border); text-align: center;
+    }
+    .roi-card-num {
+      font-size: 1.7rem; font-weight: 800; color: var(--vcf-color);
+      line-height: 1; margin-bottom: 4px;
+    }
+    .roi-card-num.green { color: #22c55e; }
+    .roi-card-label { font-size: .76rem; color: var(--muted); line-height: 1.3; }
+    .roi-note { font-size: .75rem; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+
+    /* ─── Casos antes/después ─── */
+    .usecase-grid-v2 { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 20px; }
+    .uc2-card {
+      background: var(--card-bg); border-radius: var(--radius);
+      border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden;
+    }
+    .uc2-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .uc2-icon { font-size: 1.6rem; }
+    .uc2-header h4 { font-size: .95rem; font-weight: 700; }
+    .uc2-header .recommend-badge { margin-left: auto; flex-shrink: 0; }
+    .uc2-body { display: grid; grid-template-columns: 1fr 1fr; }
+    .uc2-col { padding: 14px 16px; }
+    .uc2-col:first-child { border-right: 1px solid var(--border); }
+    .uc2-col-label {
+      font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+      margin-bottom: 8px;
+    }
+    .uc2-col-label.before { color: #e57373; }
+    .uc2-col-label.after  { color: #22c55e; }
+    .uc2-col ul { list-style: none; }
+    .uc2-col ul li { font-size: .8rem; color: var(--muted); padding: 3px 0; line-height: 1.35; }
+    .uc2-col.uc2-before li::before { content: "✗ "; color: #e57373; font-weight: 700; }
+    .uc2-col.uc2-after  li::before { content: "✓ "; color: #22c55e; font-weight: 700; }
+
+    /* ─── Historia mode ─── */
+    .story-backdrop {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.65); backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    .story-backdrop.open { opacity: 1; pointer-events: all; }
+    .story-modal {
+      position: fixed; top: 50%; left: 50%; z-index: 1001;
+      transform: translate(-50%, -48%) scale(.97);
+      width: min(680px, 96vw); max-height: 88vh;
+      background: var(--card-bg); border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      display: flex; flex-direction: column; overflow: hidden;
+      transition: transform .28s cubic-bezier(.4,0,.2,1), opacity .25s;
+      opacity: 0; pointer-events: none;
+    }
+    .story-modal.open {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1; pointer-events: all;
+    }
+    .story-modal-header {
+      padding: 20px 24px 16px;
+      background: linear-gradient(135deg, #023e8a, #0077b6);
+      color: #fff; flex-shrink: 0;
+    }
+    .story-modal-header .story-step-label {
+      font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+      opacity: .7; margin-bottom: 4px;
+    }
+    .story-modal-header h3 { font-size: 1.1rem; font-weight: 700; }
+    .story-progress-bar {
+      height: 3px; background: rgba(255,255,255,.2); border-radius: 999px;
+      margin-top: 14px; overflow: hidden;
+    }
+    .story-progress-fill {
+      height: 100%; background: rgba(255,255,255,.8); border-radius: 999px;
+      transition: width .35s ease;
+    }
+    .story-modal-close {
+      position: absolute; top: 14px; right: 16px;
+      background: rgba(255,255,255,.15); border: none; color: #fff;
+      border-radius: 999px; width: 28px; height: 28px;
+      cursor: pointer; font-size: .9rem; line-height: 28px; text-align: center;
+    }
+    .story-modal-body {
+      padding: 24px 28px; overflow-y: auto; flex: 1;
+    }
+    .story-scene {
+      font-size: .92rem; color: var(--muted); line-height: 1.7;
+      background: var(--bg); border-radius: 10px; padding: 16px 18px;
+      border-left: 3px solid var(--vcf-color); margin-bottom: 16px;
+    }
+    .story-scene strong { color: var(--text); }
+    .story-tech-highlight {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;
+    }
+    .story-tech-chip {
+      padding: 5px 13px; border-radius: 999px; font-size: .78rem; font-weight: 600;
+      background: rgba(0,119,182,.1); color: var(--vcf-color);
+      border: 1px solid rgba(0,119,182,.25); cursor: pointer;
+      transition: background .15s;
+    }
+    .story-tech-chip:hover { background: rgba(0,119,182,.2); }
+    .story-lesson {
+      font-size: .85rem; color: var(--text); line-height: 1.6;
+    }
+    .story-modal-footer {
+      padding: 16px 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-shrink: 0;
+    }
+    .story-nav-btn {
+      padding: 8px 20px; border-radius: 999px; font-size: .85rem; font-weight: 600;
+      cursor: pointer; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--text); transition: all .15s;
+    }
+    .story-nav-btn.primary {
+      background: var(--vcf-color); color: #fff; border-color: var(--vcf-color);
+    }
+    .story-nav-btn:hover { opacity: .85; }
+    .story-dots { display: flex; gap: 6px; align-items: center; }
+    .story-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--border); transition: background .2s;
+    }
+    .story-dot.active { background: var(--vcf-color); width: 20px; border-radius: 999px; }
+
     @media print {
       .toolbar, .sticky-nav, .side-panel, .panel-backdrop { display: none; }
       body { background: #fff; color: #000; }
@@ -493,6 +668,26 @@
   </style>
 </head>
 <body>
+
+
+<!-- ─── STORY MODE MODAL ─── -->
+<div class="story-backdrop" id="storyBackdrop" onclick="closeStory()"></div>
+<div class="story-modal" id="storyModal">
+  <div class="story-modal-header">
+    <div class="story-step-label" id="storyStepLabel">Paso 1 de 5</div>
+    <h3 id="storyTitle"></h3>
+    <div class="story-progress-bar"><div class="story-progress-fill" id="storyProgressFill"></div></div>
+    <button class="story-modal-close" onclick="closeStory()">✕</button>
+  </div>
+  <div class="story-modal-body" id="storyBody"></div>
+  <div class="story-modal-footer">
+    <div class="story-dots" id="storyDots"></div>
+    <div style="display:flex;gap:10px">
+      <button class="story-nav-btn" id="storyPrev" onclick="storyNav(-1)">← Anterior</button>
+      <button class="story-nav-btn primary" id="storyNext" onclick="storyNav(1)">Siguiente →</button>
+    </div>
+  </div>
+</div>
 
 <!-- ─── SIDE PANEL ─── -->
 <div class="panel-backdrop" id="panelBackdrop" onclick="closePanel()"></div>
@@ -530,6 +725,7 @@
   <input type="search" id="searchInput" placeholder="🔍 Buscar funcionalidad…" oninput="filterSearch()" />
   <button class="btn" id="diffBtn" onclick="toggleDiff()">Solo diferencias</button>
   <div class="toolbar-right">
+    <button class="btn" onclick="openStory()">📖 Modo Historia</button>
     <button class="btn" onclick="window.print()">⬇ Exportar PDF</button>
     <button class="btn" id="themeBtn" onclick="toggleTheme()">🌙 Modo oscuro</button>
   </div>
@@ -548,7 +744,7 @@
   <a class="nav-link" href="#wizard">¿Cuál plan?</a>
   <a class="nav-link" href="#planes">Planes</a>
   <a class="nav-link" href="#comparador">Comparador</a>
-  <a class="nav-link" href="#casos">Casos de uso</a>
+  <a class="nav-link" href="#casos">Antes / Después</a>
   <a class="nav-link" href="#compute">Cómputo</a>
   <a class="nav-link" href="#storage">Almacenamiento</a>
   <a class="nav-link" href="#networking">Red</a>
@@ -557,6 +753,7 @@
   <a class="nav-link" href="#operations">Operaciones</a>
   <a class="nav-link" href="#ai">IA Privada</a>
   <a class="nav-link" href="#addons">Add-ons</a>
+  <a class="nav-link" href="#roi">ROI</a>
   <a class="nav-link" href="#upgrade">Rutas de migración</a>
 </nav>
 
@@ -718,45 +915,241 @@
 
   <!-- ─── CASOS DE USO ─── -->
   <section id="casos">
-    <h2 class="section-title">¿Cuál plan es para ti?</h2>
-    <div class="usecase-grid">
-      <div class="usecase-card"><div class="uc-icon">🏢</div><h4>Virtualización clásica on-prem</h4><p>Empresa que migra desde vSphere tradicional, sin necesidad de SDN ni nube privada completa.</p><span class="recommend-badge rec-vvf">Recomendado: VVF</span></div>
-      <div class="usecase-card"><div class="uc-icon">🌐</div><h4>Nube privada en sede remota</h4><p>Oficina o sucursal con hasta 5 hosts que necesita stack completo de VCF en espacio reducido.</p><span class="recommend-badge rec-vcfe">Recomendado: VCFE</span></div>
-      <div class="usecase-card"><div class="uc-icon">🤖</div><h4>Cargas de trabajo de IA / GPU</h4><p>Proyectos de IA generativa que requieren Private AI Foundation y acceso a NVIDIA AI Enterprise.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
-      <div class="usecase-card"><div class="uc-icon">🐳</div><h4>Kubernetes en producción</h4><p>Plataformas de contenedores empresariales con Harbor Registry, ArgoCD y red NSX.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
-      <div class="usecase-card"><div class="uc-icon">🔒</div><h4>Seguridad y microsegmentación</h4><p>Entornos que requieren NSX Distributed Firewall y políticas de microsegmentación avanzadas.</p><span class="recommend-badge rec-vcfe">Recomendado: VCFE o VCF</span></div>
-      <div class="usecase-card"><div class="uc-icon">📊</div><h4>Multi-cloud con automatización</h4><p>Organizaciones que necesitan VCF Automation para self-service de infraestructura a escala.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
-      <div class="usecase-card"><div class="uc-icon">💰</div><h4>Presupuesto limitado, funciones clave</h4><p>Empresa que quiere hypervisor enterprise, vCenter y Kubernetes básico al menor costo.</p><span class="recommend-badge rec-vvf">Recomendado: VVF</span></div>
-      <div class="usecase-card"><div class="uc-icon">🔄</div><h4>Migración desde Aria / vCloud Suite</h4><p>Clientes con licencias vCloud Suite, Aria Suite o vSphere EP que buscan transicionar a SKU 9.1.</p><span class="recommend-badge rec-vcf">Recomendado: VCF</span></div>
+    <h2 class="section-title">Casos de uso · Antes y Después</h2>
+    <div class="usecase-grid-v2">
+
+      <div class="uc2-card">
+        <div class="uc2-header">
+          <div class="uc2-icon">🏢</div>
+          <h4>Empresa con 20 servidores físicos</h4>
+          <span class="recommend-badge rec-vvf">VVF</span>
+        </div>
+        <div class="uc2-body">
+          <div class="uc2-col uc2-before">
+            <div class="uc2-col-label before">Antes</div>
+            <ul>
+              <li>20 servidores físicos, 1 app por servidor</li>
+              <li>CPU promedio al 8% de uso</li>
+              <li>Mantenimiento: ventana nocturna por servidor</li>
+              <li>Fallo de hardware = downtime de app</li>
+            </ul>
+          </div>
+          <div class="uc2-col uc2-after">
+            <div class="uc2-col-label after">Con VVF</div>
+            <ul>
+              <li>3-4 hosts ESXi con 20 VMs cada uno</li>
+              <li>CPU al 60-70%, ahorro real de hardware</li>
+              <li>Parches sin downtime con vMotion</li>
+              <li>HA reinicia VMs en segundos ante fallo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="uc2-card">
+        <div class="uc2-header">
+          <div class="uc2-icon">🔒</div>
+          <h4>Banco con requisitos de microsegmentación</h4>
+          <span class="recommend-badge rec-vcfe">VCFE</span>
+        </div>
+        <div class="uc2-body">
+          <div class="uc2-col uc2-before">
+            <div class="uc2-col-label before">Antes</div>
+            <ul>
+              <li>Firewall perimetral único: norte-sur solo</li>
+              <li>Tráfico este-oeste libre entre VMs</li>
+              <li>Un compromiso puede propagarse libremente</li>
+              <li>VLANs como único aislamiento de red</li>
+            </ul>
+          </div>
+          <div class="uc2-col uc2-after">
+            <div class="uc2-col-label after">Con VCFE</div>
+            <ul>
+              <li>NSX DFW: cada VM tiene su propio firewall</li>
+              <li>Microsegmentación: tráfico este-oeste controlado</li>
+              <li>Ransomware contenido en la VM infectada</li>
+              <li>Políticas por etiqueta, no por IP</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="uc2-card">
+        <div class="uc2-header">
+          <div class="uc2-icon">🐳</div>
+          <h4>Equipo DevOps con Kubernetes</h4>
+          <span class="recommend-badge rec-vcf">VCF</span>
+        </div>
+        <div class="uc2-body">
+          <div class="uc2-col uc2-before">
+            <div class="uc2-col-label before">Antes</div>
+            <ul>
+              <li>Clusters K8s manuales en servidores separados</li>
+              <li>Imágenes en Docker Hub público</li>
+              <li>Deploy manual: "funciona en mi máquina"</li>
+              <li>Sin visibilidad de quién despliega qué</li>
+            </ul>
+          </div>
+          <div class="uc2-col uc2-after">
+            <div class="uc2-col-label after">Con VCF</div>
+            <ul>
+              <li>TKG Enterprise: clusters en minutos</li>
+              <li>Harbor Registry privado con escaneo de CVEs</li>
+              <li>ArgoCD: GitOps automático desde la rama main</li>
+              <li>Namespaces con cuotas y auditoría completa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="uc2-card">
+        <div class="uc2-header">
+          <div class="uc2-icon">🤖</div>
+          <h4>Farmacéutica con IA confidencial</h4>
+          <span class="recommend-badge rec-vcf">VCF</span>
+        </div>
+        <div class="uc2-body">
+          <div class="uc2-col uc2-before">
+            <div class="uc2-col-label before">Antes</div>
+            <ul>
+              <li>ChatGPT/Claude para análisis de datos internos</li>
+              <li>Datos de investigación enviados a la nube pública</li>
+              <li>Riesgo de fuga de IP y violación regulatoria</li>
+              <li>Sin control del modelo ni del contexto</li>
+            </ul>
+          </div>
+          <div class="uc2-col uc2-after">
+            <div class="uc2-col-label after">Con VCF</div>
+            <ul>
+              <li>LLaMA 3 on-premises con Private AI Foundation</li>
+              <li>Datos nunca salen del datacenter propio</li>
+              <li>Cumplimiento GxP, GDPR y regulación farmacéutica</li>
+              <li>RAG sobre documentos internos de investigación</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="uc2-card">
+        <div class="uc2-header">
+          <div class="uc2-icon">📊</div>
+          <h4>IT que tarda semanas en aprovisionar</h4>
+          <span class="recommend-badge rec-vcf">VCF</span>
+        </div>
+        <div class="uc2-body">
+          <div class="uc2-col uc2-before">
+            <div class="uc2-col-label before">Antes</div>
+            <ul>
+              <li>Ticket a IT → espera 2 semanas por una VM</li>
+              <li>Configuración manual: errores frecuentes</li>
+              <li>Sin visibilidad de costos por equipo</li>
+              <li>Infraestructura no reproducible ni versionada</li>
+            </ul>
+          </div>
+          <div class="uc2-col uc2-after">
+            <div class="uc2-col-label after">Con VCF</div>
+            <ul>
+              <li>Portal self-service: ambiente listo en 20 min</li>
+              <li>Blueprints con Terraform: reproducibles y en Git</li>
+              <li>Chargeback por equipo desde VCF Operations</li>
+              <li>Aprobaciones automáticas por tipo de recurso</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="uc2-card">
+        <div class="uc2-header">
+          <div class="uc2-icon">🌐</div>
+          <h4>Sucursal remota con 3 hosts</h4>
+          <span class="recommend-badge rec-vcfe">VCFE</span>
+        </div>
+        <div class="uc2-body">
+          <div class="uc2-col uc2-before">
+            <div class="uc2-col-label before">Antes</div>
+            <ul>
+              <li>Servidores físicos independientes en la sucursal</li>
+              <li>Sin nube privada: depende de VPN a sede central</li>
+              <li>Sin SDN ni storage hiperconvergido local</li>
+              <li>Gestión manual por técnico en sitio</li>
+            </ul>
+          </div>
+          <div class="uc2-col uc2-after">
+            <div class="uc2-col-label after">Con VCFE</div>
+            <ul>
+              <li>Stack VCF completo en 3-5 hosts (edge)</li>
+              <li>vSAN ESA + NSX local, sin depender de WAN</li>
+              <li>Gestión remota desde sede central vía SDDC Manager</li>
+              <li>Alta disponibilidad local ante fallos de red WAN</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── ROI CALCULATOR ─── -->
+  <section id="roi">
+    <h2 class="section-title">Calculadora de ROI · Consolidación de servidores</h2>
+    <div class="roi-section">
+      <div class="roi-grid">
+        <div class="roi-inputs">
+          <div class="roi-input-group">
+            <label>Servidores físicos actuales: <span class="roi-input-val" id="roiServersVal">20</span></label>
+            <input type="range" min="4" max="200" value="20" step="1" id="roiServers" oninput="calcROI()">
+          </div>
+          <div class="roi-input-group">
+            <label>VMs por servidor host (ratio de consolidación): <span class="roi-input-val" id="roiRatioVal">20</span></label>
+            <input type="range" min="5" max="40" value="20" step="1" id="roiRatio" oninput="calcROI()">
+          </div>
+          <div class="roi-input-group">
+            <label>Costo estimado por servidor físico (USD): <span class="roi-input-val" id="roiCostVal">$15,000</span></label>
+            <input type="range" min="5000" max="50000" value="15000" step="1000" id="roiCost" oninput="calcROI()">
+          </div>
+          <p class="roi-note">* Basado en ratio promedio de consolidación 20:1 de VMware. El ratio real depende del tipo de workload, RAM disponible y perfiles de CPU de las VMs.</p>
+        </div>
+        <div>
+          <div class="roi-results" id="roiResults"></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ─── CÓMPUTO ─── -->
   <section id="compute">
     <h2 class="section-title">Cómputo – vSphere &amp; Operaciones</h2>
+    <div class="role-filter-bar" id="roleFilterBar">
+      <span class="role-filter-label">Filtrar por rol:</span>
+      <button class="role-btn" id="rbAll" onclick="setRole(null)">Todos</button>
+      <button class="role-btn" id="rbInfra" onclick="setRole('infra')">🖥 Admin Infraestructura</button>
+      <button class="role-btn" id="rbDevops" onclick="setRole('devops')">🐳 DevOps / Plataforma</button>
+      <button class="role-btn" id="rbArq" onclick="setRole('arq')">🏗 Arquitecto Cloud</button>
+      <button class="role-btn" id="rbCiso" onclick="setRole('ciso')">🔒 CISO / Seguridad</button>
+    </div>
     <div id="mainTable" class="table-wrap">
       <table>
         <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Plataforma de cómputo</td></tr>
-          <tr class="detail-row" onclick="openModal('vsphere','yes','yes','yes')" data-key="vsphere" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere 9 (ESXi + vCenter)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vmotion','yes','yes','yes')" data-key="vmotion" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere vMotion, HA, DRS</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('ft','yes','yes','yes')" data-key="ft" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Fault Tolerance</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vds','yes','yes','yes')" data-key="vds" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Distributed Switch (vDS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vlcm','yes','yes','yes')" data-key="vlcm" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Lifecycle Manager (vLCM)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vsphere','yes','yes','yes')" data-key="vsphere" data-roles="infra arq" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere 9 (ESXi + vCenter)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vmotion','yes','yes','yes')" data-key="vmotion" data-roles="infra arq" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere vMotion, HA, DRS</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('ft','yes','yes','yes')" data-key="ft" data-roles="infra ciso" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Fault Tolerance</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vds','yes','yes','yes')" data-key="vds" data-roles="infra" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Distributed Switch (vDS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vlcm','yes','yes','yes')" data-key="vlcm" data-roles="infra" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Lifecycle Manager (vLCM)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Seguridad</td></tr>
-          <tr class="detail-row" onclick="openModal('trust','yes','yes','yes')" data-key="trust" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Trust Authority</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('nkp','yes','yes','yes')" data-key="nkp" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Native Key Provider</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('dfw','no','yes','yes')" data-key="dfw" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX Distributed Firewall</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('gfw','no','yes','yes')" data-key="gfw" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX Gateway Firewall</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('trust','yes','yes','yes')" data-key="trust" data-roles="infra ciso" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Trust Authority</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nkp','yes','yes','yes')" data-key="nkp" data-roles="infra ciso" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Native Key Provider</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('dfw','no','yes','yes')" data-key="dfw" data-roles="ciso arq" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX Distributed Firewall</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('gfw','no','yes','yes')" data-key="gfw" data-roles="ciso arq" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX Gateway Firewall</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Kubernetes (VKS)</td></tr>
-          <tr class="detail-row" onclick="openModal('vks','yes','yes','yes')" data-key="vks" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Kubernetes Service (VKS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('tkg','note','yes','yes')" data-key="tkg" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>Tanzu Kubernetes Grid (TKG)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Enterprise</span></td><td><span class="chip chip-yes">Enterprise</span></td></tr>
-          <tr class="detail-row" onclick="openModal('argocd','no','yes','yes')" data-key="argocd" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>ArgoCD Operator</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('harbor','no','no','yes')" data-key="harbor" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Harbor Registry (integrado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vks','yes','yes','yes')" data-key="vks" data-roles="devops" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Kubernetes Service (VKS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('tkg','note','yes','yes')" data-key="tkg" data-roles="devops" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>Tanzu Kubernetes Grid (TKG)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Enterprise</span></td><td><span class="chip chip-yes">Enterprise</span></td></tr>
+          <tr class="detail-row" onclick="openModal('argocd','no','yes','yes')" data-key="argocd" data-roles="devops" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>ArgoCD Operator</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('harbor','no','no','yes')" data-key="harbor" data-roles="devops" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Harbor Registry (integrado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Continuidad de negocio</td></tr>
-          <tr class="detail-row" onclick="openModal('srm','yes','yes','yes')" data-key="srm" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VMware Site Recovery Manager (SRM)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('replication','yes','yes','yes')" data-key="replication" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Replication</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('srm','yes','yes','yes')" data-key="srm" data-roles="infra arq" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VMware Site Recovery Manager (SRM)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('replication','yes','yes','yes')" data-key="replication" data-roles="infra" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Replication</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -770,13 +1163,13 @@
         <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">vSAN</td></tr>
-          <tr class="detail-row" onclick="openModal('vsanosa','note','yes','yes')" data-key="vsanosa" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>vSAN OSA (Original Storage Architecture)</td><td><span class="chip chip-note">Opcional</span></td><td><span class="chip chip-yes">Incluido</span></td><td><span class="chip chip-yes">Incluido</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vsanesa','no','yes','yes')" data-key="vsanesa" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>vSAN ESA (Express Storage Architecture)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vsanmax','no','note','yes')" data-key="vsanmax" data-vvf="no" data-vcfe="note" data-vcf="yes"><td>vSAN Max (almacenamiento desagregado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Add-on</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('stretched','no','yes','yes')" data-key="stretched" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>vSAN Stretched Clusters</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vsanosa','note','yes','yes')" data-key="vsanosa" data-roles="infra" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>vSAN OSA (Original Storage Architecture)</td><td><span class="chip chip-note">Opcional</span></td><td><span class="chip chip-yes">Incluido</span></td><td><span class="chip chip-yes">Incluido</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vsanesa','no','yes','yes')" data-key="vsanesa" data-roles="infra arq" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>vSAN ESA (Express Storage Architecture)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vsanmax','no','note','yes')" data-key="vsanmax" data-roles="infra arq" data-vvf="no" data-vcfe="note" data-vcf="yes"><td>vSAN Max (almacenamiento desagregado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Add-on</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('stretched','no','yes','yes')" data-key="stretched" data-roles="infra arq" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>vSAN Stretched Clusters</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Almacenamiento externo</td></tr>
-          <tr class="detail-row" onclick="openModal('nfs','yes','yes','yes')" data-key="nfs" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>NFS / iSCSI / FC (VMFS Datastores)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vvols','yes','yes','yes')" data-key="vvols" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vVols (VMware Virtual Volumes)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nfs','yes','yes','yes')" data-key="nfs" data-roles="infra" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>NFS / iSCSI / FC (VMFS Datastores)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vvols','yes','yes','yes')" data-key="vvols" data-roles="infra" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vVols (VMware Virtual Volumes)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -790,12 +1183,12 @@
         <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Networking</td></tr>
-          <tr class="detail-row" onclick="openModal('vds','yes','yes','yes')" data-key="vds" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Distributed Switch (vDS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('nsx','no','yes','yes')" data-key="nsx" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX (SDN – redes definidas por software)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('nsxrouting','no','yes','yes')" data-key="nsxrouting" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – Enrutamiento distribuido (T0/T1)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('nsxvpn','no','yes','yes')" data-key="nsxvpn" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – VPN (L2/L3)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('microseg','no','yes','yes')" data-key="microseg" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – Microsegmentación</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('avi','no','no','yes')" data-key="avi" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>NSX Advanced Load Balancer (Avi)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vds','yes','yes','yes')" data-key="vds" data-roles="infra" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>vSphere Distributed Switch (vDS)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nsx','no','yes','yes')" data-key="nsx" data-roles="arq ciso" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX (SDN – redes definidas por software)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nsxrouting','no','yes','yes')" data-key="nsxrouting" data-roles="arq" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – Enrutamiento distribuido (T0/T1)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nsxvpn','no','yes','yes')" data-key="nsxvpn" data-roles="arq ciso" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – VPN (L2/L3)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('microseg','no','yes','yes')" data-key="microseg" data-roles="ciso arq" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>NSX – Microsegmentación</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('avi','no','no','yes')" data-key="avi" data-roles="arq devops" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>NSX Advanced Load Balancer (Avi)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -809,14 +1202,14 @@
         <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Kubernetes (VKS)</td></tr>
-          <tr class="detail-row" onclick="openModal('supervisor','yes','yes','yes')" data-key="supervisor" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VKS – Supervisor Cluster</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('tkg','note','yes','yes')" data-key="tkg" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>VKS – Guest Clusters (TKG)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Enterprise</span></td><td><span class="chip chip-yes">Enterprise</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vksnet','no','yes','yes')" data-key="vksnet" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VKS – Network Policies con NSX</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vksstorage','no','yes','yes')" data-key="vksstorage" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VKS – Storage con vSAN ESA</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('harbor','no','no','yes')" data-key="harbor" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VKS – Harbor Registry integrado</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('supervisor','yes','yes','yes')" data-key="supervisor" data-roles="devops arq" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VKS – Supervisor Cluster</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('tkg','note','yes','yes')" data-key="tkg" data-roles="devops" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>VKS – Guest Clusters (TKG)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Enterprise</span></td><td><span class="chip chip-yes">Enterprise</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vksnet','no','yes','yes')" data-key="vksnet" data-roles="devops" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VKS – Network Policies con NSX</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vksstorage','no','yes','yes')" data-key="vksstorage" data-roles="devops" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VKS – Storage con vSAN ESA</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('harbor','no','no','yes')" data-key="harbor" data-roles="devops" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VKS – Harbor Registry integrado</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
           <tr class="subcategory-row"><td colspan="4">Servicios cloud</td></tr>
-          <tr class="detail-row" onclick="openModal('vcd','yes','yes','yes')" data-key="vcd" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VMware Cloud Director (VCD)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('hcx','no','yes','yes')" data-key="hcx" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VMware HCX (migración workloads)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vcd','yes','yes','yes')" data-key="vcd" data-roles="arq" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>VMware Cloud Director (VCD)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('hcx','no','yes','yes')" data-key="hcx" data-roles="arq infra" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VMware HCX (migración workloads)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -830,11 +1223,11 @@
         <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Automatización e IaC</td></tr>
-          <tr class="detail-row" onclick="openModal('vcfauto','no','note','yes')" data-key="vcfauto" data-vvf="no" data-vcfe="note" data-vcf="yes"><td>VCF Automation (Aria Automation)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">≤5 hosts</span></td><td><span class="chip chip-yes">Ilimitado</span></td></tr>
-          <tr class="detail-row" onclick="openModal('selfservice','no','yes','yes')" data-key="selfservice" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>Self-service catalog (service broker)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('terraform','no','yes','yes')" data-key="terraform" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>Terraform &amp; Ansible integration</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('multicloud','no','no','yes')" data-key="multicloud" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Multi-cloud automation (AWS, Azure, GCP)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('slcm','yes','yes','yes')" data-key="slcm" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>Aria Suite Lifecycle Manager</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vcfauto','no','note','yes')" data-key="vcfauto" data-roles="arq devops" data-vvf="no" data-vcfe="note" data-vcf="yes"><td>VCF Automation (Aria Automation)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">≤5 hosts</span></td><td><span class="chip chip-yes">Ilimitado</span></td></tr>
+          <tr class="detail-row" onclick="openModal('selfservice','no','yes','yes')" data-key="selfservice" data-roles="devops" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>Self-service catalog (service broker)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('terraform','no','yes','yes')" data-key="terraform" data-roles="devops" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>Terraform &amp; Ansible integration</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('multicloud','no','no','yes')" data-key="multicloud" data-roles="arq devops" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Multi-cloud automation (AWS, Azure, GCP)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('slcm','yes','yes','yes')" data-key="slcm" data-roles="infra" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>Aria Suite Lifecycle Manager</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -848,11 +1241,11 @@
         <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
           <tr class="subcategory-row"><td colspan="4">Monitoreo y gestión</td></tr>
-          <tr class="detail-row" onclick="openModal('ops','note','yes','yes')" data-key="ops" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>VCF Operations (Aria Operations)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Completo</span></td><td><span class="chip chip-yes">Completo</span></td></tr>
-          <tr class="detail-row" onclick="openModal('opsnet','no','yes','yes')" data-key="opsnet" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VCF Operations for Networks</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('logintel','no','no','yes')" data-key="logintel" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VCF Log Intelligence (Aria Log Insight)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('apm','no','no','yes')" data-key="apm" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VCF Operations for Apps (APM)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('sddcmgr','yes','yes','yes')" data-key="sddcmgr" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>SDDC Manager (gestión de dominio)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('ops','note','yes','yes')" data-key="ops" data-roles="infra arq" data-vvf="note" data-vcfe="yes" data-vcf="yes"><td>VCF Operations (Aria Operations)</td><td><span class="chip chip-note">Básico</span></td><td><span class="chip chip-yes">Completo</span></td><td><span class="chip chip-yes">Completo</span></td></tr>
+          <tr class="detail-row" onclick="openModal('opsnet','no','yes','yes')" data-key="opsnet" data-roles="infra ciso" data-vvf="no" data-vcfe="yes" data-vcf="yes"><td>VCF Operations for Networks</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('logintel','no','no','yes')" data-key="logintel" data-roles="infra ciso" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VCF Log Intelligence (Aria Log Insight)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('apm','no','no','yes')" data-key="apm" data-roles="devops arq" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>VCF Operations for Apps (APM)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('sddcmgr','yes','yes','yes')" data-key="sddcmgr" data-roles="infra arq" data-vvf="yes" data-vcfe="yes" data-vcf="yes"><td>SDDC Manager (gestión de dominio)</td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -865,10 +1258,10 @@
       <table>
         <thead><tr><th>Funcionalidad <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
-          <tr class="detail-row" onclick="openModal('privateai','no','no','yes')" data-key="privateai" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Private AI Foundation (GPU workloads)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('nvidia','no','no','yes')" data-key="nvidia" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>NVIDIA AI Enterprise (integración)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Add-on</span></td></tr>
-          <tr class="detail-row" onclick="openModal('vgpu','no','no','yes')" data-key="vgpu" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Gestión de GPU vGPU / MIG</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
-          <tr class="detail-row" onclick="openModal('aiops','no','no','yes')" data-key="aiops" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>AI/ML Kubernetes operators</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('privateai','no','no','yes')" data-key="privateai" data-roles="arq" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Private AI Foundation (GPU workloads)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nvidia','no','no','yes')" data-key="nvidia" data-roles="arq" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>NVIDIA AI Enterprise (integración)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Add-on</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vgpu','no','no','yes')" data-key="vgpu" data-roles="infra arq" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>Gestión de GPU vGPU / MIG</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
+          <tr class="detail-row" onclick="openModal('aiops','no','no','yes')" data-key="aiops" data-roles="devops arq" data-vvf="no" data-vcfe="no" data-vcf="yes"><td>AI/ML Kubernetes operators</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-yes">Sí</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -882,11 +1275,11 @@
       <table>
         <thead><tr><th>Add-on <span style="font-weight:400;opacity:.6;font-size:.75em">(clic para detalles)</span></th><th>VVF</th><th>VCFE</th><th>VCF</th></tr></thead>
         <tbody>
-          <tr class="detail-row" onclick="openModal('vsanmax','no','note','note')" data-key="vsanmax" data-vvf="no" data-vcfe="note" data-vcf="note"><td>vSAN Max (almacenamiento desagregado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
-          <tr class="detail-row" onclick="openModal('nsxatp','no','note','note')" data-key="nsxatp" data-vvf="no" data-vcfe="note" data-vcf="note"><td>NSX Advanced Threat Prevention</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
-          <tr class="detail-row" onclick="openModal('nvidia','no','no','note')" data-key="nvidia" data-vvf="no" data-vcfe="no" data-vcf="note"><td>NVIDIA AI Enterprise</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
-          <tr class="detail-row" onclick="openModal('hcx','no','note','note')" data-key="hcx" data-vvf="no" data-vcfe="note" data-vcf="note"><td>VMware HCX Enterprise</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
-          <tr class="detail-row" onclick="openModal('cbc','note','note','note')" data-key="cbc" data-vvf="note" data-vcfe="note" data-vcf="note"><td>Carbon Black Cloud (EDR/XDR)</td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" onclick="openModal('vsanmax','no','note','note')" data-key="vsanmax" data-roles="infra arq" data-vvf="no" data-vcfe="note" data-vcf="note"><td>vSAN Max (almacenamiento desagregado)</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nsxatp','no','note','note')" data-key="nsxatp" data-roles="ciso" data-vvf="no" data-vcfe="note" data-vcf="note"><td>NSX Advanced Threat Prevention</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" onclick="openModal('nvidia','no','no','note')" data-key="nvidia" data-roles="arq" data-vvf="no" data-vcfe="no" data-vcf="note"><td>NVIDIA AI Enterprise</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" onclick="openModal('hcx','no','note','note')" data-key="hcx" data-roles="arq infra" data-vvf="no" data-vcfe="note" data-vcf="note"><td>VMware HCX Enterprise</td><td><span class="chip chip-no">No</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
+          <tr class="detail-row" onclick="openModal('cbc','note','note','note')" data-key="cbc" data-roles="ciso" data-vvf="note" data-vcfe="note" data-vcf="note"><td>Carbon Black Cloud (EDR/XDR)</td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td><td><span class="chip chip-note">Disponible</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1684,6 +2077,169 @@
   }
 
   wizardRender();
+
+
+  /* ─── Role Filter ─── */
+  let activeRole = null;
+  function setRole(role) {
+    activeRole = role;
+    ['rbAll','rbInfra','rbDevops','rbArq','rbCiso'].forEach(id => {
+      document.getElementById(id).className = 'role-btn';
+    });
+    if (!role) {
+      document.getElementById('rbAll').classList.add('active');
+    } else {
+      const map = { infra:'rbInfra', devops:'rbDevops', arq:'rbArq', ciso:'rbCiso' };
+      const cls = { infra:'active-infra', devops:'active-devops', arq:'active-arq', ciso:'active-ciso' };
+      document.getElementById(map[role]).classList.add(cls[role]);
+    }
+    document.querySelectorAll('tr.detail-row').forEach(tr => {
+      if (!role) {
+        tr.classList.remove('role-hidden', 'role-dimmed');
+      } else {
+        const roles = (tr.dataset.roles || '').split(' ');
+        tr.classList.toggle('role-hidden', !roles.includes(role));
+        tr.classList.remove('role-dimmed');
+      }
+    });
+    // Clone bar to all sections
+    const bar = document.getElementById('roleFilterBar');
+    document.querySelectorAll('.role-filter-clone').forEach(e => e.remove());
+    const sections = ['storage','networking','vks','automation','operations','ai','addons'];
+    sections.forEach(sid => {
+      const sec = document.getElementById(sid);
+      if (sec) {
+        const clone = bar.cloneNode(true);
+        clone.id = '';
+        clone.classList.add('role-filter-clone');
+        clone.querySelectorAll('button').forEach(btn => {
+          btn.onclick = btn.onclick; // preserve
+        });
+        sec.insertBefore(clone, sec.querySelector('.table-wrap'));
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', () => setRole(null));
+
+  /* ─── ROI Calculator ─── */
+  function calcROI() {
+    const servers = parseInt(document.getElementById('roiServers').value);
+    const ratio   = parseInt(document.getElementById('roiRatio').value);
+    const cost    = parseInt(document.getElementById('roiCost').value);
+    document.getElementById('roiServersVal').textContent = servers;
+    document.getElementById('roiRatioVal').textContent = ratio;
+    document.getElementById('roiCostVal').textContent = '$' + cost.toLocaleString();
+    const totalVMs    = servers * ratio;
+    const hostsNeeded = Math.ceil(totalVMs / ratio);
+    const savedServers = servers - hostsNeeded;
+    const savedCost    = savedServers * cost;
+    const savedPct     = Math.round((savedServers / servers) * 100);
+    const u = n => n.toLocaleString();
+    document.getElementById('roiResults').innerHTML =
+      '<div class="roi-card"><div class="roi-card-num">' + u(totalVMs) + '</div><div class="roi-card-label">VMs totales soportadas</div></div>' +
+      '<div class="roi-card"><div class="roi-card-num">' + hostsNeeded + '</div><div class="roi-card-label">Hosts ESXi necesarios</div></div>' +
+      '<div class="roi-card"><div class="roi-card-num green">' + savedServers + '</div><div class="roi-card-label">Servidores físicos eliminados</div></div>' +
+      '<div class="roi-card"><div class="roi-card-num green">$' + u(savedCost) + '</div><div class="roi-card-label">Ahorro estimado en hardware (' + savedPct + '%)</div></div>';
+  }
+  calcROI();
+
+  /* ─── Story Mode ─── */
+  const storyChapters = [
+    {
+      title: 'Tienes 20 servidores físicos subutilizados',
+      scene: 'Imagina que eres el nuevo CTO de <strong>MedLogística S.A.</strong>, una empresa de 200 personas. Tu primer día descubres que tienen 20 servidores físicos en el datacenter, pero la mayoría está al <strong>8% de CPU</strong>. Cada servidor corre una sola aplicación. Cuando hay mantenimiento de un servidor, esa app cae. El equipo de infra pasa los domingos aplicando parches uno por uno.',
+      tech: ['vSphere 9 (ESXi + vCenter)', 'vMotion / HA / DRS', 'vSphere Lifecycle Manager'],
+      lesson: 'Con vSphere (incluido en VVF), consolidas las 20 apps en 3-4 hosts físicos. Las VMs se mueven entre hosts en vivo sin downtime gracias a vMotion. Si un host falla, HA reinicia las VMs en otro en 30 segundos. Los parches se aplican solos con vLCM.',
+      plan: 'VVF'
+    },
+    {
+      title: 'El CISO pide microsegmentación urgente',
+      scene: 'Tres meses después, el CISO de MedLogística llega con un informe de auditoría: <strong>"Si atacan una VM, pueden moverse libremente a todas las demás."</strong> Es cierto: todas las VMs están en la misma red plana. Un ransomware podría propagarse a los 20 sistemas en minutos. El auditor pide Zero Trust en el datacenter.',
+      tech: ['NSX Distributed Firewall', 'NSX Microsegmentación', 'NSX Gateway Firewall'],
+      lesson: 'NSX DFW (incluido en VCFE y VCF) instala un firewall en el kernel de cada host. Aunque un atacante comprometa una VM de RR.HH., NSX bloquea automáticamente el tráfico hacia las VMs de finanzas o producción. Sin cambiar la red física, sin nuevos appliances.',
+      plan: 'VCFE'
+    },
+    {
+      title: 'Los desarrolladores quieren Kubernetes',
+      scene: 'El equipo de producto decide que el nuevo sistema de tracking de envíos se construirá con <strong>microservicios en contenedores</strong>. Los devs piden un cluster Kubernetes. IT pregunta: ¿en qué servidores? ¿quién mantiene el cluster? ¿cómo se gestiona el storage? ¿dónde se guardan las imágenes Docker? No hay respuestas claras.',
+      tech: ['TKG Enterprise', 'Harbor Registry', 'ArgoCD Operator', 'VKS Supervisor'],
+      lesson: 'Con VCF, el Supervisor Cluster habilita Kubernetes nativo sobre la misma infraestructura. Los devs crean clusters TKG en minutos. Harbor guarda las imágenes internamente con escaneo de CVEs. ArgoCD hace deploy automático desde el repositorio Git. El storage lo provee vSAN ESA automáticamente.',
+      plan: 'VCF'
+    },
+    {
+      title: 'El CEO quiere IA interna para analizar contratos',
+      scene: '<strong>"Quiero que nuestros abogados puedan preguntarle a una IA sobre nuestros contratos"</strong>, dice el CEO. El problema: los contratos de MedLogística son confidenciales. Subirlos a ChatGPT viola el GDPR. Contratar un servicio cloud de IA expone la propiedad intelectual. Necesitan IA privada.',
+      tech: ['Private AI Foundation', 'GPU vGPU / MIG', 'NVIDIA AI Enterprise', 'AI/ML Kubernetes operators'],
+      lesson: 'VCF incluye Private AI Foundation. Despliegan LLaMA 3 en servidores con GPUs NVIDIA dentro de su propio datacenter. Los abogados hacen preguntas al modelo sobre los contratos internos. Los datos nunca salen de la empresa. Las GPUs son compartidas entre el equipo legal y el de data science con vGPU.',
+      plan: 'VCF'
+    },
+    {
+      title: 'Autoservicio: el equipo de IT deja de hacer tickets',
+      scene: 'MedLogística ahora tiene 150 VMs, 8 clusters Kubernetes y 3 equipos pidiendo recursos constantemente. El equipo de IT recibe <strong>40 tickets por semana</strong> solo para aprovisionar ambientes. Tardan 2 semanas en entregar lo que un equipo necesita. Los devs están frustrados, IT está saturado.',
+      tech: ['VCF Automation (Aria)', 'Self-service catalog', 'Terraform & Ansible', 'VCF Operations'],
+      lesson: 'VCF Automation publica un catálogo de recursos: "VM Linux", "Cluster K8s", "Base de datos MySQL". Los equipos eligen lo que necesitan, lo aprueban su líder técnico automáticamente, y en 20 minutos tienen el ambiente. IT pasa de operar tickets a diseñar plataformas. VCF Operations mide el costo de cada equipo.',
+      plan: 'VCF'
+    }
+  ];
+
+  let storyStep = 0;
+
+  function openStory() {
+    storyStep = 0;
+    storyRender();
+    document.getElementById('storyBackdrop').classList.add('open');
+    document.getElementById('storyModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeStory() {
+    document.getElementById('storyBackdrop').classList.remove('open');
+    document.getElementById('storyModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function storyRender() {
+    const total = storyChapters.length;
+    const c = storyChapters[storyStep];
+    document.getElementById('storyStepLabel').textContent = 'Capítulo ' + (storyStep + 1) + ' de ' + total;
+    document.getElementById('storyTitle').textContent = c.title;
+    document.getElementById('storyProgressFill').style.width = ((storyStep + 1) / total * 100) + '%';
+
+    const planColors = { VVF: '#48cae4', VCFE: '#00b4d8', VCF: '#0077b6' };
+    const chips = c.tech.map(t =>
+      '<span class="story-tech-chip">' + t + '</span>'
+    ).join('');
+
+    document.getElementById('storyBody').innerHTML =
+      '<div class="story-scene">' + c.scene + '</div>' +
+      '<div style="margin-bottom:10px;font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Tecnologías clave en este capítulo:</div>' +
+      '<div class="story-tech-highlight">' + chips + '</div>' +
+      '<div style="margin-bottom:8px;font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Solución con VMware:</div>' +
+      '<div class="story-lesson">' + c.lesson + '</div>' +
+      '<div style="margin-top:16px;padding:10px 14px;border-radius:8px;background:' + planColors[c.plan] + '22;border:1px solid ' + planColors[c.plan] + '44;font-size:.82rem;font-weight:700;color:' + planColors[c.plan] + '">Plan que lo resuelve: ' + c.plan + '</div>';
+
+    // dots
+    document.getElementById('storyDots').innerHTML = storyChapters.map((_, i) =>
+      '<div class="story-dot' + (i === storyStep ? ' active' : '') + '"></div>'
+    ).join('');
+
+    document.getElementById('storyPrev').style.visibility = storyStep === 0 ? 'hidden' : 'visible';
+    const nextBtn = document.getElementById('storyNext');
+    nextBtn.textContent = storyStep === total - 1 ? 'Cerrar ✓' : 'Siguiente →';
+  }
+
+  function storyNav(dir) {
+    if (dir === 1 && storyStep === storyChapters.length - 1) { closeStory(); return; }
+    storyStep = Math.max(0, Math.min(storyChapters.length - 1, storyStep + dir));
+    storyRender();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('storyModal').classList.contains('open')) {
+      if (e.key === 'ArrowRight') storyNav(1);
+      if (e.key === 'ArrowLeft') storyNav(-1);
+    }
+  });
 
   /* ─── Theme toggle ─── */
   function toggleTheme() {
